@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>微软雅黑</family>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>WebCourse</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../resource/webcourse.qrc">
+    <normaloff>:/ICO/list.ico</normaloff>:/ICO/list.ico</iconset>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>64</width>
+    <height>64</height>
+   </size>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QStackedWidget" name="stackedWidget">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>0</y>
+      <width>680</width>
+      <height>580</height>
+     </rect>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="currentIndex">
+     <number>3</number>
+    </property>
+    <widget class="QWidget" name="login_page">
+     <widget class="QLabel" name="password_label">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>270</y>
+        <width>51</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>密码</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="logo_label">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>671</width>
+        <height>201</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Albertus Extra Bold</family>
+        <pointsize>36</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">image: url(:/IMG/logo.png);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="password_input">
+      <property name="geometry">
+       <rect>
+        <x>239</x>
+        <y>270</y>
+        <width>231</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Albertus Extra Bold</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="username_label">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>210</y>
+        <width>51</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>账号</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="login_button">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>390</y>
+        <width>191</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>登  陆</string>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="username_input">
+      <property name="geometry">
+       <rect>
+        <x>239</x>
+        <y>210</y>
+        <width>231</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+      <item>
+       <property name="text">
+        <string>3412245111</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QCheckBox" name="remember_check">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>330</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>记住密码</string>
+      </property>
+     </widget>
+     <zorder>password_label</zorder>
+     <zorder>logo_label</zorder>
+     <zorder>password_input</zorder>
+     <zorder>login_button</zorder>
+     <zorder>username_input</zorder>
+     <zorder>remember_check</zorder>
+     <zorder>username_label</zorder>
+    </widget>
+    <widget class="QWidget" name="regist_page">
+     <widget class="QTableView" name="regist_list">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>661</width>
+        <height>451</height>
+       </rect>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAsNeeded</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustToContents</enum>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <property name="textElideMode">
+       <enum>Qt::ElideMiddle</enum>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>50</number>
+      </attribute>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>false</bool>
+      </attribute>
+     </widget>
+     <widget class="QLineEdit" name="keyword_input">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>20</y>
+        <width>241</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="placeholderText">
+       <string> 仅支持中文(非必填项)</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="year_input">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>19</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="placeholderText">
+       <string> 非必填项</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="regist_button">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>530</y>
+        <width>281</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>注  册</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="search_button">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>20</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>搜 索</string>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="year_label">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>20</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>课程年份</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="keyword_label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>61</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>关键词</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="project_page">
+     <widget class="QPushButton" name="detail_button">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>530</y>
+        <width>131</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>学习项目子课程</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="project_list">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>660</width>
+        <height>511</height>
+       </rect>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="learnProject_button">
+      <property name="geometry">
+       <rect>
+        <x>189</x>
+        <y>530</y>
+        <width>131</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>学习整个项目</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="course_page">
+     <widget class="QTableView" name="course_list">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>660</width>
+        <height>511</height>
+       </rect>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="learnCourse_button">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>530</y>
+        <width>120</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>学  习</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="lab_page"/>
+    <widget class="QWidget" name="about_page">
+     <widget class="QPushButton" name="thumb_button">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>440</y>
+        <width>100</width>
+        <height>100</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="../resource/webcourse.qrc">
+        <normaloff>:/ICO/thumb.png</normaloff>:/ICO/thumb.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>100</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="about_label">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>40</y>
+        <width>431</width>
+        <height>381</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600; color:#ffaa00;&quot;&gt;WebCourse&lt;/span&gt;&lt;span style=&quot; font-size:14pt; color:#ffaa00;&quot;&gt;，&lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;一款学习辅助软件。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;作者：菜菜子（xeroxYor）&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;项目地址：&lt;/span&gt;&lt;a href=&quot;github.com/MrBeike/webCourse.git&quot;&gt;&lt;span style=&quot; font-size:14pt; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/MrBeike/webCourse.git&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;联系方式：lbbas@126.com&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::RichText</enum>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="donate_label">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>20</y>
+        <width>431</width>
+        <height>401</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-image: url(:/IMG/donate.png);</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QListWidget" name="menu_list">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>120</width>
+      <height>580</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="resizeMode">
+     <enum>QListView::Adjust</enum>
+    </property>
+    <property name="currentRow">
+     <number>-1</number>
+    </property>
+    <property name="sortingEnabled">
+     <bool>false</bool>
+    </property>
+    <item>
+     <property name="text">
+      <string>用户登录</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+     <property name="icon">
+      <iconset resource="../resource/webcourse.qrc">
+       <normaloff>:/ICO/lgoin.png</normaloff>:/ICO/lgoin.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>项目注册</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+     <property name="icon">
+      <iconset resource="../resource/webcourse.qrc">
+       <normaloff>:/ICO/regist.png</normaloff>:/ICO/regist.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>我的项目</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+     <property name="icon">
+      <iconset resource="../resource/webcourse.qrc">
+       <normaloff>:/ICO/project.png</normaloff>:/ICO/project.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>我的课程</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+     <property name="icon">
+      <iconset resource="../resource/webcourse.qrc">
+       <normaloff>:/ICO/course.png</normaloff>:/ICO/course.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>实验室</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+     <property name="icon">
+      <iconset resource="../resource/webcourse.qrc">
+       <normaloff>:/ICO/lab.png</normaloff>:/ICO/lab.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>关于</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+     <property name="icon">
+      <iconset resource="../resource/webcourse.qrc">
+       <normaloff>:/ICO/about.png</normaloff>:/ICO/about.png</iconset>
+     </property>
+    </item>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <tabstops>
+  <tabstop>username_input</tabstop>
+  <tabstop>password_input</tabstop>
+  <tabstop>remember_check</tabstop>
+  <tabstop>login_button</tabstop>
+  <tabstop>keyword_input</tabstop>
+  <tabstop>year_input</tabstop>
+  <tabstop>search_button</tabstop>
+  <tabstop>regist_button</tabstop>
+  <tabstop>regist_list</tabstop>
+  <tabstop>project_list</tabstop>
+  <tabstop>learnProject_button</tabstop>
+  <tabstop>detail_button</tabstop>
+  <tabstop>course_list</tabstop>
+  <tabstop>learnCourse_button</tabstop>
+  <tabstop>thumb_button</tabstop>
+  <tabstop>menu_list</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../resource/webcourse.qrc"/>
+ </resources>
+ <connections/>
+</ui>

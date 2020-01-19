@@ -1,0 +1,8 @@
+TableView : https://blog.csdn.net/cloveses/article/details/80943496
+
+QTableView设为不可编辑： ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+QTableView设置整行选中：
+
+    ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);//设置选中模式为选中行
+    ui->tableView->setSelectionMode( QAbstractItemView::SingleSelection);//设置选中单个

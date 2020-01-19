@@ -1,0 +1,20 @@
+<RCC>
+  <qresource prefix="QSS">
+    <file>QSS.qss</file>
+  </qresource>
+  <qresource prefix="ICO">
+    <file>list.ico</file>
+    <file>thumb.png</file>
+    <file>about.png</file>
+    <file>course.png</file>
+    <file>lab.png</file>
+    <file>lgoin.png</file>
+    <file>project.png</file>
+    <file>regist.png</file>
+  </qresource>
+  <qresource prefix="IMG">
+    <file>logo.jpg</file>
+    <file>donate.png</file>
+    <file>logo.png</file>
+  </qresource>
+</RCC>
