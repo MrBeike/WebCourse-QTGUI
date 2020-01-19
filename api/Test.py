@@ -20,12 +20,12 @@ class Test:
 
     def autoTest(self):
         testIds = self.testIds
-        for id in testIds:
+        for testId in testIds:
             try:
-                self.itemId = id
+                self.itemId = testId
                 # pagefix(id)  这条当时为了修复BUG而写，如今反而导致程序出错？
                 submitPackge = self.testPage()
-                pagefix()
+                self.pagefix()
                 answers = self.ansewerPage()
                 self.submitPage(answers, submitPackge)
                 self.resultPage()

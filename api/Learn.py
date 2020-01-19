@@ -134,35 +134,37 @@ class Learn:
                     "studyTime": coursePeriod}
             response = self.s.post(timeSave_url, data=data)
             learn_message = response.content.decode("utf-8")
-            # TODO 消息提示
-            self.points = self.pointDetect(courseId)
-            # 课程轨迹实现部分
-            self.learnRecord()
-            # 自动测试实现部分
-            self.testDetect()
+        # TODO 消息提示
+        self.points = self.pointDetect(courseLists)
+        # 课程轨迹实现部分
+        self.learnRecord()
+        # 自动测试实现部分
+        self.testDetect()
 
-    def pointDetect(self，courseId):
+    def pointDetect(self，courseLists):
         '''
         课程节点检测
         @param courserId: 课程ID str
         @return points: 课程节点信息  list [{,,,},{,,,},{,,,}] 
         '''
         points = []
-        data = {"params.courseId": courseId}
-        response = s.post(courseware_url, data=data)
-        courseware = response.content.decode("utf-8")
-        pointcollect = re.findall(r"openLearnResItem\((.*)\)", courseware)
-        for item in pointcollect:
-            pointId = eval(item.split(",")[0])
-            pointType = eval(item.split(",")[1])
-            if pointType in("video", "courseware", "test"):
-                # point.keys() = [课程Id,节点Id，节点类型] 
-                point = {
-                    'courseId':courseId,
-                    'pointId':pointId,
-                    'pointType': pointType
-                }
-                points.append(point)
+        for courseList in courseLists:
+            courseId = courseList['id']
+            data = {"params.courseId": courseId}
+            response = s.post(courseware_url, data=data)
+            courseware = response.content.decode("utf-8")
+            pointcollect = re.findall(r"openLearnResItem\((.*)\)", courseware)
+            for item in pointcollect:
+                pointId = eval(item.split(",")[0])
+                pointType = eval(item.split(",")[1])
+                if pointType in("video", "courseware", "test"):
+                    # point.keys() = [课程Id,节点Id，节点类型] 
+                    point = {
+                        'courseId':courseId,
+                        'pointId':pointId,
+                        'pointType': pointType
+                    }
+                    points.append(point)
         return points
 
     def learnRecord(self):
@@ -223,7 +225,7 @@ class Learn:
             pointType = point['pointType']
             if pointType == "test":
                 testIds.append(point['pointId'])
-        if len(testIds):
+        if testIds:
             Test(self.s,testIds)
 
     

@@ -58,7 +58,7 @@
      <enum>QFrame::Plain</enum>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="login_page">
      <widget class="QLabel" name="password_label">
@@ -177,11 +177,6 @@
       <property name="editable">
        <bool>true</bool>
       </property>
-      <item>
-       <property name="text">
-        <string>3412245111</string>
-       </property>
-      </item>
      </widget>
      <widget class="QCheckBox" name="remember_check">
       <property name="geometry">
@@ -385,6 +380,9 @@
       </property>
      </widget>
      <widget class="QPushButton" name="learnProject_button">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>189</x>
@@ -441,7 +439,39 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="lab_page"/>
+    <widget class="QWidget" name="lab_page">
+     <widget class="QCheckBox" name="download_checkBox">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>100</y>
+        <width>91</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>视频下载</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="descriptio_label">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>30</y>
+        <width>371</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>陆续开发相关扩展功能，勾选以打开该功能</string>
+      </property>
+     </widget>
+    </widget>
     <widget class="QWidget" name="about_page">
      <widget class="QPushButton" name="thumb_button">
       <property name="geometry">
@@ -491,7 +521,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600; color:#ffaa00;&quot;&gt;WebCourse&lt;/span&gt;&lt;span style=&quot; font-size:14pt; color:#ffaa00;&quot;&gt;，&lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;一款学习辅助软件。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;作者：菜菜子（xeroxYor）&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;项目地址：&lt;/span&gt;&lt;a href=&quot;github.com/MrBeike/webCourse.git&quot;&gt;&lt;span style=&quot; font-size:14pt; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/MrBeike/webCourse.git&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;联系方式：lbbas@126.com&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600; color:#ffaa00;&quot;&gt;WebCourse&lt;/span&gt;&lt;span style=&quot; font-size:14pt; color:#ffaa00;&quot;&gt;，&lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;一款学习辅助软件。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;作者：菜菜子（xeroxYor）&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;项目地址：&lt;/span&gt;&lt;a href=&quot;github.com/MrBeike/webCourse.git&quot;&gt;&lt;span style=&quot; font-size:14pt; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/MrBeike/webCourse.git&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;联系方式：lbbas@126.com&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;本项目仅供python、pyqt学习研究使用，请勿用于其他非法用途。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;本项目开源免费，请勿作任何商业行为。QT @ GPL&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="textFormat">
        <enum>Qt::RichText</enum>
@@ -519,6 +549,9 @@
        <string/>
       </property>
      </widget>
+     <zorder>thumb_button</zorder>
+     <zorder>donate_label</zorder>
+     <zorder>about_label</zorder>
     </widget>
    </widget>
    <widget class="QListWidget" name="menu_list">

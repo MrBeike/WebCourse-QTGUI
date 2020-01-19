@@ -92,13 +92,13 @@ class Download:
         '''
         将课程下载信息保存到本地网页，包含标题和下载地址
         '''
-        downloadLists =self.downloadLists
+        fileInfoLists =self.fileInfoLists
         with open("videolist.html", 'wb') as f:
             prelog = '<head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"></head>'
             f.write(prelog.encode())
-            for downloadList in downloadlists:
-                fileName = downloadlists['title']
-                fileUrl = downloadlists['url']
+            for fileInfoList in fileInfolists:
+                fileName = fileInfoList['title']
+                fileUrl = fileInfoList['url']
                 log = "<p>" + "【" + str(i) + "】" + fileName + "</p>" + "<a href=" + fileUrl + ">" + fileUrl + "</a></br>"
                 f.write(log.encode())
             saveToPage_message = "已经生成含有视频地址和名称的文件：videolist.html"

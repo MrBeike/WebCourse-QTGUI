@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>course_form</class>
- <widget class="QWidget" name="course_form">
+ <class>DetailWindow</class>
+ <widget class="QDialog" name="DetailWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -10,36 +10,30 @@
     <height>580</height>
    </rect>
   </property>
-  <property name="font">
-   <font>
-    <family>微软雅黑</family>
-    <pointsize>12</pointsize>
-   </font>
-  </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Dialog</string>
   </property>
-  <widget class="QTableView" name="table_list">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>660</width>
-     <height>511</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="learn_button">
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>530</y>
-     <width>120</width>
+     <y>510</y>
+     <width>121</width>
      <height>41</height>
     </rect>
    </property>
    <property name="text">
     <string>学  习</string>
+   </property>
+  </widget>
+  <widget class="QTableView" name="detail_list">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>651</width>
+     <height>461</height>
+    </rect>
    </property>
   </widget>
  </widget>

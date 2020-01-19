@@ -15,11 +15,17 @@ sys.path = [os.path.join(myFolder, 'ui'),
 os.chdir(myFolder)
 
 from Ui_MainWindow import *
+from Ui_DetailWindow import *
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox
-# from login import login
-# from regist import Regist
+from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QDialog
+from Slots import *
+# from Login import Login
+# from Learn import Learn
+# from Regist import Regist
+# from Test import Test
+# from Download import Download
+
 
 class MyMainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
@@ -32,62 +38,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.list_style = f.read()
         self.menu_list.setStyleSheet(self.list_style)
 
-    def project_list_initial(self):
-        learn = Learn(self.s)
-        project_result = learn.projectReader
-        # 建立数据模型实例
-        self.project_list_model = QStandardItemModel()
-        # 设置列标题
-        header = ['项目名称', '项目时间', '学时','完成状态','项目编号']
-        self.project_list_model.setHorizontalHeaderLabels(header)
-        # 向模型添加数据
-        if project_result:
-            row, col = len(project_result), len(project_result[0])
-            for row, datadict in enumerate(project_result):
-                datalist = [datadict['name'], datadict['period'],datadict['time'], datadict['status'],datadict['id']]
-                for col, cell in enumerate(datalist):
-                    value = QStandardItem(str(cell))
-                    # 设置单元不可编辑
-                    value.setEditable(False)
-                    self.project_list_model.setItem(row, col, value)
-        # 添加模型到QTableView实例中
-        self.project_list.setModel(self.regist_list_model)
-        
-        self.project_list.setColumnWidth(0,300)
-        self.project_list.setColumnWidth(1,300)
-        self.project_list.setColumnWidth(2,20)
-        self.project_list.setColumnWidth(3,30)
-        self.project_list.setColumnWidth(4,30)
-        self.project_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
-
-
-    def course_list_initial(self):
-        learn = Learn(self.s)
-        course_result = learn.courseReader
-        # 建立数据模型实例
-        self.course_list_model = QStandardItemModel()
-        # 设置列标题
-        header = ['课程名称', '学时','完成状态','课程编号']
-        self.course_list_model.setHorizontalHeaderLabels(header)
-        # 向模型添加数据
-        if course_result:
-            row, col = len(course_result), len(course_result[0])
-            for row, datadict in enumerate(project_result):
-                datalist = [datadict['name'],datadict['time'], datadict['status'],datadict['id']]
-                for col, cell in enumerate(datalist):
-                    value = QStandardItem(str(cell))
-                    # 设置单元不可编辑
-                    value.setEditable(False)
-                    self.course_list_model.setItem(row, col, value)
-        # 添加模型到QTableView实例中
-        self.course_list.setModel(self.regist_list_model)
-        
-        self.course_list.setColumnWidth(0,350)
-        self.course_list.setColumnWidth(1,20)
-        self.course_list.setColumnWidth(2,30)
-        self.course_list.setColumnWidth(3,280)
-        self.course_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
-
     '''
     Slots Defination
     '''
@@ -96,8 +46,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     @pyqtSlot(int)
     def on_menu_list_currentRowChanged(self, value):
         if (self.login_status or value == 0):
-            self.stackedWidget.setCurrentIndex(value)
-            
+            self.stackedWidget.setCurrentIndex(value)  
         else:
             QMessageBox.about(self, "提示", "请先登陆!")
             # TODO  美化消息提示
@@ -119,10 +68,12 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         login_status, s, login_message = login(username, password, rememberFlag)
         self.statusbar.showMessage(login_message)
         if login_status:
+            self.login_button.setEnabled = False
             self.s = s
             self.login_status = login_status
             self.project_list_initial()
             self.course_list_initial()
+            self.login_button.setEnabled(False)
         else:
             # TODO 错误提示美化
             QMessageBox.ablout(self,'提示',login_message)
@@ -140,7 +91,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         # 建立数据模型实例
         self.regist_list_model = QStandardItemModel()
         # 设置列标题
-         header = ['类型', '名称', 'ID']
+        header = ['类型', '名称', 'ID']
         self.regist_list_model.setHorizontalHeaderLabels(header)
         # 向模型添加数据
         if search_result:
@@ -170,12 +121,9 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     @pyqtSlot()
     def on_regist_button_clicked(self):
         row = self.regist_list.currentIndex().row()
-        type_index = self.regist_list_model.index(row, 0)
-        name_index = self.regist_list_model.index(row, 1)
-        id_index = self.regist_list_model.index(row, 2)
-        type = self.regist_list_model.data(type_index)
-        name = self.regist_list_model.data(name_index)
-        id = self.regist_list_model.data(id_index)
+        type = self.regist_list_model.index(row, 0).data()
+        name = self.regist_list_model.index(row, 1).data()
+        id= self.regist_list_model.index(row, 2).data()
         info = {
             'type': type,
             'name': name,
@@ -185,17 +133,96 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         QMessageBox.about(self,'提示',regist_message)
 
     # ===project_page===
+    def project_list_initial(self):
+        learn = Learn(self.s)
+        project_result = learn.projectReader()
+        # 建立数据模型实例
+        self.project_list_model = QStandardItemModel()
+        # 设置列标题
+        header = ['项目名称', '项目时间', '学时','完成状态','项目编号']
+        self.project_list_model.setHorizontalHeaderLabels(header)
+        # 向模型添加数据
+        if project_result:
+            row, col = len(project_result), len(project_result[0])
+            for row, datadict in enumerate(project_result):
+                datalist = [datadict['name'], datadict['period'],datadict['time'], datadict['status'],datadict['id']]
+                for col, cell in enumerate(datalist):
+                    value = QStandardItem(str(cell))
+                    # 设置单元不可编辑
+                    value.setEditable(False)
+                    self.project_list_model.setItem(row, col, value)
+        # 添加模型到QTableView实例中
+        self.project_list.setModel(self.regist_list_model)
+        
+        self.project_list.setColumnWidth(0,300)
+        self.project_list.setColumnWidth(1,300)
+        self.project_list.setColumnWidth(2,20)
+        self.project_list.setColumnWidth(3,30)
+        self.project_list.setColumnWidth(4,30)
+        self.project_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
+
+
+    def course_list_initial(self):
+        learn = Learn(self.s)
+        course_result = learn.courseReader()
+        # 建立数据模型实例
+        self.course_list_model = QStandardItemModel()
+        # 设置列标题
+        header = ['课程名称', '学时','完成状态','课程编号']
+        self.course_list_model.setHorizontalHeaderLabels(header)
+        # 向模型添加数据
+        if course_result:
+            row, col = len(course_result), len(course_result[0])
+            for row, datadict in enumerate(project_result):
+                datalist = [datadict['name'],datadict['time'], datadict['status'],datadict['id']]
+                for col, cell in enumerate(datalist):
+                    value = QStandardItem(str(cell))
+                    # 设置单元不可编辑
+                    value.setEditable(False)
+                    self.course_list_model.setItem(row, col, value)
+        # 添加模型到QTableView实例中
+        self.course_list.setModel(self.regist_list_model)
+        
+        self.course_list.setColumnWidth(0,350)
+        self.course_list.setColumnWidth(1,20)
+        self.course_list.setColumnWidth(2,30)
+        self.course_list.setColumnWidth(3,280)
+        self.course_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
+
     # 学习整个项目按钮响应
-    @pyptSlot()
+    @pyqtSlot()
     def on_learnProject_button_clicked(self):
-        pass
+        learn = Learn()
+        row = self.project_list.currentIndex().row()
+        projectId  = self.project_list_model.index(row, 4).data()
+        courseLists = learn.projectDetailReader(projectId)
+        learn.learn(courseLists)
 
     # 学习项目子课程按钮响应
     @pyqtSlot()
     def on_detail_button_clicked(self):
-        pass
+        detailWindow = DetailWindow()
+        detailWindow.show()
+        # TODO 窗口初始化 传值
 
-    
+    # ===course_page===
+    #学习按钮响应
+    @pyqtSlot()
+    def on_learnCourse_button_clicked(self):
+        learn = Learn()
+        row = self.course_list.currentIndex().row()
+        courseId = self.course_list_model.index(row,3).data()
+        courseTime = self.course_list_model.index(row,1).data()
+        # 为了函数的一致性，此处构建包含一个信息点的list [{,,,}]
+        courseLists = [{
+            'id':courseId,
+            'time':courseTime
+        }]
+        learn.learn(courseLists)
+
+
+    # ===lab_page===
+    # TODO 存在的必要？
 
     # ===about_page===
     # 控制捐赠界面的开关
@@ -204,9 +231,14 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.about_label.setHidden(value)
         self.donate_label.setVisible(value)
 
+class DetailWindow(QDialog,Ui_DetailWindow):
+    def __init__(self,parent=None):
+        super(DetailWindow, self).__init__(parent)
+        self.setupUi(self)
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    myWin = MyMainWindow()
-    myWin.show()
+    mainWinow = MyMainWindow()
+    mainWinow.show()
     sys.exit(app.exec_())

@@ -2,6 +2,9 @@ search_result = [{'type': 'project', 'name': '我不知道你在想什么，还�
     'type': 'project', 'name': 'mikeqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', 'id': 2}, {'type': 'course', 'name': 'mikenqqqqqqqqqqqqqqqqq', 'id': 3}]
 
 
-for item in search_result:
-    file = [x for x in item.values() ]
-    print(file)
+courseLists = [{
+    'id': 'courseId',
+    'time': 'courseTime'
+}]
+
+print(courseLists)
