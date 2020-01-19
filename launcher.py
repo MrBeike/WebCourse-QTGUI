@@ -32,12 +32,61 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.list_style = f.read()
         self.menu_list.setStyleSheet(self.list_style)
 
-    # FIXME 如何实现？激活 直接初始化
     def project_list_initial(self):
-        pass
+        learn = Learn(self.s)
+        project_result = learn.projectReader
+        # 建立数据模型实例
+        self.project_list_model = QStandardItemModel()
+        # 设置列标题
+        header = ['项目名称', '项目时间', '学时','完成状态','项目编号']
+        self.project_list_model.setHorizontalHeaderLabels(header)
+        # 向模型添加数据
+        if project_result:
+            row, col = len(project_result), len(project_result[0])
+            for row, datadict in enumerate(project_result):
+                datalist = [datadict['name'], datadict['period'],datadict['time'], datadict['status'],datadict['id']]
+                for col, cell in enumerate(datalist):
+                    value = QStandardItem(str(cell))
+                    # 设置单元不可编辑
+                    value.setEditable(False)
+                    self.project_list_model.setItem(row, col, value)
+        # 添加模型到QTableView实例中
+        self.project_list.setModel(self.regist_list_model)
+        
+        self.project_list.setColumnWidth(0,300)
+        self.project_list.setColumnWidth(1,300)
+        self.project_list.setColumnWidth(2,20)
+        self.project_list.setColumnWidth(3,30)
+        self.project_list.setColumnWidth(4,30)
+        self.project_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
-    def courser_list_initial(self):
-        pass
+
+    def course_list_initial(self):
+        learn = Learn(self.s)
+        course_result = learn.courseReader
+        # 建立数据模型实例
+        self.course_list_model = QStandardItemModel()
+        # 设置列标题
+        header = ['课程名称', '学时','完成状态','课程编号']
+        self.course_list_model.setHorizontalHeaderLabels(header)
+        # 向模型添加数据
+        if course_result:
+            row, col = len(course_result), len(course_result[0])
+            for row, datadict in enumerate(project_result):
+                datalist = [datadict['name'],datadict['time'], datadict['status'],datadict['id']]
+                for col, cell in enumerate(datalist):
+                    value = QStandardItem(str(cell))
+                    # 设置单元不可编辑
+                    value.setEditable(False)
+                    self.course_list_model.setItem(row, col, value)
+        # 添加模型到QTableView实例中
+        self.course_list.setModel(self.regist_list_model)
+        
+        self.course_list.setColumnWidth(0,350)
+        self.course_list.setColumnWidth(1,20)
+        self.course_list.setColumnWidth(2,30)
+        self.course_list.setColumnWidth(3,280)
+        self.course_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
     '''
     Slots Defination
@@ -48,6 +97,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def on_menu_list_currentRowChanged(self, value):
         if (self.login_status or value == 0):
             self.stackedWidget.setCurrentIndex(value)
+            
         else:
             QMessageBox.about(self, "提示", "请先登陆!")
             # TODO  美化消息提示
@@ -72,7 +122,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.s = s
             self.login_status = login_status
             self.project_list_initial()
-            self.courser_list_initial()
+            self.course_list_initial()
         else:
             # TODO 错误提示美化
             QMessageBox.ablout(self,'提示',login_message)
@@ -87,9 +137,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         s = self.s
         self.register = Regist(s,keyword,year)
         search_result = self.register.search()
-        # search_result = [{'type': 'project', 'name': '我不知道你在想什么，还是那个季节那条街，噢噢噢噢，我还在这里干什么，我不知你是在看我啊', 'id': 111111111111111}, {
-        #     'type': 'project', 'name': 'mikeqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', 'id': 2}, {'type': 'course', 'name': 'mikenqqqqqqqqqqqqqqqqq', 'id': 3}]
-
         # 建立数据模型实例
         self.regist_list_model = QStandardItemModel()
         # 设置列标题
@@ -100,6 +147,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             row, col = len(search_result), len(search_result[0])
             for row, datadict in enumerate(search_result):
                 datalist = [datadict['type'], datadict['name'], datadict['id']]
+                # datalist = [x for x in datadict.values()]
                 for col, cell in enumerate(datalist):
                     value = QStandardItem(str(cell))
                     # 设置单元不可编辑
