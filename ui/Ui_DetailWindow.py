@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\lbbas\Desktop\test\webCourse(QT)\ui\DetailWindow.ui'
+# Form implementation generated from reading ui file 'c:\Users\lbbas\Desktop\test\webCourseQT\ui\DetailWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.14.1
 #
@@ -13,13 +13,16 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_DetailWindow(object):
     def setupUi(self, DetailWindow):
         DetailWindow.setObjectName("DetailWindow")
-        DetailWindow.resize(680, 580)
+        DetailWindow.resize(700, 428)
         self.learn_button = QtWidgets.QPushButton(DetailWindow)
-        self.learn_button.setGeometry(QtCore.QRect(280, 510, 121, 41))
+        self.learn_button.setGeometry(QtCore.QRect(280, 380, 121, 41))
         self.learn_button.setObjectName("learn_button")
-        self.detail_list = QtWidgets.QTableView(DetailWindow)
-        self.detail_list.setGeometry(QtCore.QRect(10, 30, 651, 461))
-        self.detail_list.setObjectName("detail_list")
+        self.project_detail_list = QtWidgets.QTableView(DetailWindow)
+        self.project_detail_list.setGeometry(QtCore.QRect(10, 20, 680, 351))
+        self.project_detail_list.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.project_detail_list.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.project_detail_list.setTextElideMode(QtCore.Qt.ElideMiddle)
+        self.project_detail_list.setObjectName("project_detail_list")
 
         self.retranslateUi(DetailWindow)
         QtCore.QMetaObject.connectSlotsByName(DetailWindow)

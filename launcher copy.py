@@ -16,8 +16,7 @@ os.chdir(myFolder)
 
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QDialog,QTableWidgetItem
+from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QDialog
 
 from Ui_MainWindow import *
 from Ui_DetailWindow import *
@@ -26,9 +25,8 @@ from Learn import Learn
 from Regist import Regist
 from Test import Test
 from Download import Download
-from result import *
 
-# TODO 默认搜索开启loginID,显示课程注册状态。
+
 # TODO 实验室增加注册过期课程功能
 # TODO 保存密码用户快捷登陆
 # TODO 用户登陆后界面变化
@@ -37,19 +35,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
-        # self.login_status = False
-        self.login_status = True
+        self.login_status = False
         # 设置donate界面默认不显示
         self.donate_label.setVisible(False)
         with open(r'resource\QSS.qss', 'r') as f:
             self.list_style = f.read()
-        self.setStyleSheet(self.list_style)
-
-        # for test only Delete later {
-        self.project_list_initial()
-        self.course_list_initial()
-        # for test only Delete later }
-
+        self.menu_list.setStyleSheet(self.list_style)
 
     '''
     Slots Defination
@@ -97,11 +88,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # 搜索按钮响应
     @pyqtSlot()
     def on_search_button_clicked(self):
-        # keyword = self.keyword_input.text().strip()
-        # year = self.year_input.text().strip()
-        # s = self.s
-        # self.register = Regist(s,keyword,year)
-        # search_result = self.register.search()
+        keyword = self.keyword_input.text().strip()
+        year = self.year_input.text().strip()
+        s = self.s
+        self.register = Regist(s,keyword,year)
+        search_result = self.register.search()
         # 建立数据模型实例
         self.regist_list_model = QStandardItemModel()
         # 设置列标题
@@ -109,13 +100,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.regist_list_model.setHorizontalHeaderLabels(header)
         # 向模型添加数据
         if search_result:
+            with open('search_result','w',encoding='utf-8') as f:
+                f.write(str(search_result))
             row, col = len(search_result), len(search_result[0])
             for row, datadict in enumerate(search_result):
                 datalist = [datadict['type'], datadict['name'], datadict['status'],datadict['id']]
                 # datalist = [x for x in datadict.values()]
                 for col, cell in enumerate(datalist):
                     value = QStandardItem(str(cell))
-                    value.setTextAlignment(Qt.AlignCenter)
                     # 设置单元不可编辑
                     value.setEditable(False)
                     self.regist_list_model.setItem(row, col, value)
@@ -127,9 +119,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.regist_list.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)        
         # self.regist_list.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
         # self.regist_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
-        self.regist_list.setColumnWidth(0,90)
-        self.regist_list.setColumnWidth(1,530)
-        self.regist_list.setColumnWidth(2,0)
+        self.regist_list.setColumnWidth(0,80)
+        self.regist_list.setColumnWidth(1,430)
+        self.regist_list.setColumnWidth(2,150)
         self.regist_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
     # FIXME 注册函数有问题？
@@ -150,8 +142,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     # ===project_page===
     def project_list_initial(self):
-        # learn = Learn(self.s)
-        # project_result = learn.projectReader()
+        learn = Learn(self.s)
+        project_result = learn.projectReader()
         # 建立数据模型实例
         self.project_list_model = QStandardItemModel()
         # 设置列标题
@@ -159,19 +151,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.project_list_model.setHorizontalHeaderLabels(header)
         # 向模型添加数据
         if project_result:
+            with open('project_result', 'w',encoding='utf-8') as f:
+                f.write(str(project_result))
             row, col = len(project_result), len(project_result[0])
             for row, datadict in enumerate(project_result):
                 datalist = [datadict['name'], datadict['period'],datadict['time'], datadict['status'],datadict['id']]
                 for col, cell in enumerate(datalist):
                     value = QStandardItem(str(cell))
-                    value.setTextAlignment(Qt.AlignCenter)
                     # 设置单元不可编辑
                     value.setEditable(False)
                     self.project_list_model.setItem(row, col, value)
         # 添加模型到QTableView实例中
         self.project_list.setModel(self.project_list_model)
         
-        self.project_list.setColumnWidth(0,370)
+        self.project_list.setColumnWidth(0,369)
         self.project_list.setColumnWidth(1,150)
         self.project_list.setColumnWidth(2,40)
         self.project_list.setColumnWidth(3,60)
@@ -180,8 +173,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 
     def course_list_initial(self):
-        # learn = Learn(self.s)
-        # course_result = learn.courseReader()
+        learn = Learn(self.s)
+        course_result = learn.courseReader()
         # 建立数据模型实例
         self.course_list_model = QStandardItemModel()
         # 设置列标题
@@ -189,19 +182,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.course_list_model.setHorizontalHeaderLabels(header)
         # 向模型添加数据
         if course_result:
+            with open('course_result', 'w',encoding='utf-8') as f:
+                f.write(str(course_result))
             row, col = len(course_result), len(course_result[0])
             for row, datadict in enumerate(course_result):
                 datalist = [datadict['name'],datadict['time'], datadict['status'],datadict['id']]
                 for col, cell in enumerate(datalist):
                     value = QStandardItem(str(cell))
-                    value.setTextAlignment(Qt.AlignCenter)
                     # 设置单元不可编辑
                     value.setEditable(False)
                     self.course_list_model.setItem(row, col, value)
         # 添加模型到QTableView实例中
         self.course_list.setModel(self.course_list_model)
         
-        self.course_list.setColumnWidth(0,500)
+        self.course_list.setColumnWidth(0,499)
         self.course_list.setColumnWidth(1,40)
         self.course_list.setColumnWidth(2,80)
         self.course_list.setColumnWidth(3,0)
@@ -220,38 +214,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # 学习项目子课程按钮响应
     @pyqtSlot()
     def on_detail_button_clicked(self):
-        # TODO 窗口初始化 传值  projectName?
+        # detailWindow = DetailWindow()
+        # detailWindow.show()
+        # TODO 窗口初始化 传值
         row = self.project_list.currentIndex().row()
         projectId = self.project_list_model.index(row, 4).data()
-        # learn = Learn(self.s)
-        # project_detail_result = learn.projectDetailReader(projectId)
-        # 将子窗口添加到主窗口进程中，修复闪退
-        self.detailWindow = DetailWindow()
-        # 建立数据模型实例
-        self.project_detail_list_model = QStandardItemModel()
-        # 设置列标题
-        header = ['课程名称', '学时','测试得分','是否完成','课程编号']
-        self.project_detail_list_model.setHorizontalHeaderLabels(header)
-        # 向模型添加数据
-        if project_detail_result:
-            row, col = len(project_detail_result), len(project_detail_result[0])
-            for row, datadict in enumerate(project_detail_result):
-                datalist = [datadict['name'],datadict['time'],datadict['score'],datadict['finished'],datadict['id']]
-                for col, cell in enumerate(datalist):
-                    value = QStandardItem(str(cell))
-                    # 设置单元不可编辑
-                    value.setEditable(False)
-                    self.project_detail_list_model.setItem(row, col, value)
-        # 添加模型到QTableView实例中
-        self.detailWindow.project_detail_list.setModel(self.project_detail_list_model)
-    
-        self.detailWindow.project_detail_list.setColumnWidth(0,455)
-        self.detailWindow.project_detail_list.setColumnWidth(1,40)
-        self.detailWindow.project_detail_list.setColumnWidth(2,70)
-        self.detailWindow.project_detail_list.setColumnWidth(3,70)
-        self.detailWindow.project_detail_list.setColumnWidth(4,0)
-        self.detailWindow.project_detail_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
-        self.detailWindow.show()
+        learn = Learn(self.s)
+        project_detail_result = learn.projectDetailReader(projectId)
+        with open('project_detail_result', 'w',encoding='utf-8') as f:
+            f.write(str(project_detail_result))
+
 
     # ===course_page===
     #学习按钮响应

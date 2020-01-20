@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\lbbas\Desktop\test\webCourse(QT)\ui\MainWindow.ui'
+# Form implementation generated from reading ui file 'c:\Users\lbbas\Desktop\test\webCourseQT\ui\MainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.14.1
 #
@@ -149,8 +149,11 @@ class Ui_MainWindow(object):
         self.detail_button.setObjectName("detail_button")
         self.project_list = QtWidgets.QTableView(self.project_page)
         self.project_list.setGeometry(QtCore.QRect(10, 10, 660, 511))
+        self.project_list.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.project_list.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.project_list.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.project_list.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.project_list.setTextElideMode(QtCore.Qt.ElideMiddle)
         self.project_list.setObjectName("project_list")
         self.learnProject_button = QtWidgets.QPushButton(self.project_page)
         self.learnProject_button.setEnabled(True)
@@ -165,8 +168,11 @@ class Ui_MainWindow(object):
         self.course_page.setObjectName("course_page")
         self.course_list = QtWidgets.QTableView(self.course_page)
         self.course_list.setGeometry(QtCore.QRect(10, 10, 660, 511))
+        self.course_list.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.course_list.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.course_list.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.course_list.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.course_list.setTextElideMode(QtCore.Qt.ElideMiddle)
         self.course_list.setObjectName("course_list")
         self.learnCourse_button = QtWidgets.QPushButton(self.course_page)
         self.learnCourse_button.setGeometry(QtCore.QRect(280, 530, 120, 41))
@@ -187,6 +193,9 @@ class Ui_MainWindow(object):
         font.setPointSize(14)
         self.descriptio_label.setFont(font)
         self.descriptio_label.setObjectName("descriptio_label")
+        self.search_checkBox = QtWidgets.QCheckBox(self.lab_page)
+        self.search_checkBox.setGeometry(QtCore.QRect(70, 160, 181, 41))
+        self.search_checkBox.setObjectName("search_checkBox")
         self.stackedWidget.addWidget(self.lab_page)
         self.about_page = QtWidgets.QWidget()
         self.about_page.setObjectName("about_page")
@@ -269,7 +278,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(4)
+        self.stackedWidget.setCurrentIndex(1)
         self.menu_list.setCurrentRow(-1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.username_input, self.password_input)
@@ -306,6 +315,7 @@ class Ui_MainWindow(object):
         self.learnCourse_button.setText(_translate("MainWindow", "学  习"))
         self.download_checkBox.setText(_translate("MainWindow", "视频下载"))
         self.descriptio_label.setText(_translate("MainWindow", "陆续开发相关扩展功能，勾选以打开该功能"))
+        self.search_checkBox.setText(_translate("MainWindow", "搜索全国课程"))
         self.about_label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:600; color:#ffaa00;\">WebCourse</span><span style=\" font-size:14pt; color:#ffaa00;\">，</span><span style=\" font-size:14pt;\">一款学习辅助软件。</span></p><p><span style=\" font-size:14pt;\">作者：菜菜子（xeroxYor）</span></p><p><span style=\" font-size:14pt;\">项目地址：</span><a href=\"github.com/MrBeike/webCourse.git\"><span style=\" font-size:14pt; text-decoration: underline; color:#0000ff;\">github.com/MrBeike/webCourse.git</span></a></p><p><span style=\" font-size:14pt;\">联系方式：lbbas@126.com</span></p><p><span style=\" font-size:10pt;\">本项目仅供python、pyqt学习研究使用，请勿用于其他非法用途。</span></p><p><span style=\" font-size:10pt;\">本项目开源免费，请勿作任何商业行为。QT @ GPL</span></p></body></html>"))
         self.menu_list.setSortingEnabled(False)
         __sortingEnabled = self.menu_list.isSortingEnabled()

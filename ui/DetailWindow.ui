@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>680</width>
-    <height>580</height>
+    <width>681</width>
+    <height>428</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>510</y>
+     <y>380</y>
      <width>121</width>
      <height>41</height>
     </rect>
@@ -26,14 +26,23 @@
     <string>学  习</string>
    </property>
   </widget>
-  <widget class="QTableView" name="detail_list">
+  <widget class="QTableView" name="project_detail_list">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>30</y>
-     <width>651</width>
-     <height>461</height>
+     <y>20</y>
+     <width>661</width>
+     <height>351</height>
     </rect>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="sizeAdjustPolicy">
+    <enum>QAbstractScrollArea::AdjustToContents</enum>
+   </property>
+   <property name="textElideMode">
+    <enum>Qt::ElideMiddle</enum>
    </property>
   </widget>
  </widget>
