@@ -6,7 +6,7 @@ import time
 from bs4 import BeautifulSoup
 
 from Wget import Wget
-from Learn import pointDetect
+from Learn import Learn
 from paramDefine import *
 
 
@@ -18,9 +18,9 @@ class Download:
     @param s: 保存用户登陆成功状态的session  requsts.session()
     @param courseLists：项目/课程ID合集 list
     '''
-    def __init__(self,s,courseLists)
+    def __init__(self,s,courseLists):
         self.s = s
-        points = pointDetect(courseLists)
+        points = Learn().pointDetect(courseLists)
         self.fileInfoLists = self.getVideoUrl(points)
 
 

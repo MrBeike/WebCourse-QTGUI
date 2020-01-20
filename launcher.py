@@ -14,22 +14,27 @@ sys.path = [os.path.join(myFolder, 'ui'),
 
 os.chdir(myFolder)
 
-from Ui_MainWindow import *
-from Ui_DetailWindow import *
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QDialog
-from Slots import *
-# from Login import Login
-# from Learn import Learn
-# from Regist import Regist
-# from Test import Test
-# from Download import Download
+
+from Ui_MainWindow import *
+from Ui_DetailWindow import *
+from Login import Login
+from Learn import Learn
+from Regist import Regist
+from Test import Test
+from Download import Download
 
 
-class MyMainWindow(QMainWindow, Ui_MainWindow):
+# TODO 默认搜索开启loginID,显示课程注册状态。
+# TODO 实验室增加注册过期课程功能
+# TODO 保存密码用户快捷登陆
+# TODO 用户登陆后界面变化
+
+class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
-        super(MyMainWindow, self).__init__(parent)
+        super(MainWindow, self).__init__(parent)
         self.setupUi(self)
         self.login_status = False
         # 设置donate界面默认不显示
@@ -43,6 +48,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     '''
     # ===MainWindow===
     # List与StackDock连接
+    # FIXME 未登录时 默认选中标签1
     @pyqtSlot(int)
     def on_menu_list_currentRowChanged(self, value):
         if (self.login_status or value == 0):
@@ -65,7 +71,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         if not password:
             QMessageBox.about(self,'提示','请输入密码')
             return False
-        login_status, s, login_message = login(username, password, rememberFlag)
+        login_status, s, login_message = Login().login(username, password, rememberFlag)
         self.statusbar.showMessage(login_message)
         if login_status:
             self.login_button.setEnabled = False
@@ -73,10 +79,10 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.login_status = login_status
             self.project_list_initial()
             self.course_list_initial()
-            self.login_button.setEnabled(False)
+            self.login_button.setEnabled = False
         else:
             # TODO 错误提示美化
-            QMessageBox.ablout(self,'提示',login_message)
+            QMessageBox.about(self,'提示',login_message)
 
 
     # ===regist_page===
@@ -91,13 +97,15 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         # 建立数据模型实例
         self.regist_list_model = QStandardItemModel()
         # 设置列标题
-        header = ['类型', '名称', 'ID']
+        header = ['类型', '名称', '注册情况','ID']
         self.regist_list_model.setHorizontalHeaderLabels(header)
         # 向模型添加数据
         if search_result:
+            with open('search_result','w') as f:
+                f.write(search_result)
             row, col = len(search_result), len(search_result[0])
             for row, datadict in enumerate(search_result):
-                datalist = [datadict['type'], datadict['name'], datadict['id']]
+                datalist = [datadict['type'], datadict['name'], datadict['status'],datadict['id']]
                 # datalist = [x for x in datadict.values()]
                 for col, cell in enumerate(datalist):
                     value = QStandardItem(str(cell))
@@ -112,11 +120,12 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         # self.regist_list.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)        
         # self.regist_list.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
         # self.regist_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
-        self.regist_list.setColumnWidth(0,50)
-        self.regist_list.setColumnWidth(1,400)
-        self.regist_list.setColumnWidth(2,230)
+        self.regist_list.setColumnWidth(0,80)
+        self.regist_list.setColumnWidth(1,430)
+        self.regist_list.setColumnWidth(2,150)
         self.regist_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
+    # FIXME 注册函数有问题？
     # 注册按钮响应
     @pyqtSlot()
     def on_regist_button_clicked(self):
@@ -152,13 +161,13 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
                     value.setEditable(False)
                     self.project_list_model.setItem(row, col, value)
         # 添加模型到QTableView实例中
-        self.project_list.setModel(self.regist_list_model)
+        self.project_list.setModel(self.project_list_model)
         
-        self.project_list.setColumnWidth(0,300)
-        self.project_list.setColumnWidth(1,300)
-        self.project_list.setColumnWidth(2,20)
-        self.project_list.setColumnWidth(3,30)
-        self.project_list.setColumnWidth(4,30)
+        self.project_list.setColumnWidth(0,369)
+        self.project_list.setColumnWidth(1,150)
+        self.project_list.setColumnWidth(2,40)
+        self.project_list.setColumnWidth(3,60)
+        self.project_list.setColumnWidth(4,0)
         self.project_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
 
@@ -173,7 +182,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         # 向模型添加数据
         if course_result:
             row, col = len(course_result), len(course_result[0])
-            for row, datadict in enumerate(project_result):
+            for row, datadict in enumerate(course_result):
                 datalist = [datadict['name'],datadict['time'], datadict['status'],datadict['id']]
                 for col, cell in enumerate(datalist):
                     value = QStandardItem(str(cell))
@@ -181,22 +190,23 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
                     value.setEditable(False)
                     self.course_list_model.setItem(row, col, value)
         # 添加模型到QTableView实例中
-        self.course_list.setModel(self.regist_list_model)
+        self.course_list.setModel(self.course_list_model)
         
-        self.course_list.setColumnWidth(0,350)
-        self.course_list.setColumnWidth(1,20)
-        self.course_list.setColumnWidth(2,30)
-        self.course_list.setColumnWidth(3,280)
+        self.course_list.setColumnWidth(0,499)
+        self.course_list.setColumnWidth(1,40)
+        self.course_list.setColumnWidth(2,80)
+        self.course_list.setColumnWidth(3,0)
         self.course_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
     # 学习整个项目按钮响应
     @pyqtSlot()
     def on_learnProject_button_clicked(self):
-        learn = Learn()
+        learn = Learn(self.s)
         row = self.project_list.currentIndex().row()
         projectId  = self.project_list_model.index(row, 4).data()
         courseLists = learn.projectDetailReader(projectId)
         learn.learn(courseLists)
+        self.project_list_initial()
 
     # 学习项目子课程按钮响应
     @pyqtSlot()
@@ -207,9 +217,10 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
     # ===course_page===
     #学习按钮响应
+    # FIXME 学习后视图更新失败
     @pyqtSlot()
     def on_learnCourse_button_clicked(self):
-        learn = Learn()
+        learn = Learn(self.s)
         row = self.course_list.currentIndex().row()
         courseId = self.course_list_model.index(row,3).data()
         courseTime = self.course_list_model.index(row,1).data()
@@ -219,7 +230,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             'time':courseTime
         }]
         learn.learn(courseLists)
-
+        self.course_list_initial()
 
     # ===lab_page===
     # TODO 存在的必要？
@@ -239,6 +250,6 @@ class DetailWindow(QDialog,Ui_DetailWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    mainWinow = MyMainWindow()
+    mainWinow = MainWindow()
     mainWinow.show()
     sys.exit(app.exec_())

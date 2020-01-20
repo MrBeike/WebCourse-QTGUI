@@ -24,7 +24,7 @@ class Learn:
         @return projectLists：  用户所有项目信息  list [{,,,},{,,,}]
         '''
         project_page = self.s.get(project_url).content.decode('utf-8')
-        Soup = BeautifulSoup(page, "html.parser")
+        Soup = BeautifulSoup(project_page, "html.parser")
         # 读取所有TD calss = cal_td标签项目
         all_tds = Soup.find_all('td', class_="cal_td")
         # 将TD内文字遍历并按8分组写入数组 
@@ -62,21 +62,21 @@ class Learn:
         # 读取所有TR class = add_app_list标签项目
         all_trs = Soup.find_all("tr", class_="add_app_list")
         courseLists = []
-        for i in range(len(all_trs)):
+        for trs in all_trs:
             # tr标签内包含着所有信息，第一行tr:courseId,后8行td包含课程其他信息[其中2，3，7有用]
-            courseId = str(all_trs[i].get('id'))[0:32]
-            tds = all_trs[i].find_all("td", class_="cal_td")
+            courseId = str(trs.get('id'))[0:32]
+            tds = trs.find_all("td", class_="cal_td")
             courseList = []
-            for j in range(len(tds)):
-                td_text = tds[j].get_text().strip()
+            for td in tds:
+                td_text = td.get_text().strip()
                 courseList.append(td_text)
-                # courseDict.keys() = ["课程名称", "学时", "完成状态", "课程ID"]
-                courseDict = {
-                    'name':courseList[1], 
-                    'time':courseList[2], 
-                    'status':courseList[6], 
-                    'id':courseId
-                }
+            # courseDict.keys() = ["课程名称", "学时", "完成状态", "课程ID"]
+            courseDict = {
+                'name':courseList[1],
+                'time':courseList[2],
+                'status':courseList[6],
+                'id':courseId
+            }
             courseLists.append(courseDict)
         return courseLists
 
@@ -109,7 +109,7 @@ class Learn:
                 'name':name,
                 'time':time,
                 'id':id_text,
-                'learnTime':round(eval(courseInfo['learnTime']) / 3600,
+                'learnTime':round(eval(courseInfo['learnTime']) / 3600),
                 'score':courseInfo['totalScore'],
                 'finished':courseInfo['flagCourseFinish']
             }
@@ -126,13 +126,14 @@ class Learn:
         模拟网页逻辑完成课程学习,包括视频轨迹的实现、测试自动完成等。
         @param courseLists：待学习的课程相关信息 list [{,,,},{,,,}] (单个课程学习时 list.__len__ = 1)
         '''
+        s = self.s
         for courseList in courseLists:
             courseId = courseList['id']
             courseTime = courseList['time']
             courseTime = str(int(float(courseTime) * 3600 + random.randint(1000, 2000)))
             data = {"courseId": courseId,
-                    "studyTime": coursePeriod}
-            response = self.s.post(timeSave_url, data=data)
+                    "studyTime": courseTime}
+            response = s.post(timeSave_url, data=data)
             learn_message = response.content.decode("utf-8")
         # TODO 消息提示
         self.points = self.pointDetect(courseLists)
@@ -141,12 +142,13 @@ class Learn:
         # 自动测试实现部分
         self.testDetect()
 
-    def pointDetect(self，courseLists):
+    def pointDetect(self,courseLists):
         '''
         课程节点检测
         @param courserId: 课程ID str
         @return points: 课程节点信息  list [{,,,},{,,,},{,,,}] 
         '''
+        s = self.s
         points = []
         for courseList in courseLists:
             courseId = courseList['id']
@@ -186,16 +188,16 @@ class Learn:
         if videoPoint_lens:
             for videoPoint in videoPoints:
                 # 预学习1秒，否则无法获取当前视频总时长
-                savedataPre = {"videoStudyRecord.courseId": videoPoint['courserId'],
-                            "videoStudyRecord.itemId": videoPoint['courserId'],
+                savedataPre = {"videoStudyRecord.courseId": videoPoint['courseId'],
+                            "videoStudyRecord.itemId": videoPoint['pointId'],
                             "videoStudyRecord.startTime": "00:00:00",
                             "videoStudyRecord.endTime": "00:00:01",
                             "videoStudyRecord.videoIndex": "0",
                             "videoStudyRecord.studyTimeLong": "1"}
                 s.post(saveRecord_url, data=savedataPre)
                 # 获取当前视频时间长度
-                querydata = {"params.courseId": videoPoints[i][0],
-                            "params.itemId": videoPoints[i][1]}
+                querydata = {"params.courseId": videoPoint['courseId'],
+                            "params.itemId": videoPoint['pointId']}
                 query = s.post(learnRecord_url, data=querydata).content
                 learnRecordSoup = BeautifulSoup(query, "html.parser")
                 totalLearnTime = learnRecordSoup.findAll(name="span", attrs={"name": "end_time"})[-1].get_text()
@@ -205,8 +207,8 @@ class Learn:
                 seconds = int(totalLearnTimeNums[2])
                 totalLearnTimeNum = hours * 3600 + minutes * 60 + seconds
                 # 提交数据
-                savedata = {"videoStudyRecord.courseId": videoPoint['courserId'],
-                            "videoStudyRecord.itemId": videoPoint['courserId'],
+                savedata = {"videoStudyRecord.courseId": videoPoint['courseId'],
+                            "videoStudyRecord.itemId": videoPoint['pointId'],
                             "videoStudyRecord.startTime": "00:00:00",
                             "videoStudyRecord.endTime": totalLearnTime,
                             "videoStudyRecord.videoIndex": "0",
@@ -233,8 +235,9 @@ class Learn:
         '''
         获取指定课程学习相关信息（可单个，也可多个Id用逗号连接）
         '''
+        s = self.s
         data = {"electiveIds": courseId}
-        response = self.s.post(courseStatue_url, data=data)
+        response = s.post(courseStatue_url, data=data)
         json = response.json()
         if json['success'] == 'true':
             data = json['data']

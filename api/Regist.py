@@ -4,7 +4,6 @@
 import re
 
 from bs4 import BeautifulSoup
-from prettytable import PrettyTable
 from paramDefine import *
 
 
@@ -68,14 +67,16 @@ class Regist:
     # 项目搜索，显示50条 pagesize控制。
     # @return [projectName,projectId]
     def projectSearch(self):
-        userId = ''
+        userId = self.loginId
+        year = self.year
+        keyword = self.keyword
         pageNum = ''
         categoryId = ''
-        pageSize = '30'
+        pageSize = '50'
         # ckey为必须项目，其他可忽略。loginID会控制搜索范围（空值搜索更多）
         data = {'loginId': userId,
-                'ckey': self.keyword,
-                'year': self.year,
+                'ckey': keyword,
+                'year': year,
                 'pageNum': pageNum,
                 'categoryId': categoryId,
                 'pageSize': pageSize
@@ -86,16 +87,23 @@ class Regist:
         all_projectname = Soup.find_all('a', class_='font_tit')
         all_projectid = Soup.findAll(
             name="div", attrs={"id": re.compile(r"projectList(\w+).?")})
+        all_projectstatus = Soup.find_all('a',class_='font_xa2')
         all_projectname_len = len(all_projectname)
         projectInfos = []
         if all_projectname_len != 0:
             for i in range(all_projectname_len):
                 projectName = all_projectname[i].get_text()
                 projectId = all_projectid[i].get('id')[12:]
+                projectStatus = all_projectstatus[i].get_text().strip()
+                if projectStatus == '开始学习':
+                    projectStatus = '已注册'
+                elif projectStatus == '注册项目':
+                    projectStatus = '未注册'
                 projectInfo = {
                     'type': 'project',
                     'name': projectName,
-                    'id': projectId
+                    'id': projectId,
+                    'status':projectStatus
                 }
                 projectInfos.append(projectInfo)
         elif all_projectname_len == 0:
@@ -105,13 +113,15 @@ class Regist:
     # 课程搜索。
     # @return [courseName,courseId]
     def courseSearch(self):
-        loginId = ''
+        loginId = self.loginId
+        keyword = self.keyword
+        year = self.year
         courseTag = ''  # 标签  暂不实现
         pageNum = ''
         # ckey为必须项目，其他可忽略。
-        data = {'loginId': self.loginId,
-                'ckey': self.keyword,
-                'year': self.year,
+        data = {'loginId': loginId,
+                'ckey': keyword,
+                'year': year,
                 'pageNum': pageNum,
                 'courseTag': courseTag
                 }
@@ -121,16 +131,23 @@ class Regist:
         all_coursename = Soup.find_all('a', class_='font_tit')
         all_courseid = Soup.find_all(
             'div', attrs={'id': re.compile("clbutton(\w+).?")})
+        all_coursestatus = Soup.find_all('a',class_ ='font_xa2')
         all_coursename_len = len(all_courseid)
         courseInfos = []
         if all_coursename_len != 0:
             for i in range(all_coursename_len):
                 courseName = all_coursename[i].get_text()
                 courseId = all_courseid[i].get('id')[8:]
+                courseStatus = all_coursestatus[i].get_text()
+                if courseStatus == '开始学习':
+                    courseStatus = '已注册'
+                elif courseStatus == '注册课程':
+                    courseStatus = '未注册'
                 courseInfo = {
                     'type': 'course',
                     'name': courseName,
-                    'id': courseId
+                    'id': courseId,
+                    'status':courseStatus
                 }
                 courseInfos.append(courseInfo)
         elif all_coursename_len == 0:

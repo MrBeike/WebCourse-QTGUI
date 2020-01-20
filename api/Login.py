@@ -4,7 +4,6 @@ import hashlib
 import requests
 import time
 from dataBase import DataBase
-from prettytable import PrettyTable
 from bs4 import BeautifulSoup
 from paramDefine import *
 
@@ -20,26 +19,26 @@ class Login:
     @return：s: 成功登陆的session   requests.session()
     @return: login_message: 登陆反馈信息  str
     '''
-    def __init__(self,username,password,rememberFlag):
-        self.username = username
-        self.password = password
-        self.rememberFlag = rememberFlag
+    def __init__(self):
+        pass
 
-    def login():
+    def login(self,username,password,rememberFlag):
+
         # 设置请求头
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 5.1; rv:39.0) Gecko/20100101 Firefox/39.0',
                 'HOST': '11.129.195.195',
                 'Referer': 'http://11.129.195.195/center/cmslogin.jsp?url=11.129.195.195/sso/login_centerLogin.action',
                 }
-        if len(self.password) != 32:
-            self.password = hashlib.md5(password.encode(encoding='utf-8')).hexdigest()
+        if len(password) != 32:
+            password = hashlib.md5(password.encode(encoding='utf-8')).hexdigest()
         # 登陆时需要POST的数据
-        data = {'loginId': self.username,
-                'passwd': self.password,
+        data = {'loginId': username,
+                'passwd': password,
                 }
         #尝试3次
-        i = i + 1
-        while i<3:  
+        i = 0 
+        while i<3:
+            i += 1  
             try:
                 # 构造登陆请求
                 s = requests.session()
