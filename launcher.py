@@ -101,8 +101,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.regist_list_model.setHorizontalHeaderLabels(header)
         # 向模型添加数据
         if search_result:
-            with open('search_result','w') as f:
-                f.write(search_result)
+            with open('search_result','w',encoding='utf-8') as f:
+                f.write(str(search_result))
             row, col = len(search_result), len(search_result[0])
             for row, datadict in enumerate(search_result):
                 datalist = [datadict['type'], datadict['name'], datadict['status'],datadict['id']]
@@ -152,6 +152,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.project_list_model.setHorizontalHeaderLabels(header)
         # 向模型添加数据
         if project_result:
+            with open('project_result', 'w',encoding='utf-8') as f:
+                f.write(str(project_result))
             row, col = len(project_result), len(project_result[0])
             for row, datadict in enumerate(project_result):
                 datalist = [datadict['name'], datadict['period'],datadict['time'], datadict['status'],datadict['id']]
@@ -181,6 +183,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.course_list_model.setHorizontalHeaderLabels(header)
         # 向模型添加数据
         if course_result:
+            with open('course_result', 'w',encoding='utf-8') as f:
+                f.write(str(course_result))
             row, col = len(course_result), len(course_result[0])
             for row, datadict in enumerate(course_result):
                 datalist = [datadict['name'],datadict['time'], datadict['status'],datadict['id']]
@@ -211,9 +215,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # 学习项目子课程按钮响应
     @pyqtSlot()
     def on_detail_button_clicked(self):
-        detailWindow = DetailWindow()
-        detailWindow.show()
+        # detailWindow = DetailWindow()
+        # detailWindow.show()
         # TODO 窗口初始化 传值
+        row = self.project_list.currentIndex().row()
+        projectId = self.project_list_model.index(row, 4).data()
+        learn = Learn(self.s)
+        project_detail_result = learn.projectDetailReader(projectId)
+        with open('project_detail_result', 'w',encoding='utf-8') as f:
+            f.write(str(project_detail_result))
+
 
     # ===course_page===
     #学习按钮响应
