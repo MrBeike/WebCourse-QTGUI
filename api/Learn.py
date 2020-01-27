@@ -135,7 +135,7 @@ class Learn:
                     "studyTime": courseTime}
             response = s.post(timeSave_url, data=data)
             learn_message = response.content.decode("utf-8")
-        # TODO 消息提示
+        # TODO 学习-消息提示
         self.points = self.pointDetect(courseLists)
         # 课程轨迹实现部分
         self.learnRecord()
@@ -215,7 +215,7 @@ class Learn:
                             "videoStudyRecord.studyTimeLong": totalLearnTimeNum}
                 save = s.post(saveRecord_url, data=savedata)
                 learnRecord_message = save.content.decode("utf-8")
-                # TODO 消息显示
+                # TODO 学习轨迹-消息显示
 
     def testDetect(self):
         '''

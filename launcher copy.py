@@ -35,7 +35,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
-        self.login_status = False
+        self.login_status = True
         # 设置donate界面默认不显示
         self.donate_label.setVisible(False)
         with open(r'resource\QSS.qss', 'r') as f:
@@ -51,7 +51,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     @pyqtSlot(int)
     def on_menu_list_currentRowChanged(self, value):
         if (self.login_status or value == 0):
-            self.stackedWidget.setCurrentIndex(value)  
+            self.stackedWidget.setCurrentIndex(value)
         else:
             QMessageBox.about(self, "提示", "请先登陆!")
             # TODO  美化消息提示
@@ -61,27 +61,30 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # ===login_page===
     @pyqtSlot()
     def on_login_button_clicked(self):
-        username = self.username_input.currentText().strip()
-        password = self.password_input.text()
-        rememberFlag = self.remember_check.isChecked()
-        if not username:
-            QMessageBox.about(self,'提示','请输入用户名')
-            return False
-        if not password:
-            QMessageBox.about(self,'提示','请输入密码')
-            return False
-        login_status, s, login_message = Login().login(username, password, rememberFlag)
-        self.statusbar.showMessage(login_message)
-        if login_status:
-            self.login_button.setEnabled = False
-            self.s = s
-            self.login_status = login_status
-            self.project_list_initial()
-            self.course_list_initial()
-            self.login_button.setEnabled = False
+        if not self.login_status:
+            username = self.username_input.currentText().strip()
+            password = self.password_input.text()
+            rememberFlag = self.remember_check.isChecked()
+            if not username:
+                QMessageBox.about(self,'提示','请输入用户名')
+                return False
+            if not password:
+                QMessageBox.about(self,'提示','请输入密码')
+                return False
+            login_status, s, login_message = Login().login(username, password, rememberFlag)
+            self.statusbar.showMessage(login_message)
+            if login_status:
+                self.s = s
+                self.login_status = login_status
+                self.project_list_initial()
+                self.course_list_initial()
+                self.login_button.setText('注  销')
+            else:
+                # TODO 错误提示美化
+                QMessageBox.about(self,'提示',login_message)
         else:
-            # TODO 错误提示美化
-            QMessageBox.about(self,'提示',login_message)
+            login_status,s,message = Login.logout()
+            # TODO 注销函数未完成
 
 
     # ===regist_page===

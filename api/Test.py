@@ -98,7 +98,7 @@ class Test:
         submitPageResponse = s.post(submitPage_url, data=submitPageData)
         submitPageContent = submitPageResponse.content.decode('utf-8')
         # print("服务器返回信息:", submitPageContent)
-        # TODO 消息提示？
+        # TODO 测试-提交试卷-消息提示？
         return
 
     #测试结果页面，反馈成绩
@@ -112,5 +112,5 @@ class Test:
         thisRecord = resultSoup.find("span", class_="record_num_this").get_text()
         topRecord = resultSoup.find("span", class_="record_num_top").get_text()
         # print("本次成绩：", thisRecord, "最高成绩：", topRecord)
-        # TODO 消息提示 处理
+        # TODO 测试-测试结果-消息提示
         return

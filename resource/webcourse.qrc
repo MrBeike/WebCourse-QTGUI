@@ -13,6 +13,7 @@
     <file>regist.png</file>
   </qresource>
   <qresource prefix="IMG">
+    <file>xeroxYor.jpg</file>
     <file>logo.jpg</file>
     <file>donate.png</file>
     <file>logo.png</file>

@@ -87,7 +87,7 @@ class Download:
                     fileInfoLists.append(fileInfoDict)
         return fileInfoLists
 
-    # TODO 界面 文件浏览器 另存为
+    # TODO 下载-下载信息-界面-文件浏览器 另存为{编码格式？种子？}
     def saveToPage(self):
         '''
         将课程下载信息保存到本地网页，包含标题和下载地址
@@ -102,10 +102,10 @@ class Download:
                 log = "<p>" + "【" + str(i) + "】" + fileName + "</p>" + "<a href=" + fileUrl + ">" + fileUrl + "</a></br>"
                 f.write(log.encode())
             saveToPage_message = "已经生成含有视频地址和名称的文件：videolist.html"
-            # TODO 消息提示
+            # TODO 下载-下载信息-消息提示
         return
 
-    # TODO 界面 文件浏览器 另存为
+    # TODO 下载-下载文件-界面 文件浏览器 另存为
     def videoDownload(self,downloadLists):
         '''
         调用Wget下载所需文件

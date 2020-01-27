@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>631</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>631</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>631</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::NoContextMenu</enum>
+  </property>
+  <property name="windowTitle">
+   <string>xeroxYor</string>
+  </property>
+  <property name="windowOpacity">
+   <double>0.900000000000000</double>
+  </property>
+  <widget class="QLabel" name="roll_text">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>570</y>
+     <width>571</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14pt; color:#000000;&quot;&gt;这个软件的想法很早就在脑子里了，只是一直懒得动手，拖了好久。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14pt; color:#000000;&quot;&gt;2018年4月29日，我见到了一个难以忘怀的人。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14pt; color:#000000;&quot;&gt;短暂的相见固然美好，但我面对的现实却是残酷的分离。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14pt; color:#000000;&quot;&gt;我给不了你想要的，所以懦弱的选择了逃避。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14pt; color:#000000;&quot;&gt;那段时间真的是难熬，以至于凌晨2点都未能入睡，&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14pt; color:#000000;&quot;&gt;索性起来做点事，来度过这无奈的夜晚。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14pt; color:#000000;&quot;&gt;然后便有了这个小项目。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'Consolas,Courier New,monospace'; font-size:14pt; color:#000000;&quot;&gt;我很想你，心瑜小可爱。---菜菜子 &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="img">
+   <property name="geometry">
+    <rect>
+     <x>-20</x>
+     <y>-50</y>
+     <width>671</width>
+     <height>601</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/IMG/xeroxYor.jpg);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../resource/webcourse.qrc"/>
+ </resources>
+ <connections/>
+</ui>

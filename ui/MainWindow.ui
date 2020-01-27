@@ -58,7 +58,7 @@
      <enum>QFrame::Plain</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="login_page">
      <widget class="QLabel" name="password_label">
@@ -462,7 +462,7 @@
       <property name="geometry">
        <rect>
         <x>70</x>
-        <y>100</y>
+        <y>110</y>
         <width>91</width>
         <height>51</height>
        </rect>
@@ -494,12 +494,25 @@
        <rect>
         <x>70</x>
         <y>160</y>
-        <width>181</width>
+        <width>221</width>
         <height>41</height>
        </rect>
       </property>
       <property name="text">
-       <string>搜索全国课程</string>
+       <string>搜索课程（不限地区、时间）</string>
+      </property>
+     </widget>
+     <widget class="Line" name="line">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>80</y>
+        <width>501</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
      </widget>
     </widget>
@@ -552,7 +565,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600; color:#ffaa00;&quot;&gt;WebCourse&lt;/span&gt;&lt;span style=&quot; font-size:14pt; color:#ffaa00;&quot;&gt;，&lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;一款学习辅助软件。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;作者：菜菜子（xeroxYor）&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;项目地址：&lt;/span&gt;&lt;a href=&quot;github.com/MrBeike/webCourse.git&quot;&gt;&lt;span style=&quot; font-size:14pt; text-decoration: underline; color:#0000ff;&quot;&gt;github.com/MrBeike/webCourse.git&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;联系方式：lbbas@126.com&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;本项目仅供python、pyqt学习研究使用，请勿用于其他非法用途。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;本项目开源免费，请勿作任何商业行为。QT @ GPL&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color:#ffaa00;&quot;&gt;WebCourse&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-style:italic;&quot;&gt;一款学习辅助软件。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;作者：菜菜子（xeroxYor）&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;项目地址：&lt;/span&gt;&lt;a href=&quot;github.com/MrBeike/webCourse.git&quot;&gt;&lt;span style=&quot; font-size:18pt; text-decoration: underline; color:#0000ff;&quot;&gt;@github.com/MrBeike&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;联系方式：lbbas@126.com&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;本项目仅供python、pyqt学习研究使用，请勿用于其他非法用途。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;本项目开源免费，请勿作任何商业行为。QT @ GPL&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="textFormat">
        <enum>Qt::RichText</enum>
@@ -580,9 +593,26 @@
        <string/>
       </property>
      </widget>
+     <widget class="QPushButton" name="xeroxyor_button">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>230</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
      <zorder>thumb_button</zorder>
      <zorder>donate_label</zorder>
      <zorder>about_label</zorder>
+     <zorder>xeroxyor_button</zorder>
     </widget>
    </widget>
    <widget class="QListWidget" name="menu_list">
@@ -599,14 +629,53 @@
       <pointsize>12</pointsize>
      </font>
     </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true"/>
     </property>
     <property name="frameShape">
      <enum>QFrame::NoFrame</enum>
     </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
+    </property>
+    <property name="showDropIndicator" stdset="0">
+     <bool>false</bool>
+    </property>
+    <property name="dragDropMode">
+     <enum>QAbstractItemView::NoDragDrop</enum>
+    </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::SingleSelection</enum>
+    </property>
+    <property name="textElideMode">
+     <enum>Qt::ElideMiddle</enum>
+    </property>
+    <property name="movement">
+     <enum>QListView::Static</enum>
+    </property>
+    <property name="flow">
+     <enum>QListView::LeftToRight</enum>
+    </property>
     <property name="resizeMode">
      <enum>QListView::Adjust</enum>
+    </property>
+    <property name="layoutMode">
+     <enum>QListView::SinglePass</enum>
+    </property>
+    <property name="viewMode">
+     <enum>QListView::IconMode</enum>
+    </property>
+    <property name="selectionRectVisible">
+     <bool>false</bool>
     </property>
     <property name="currentRow">
      <number>-1</number>
@@ -618,6 +687,12 @@
      <property name="text">
       <string>用户登录</string>
      </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
      <property name="textAlignment">
       <set>AlignCenter</set>
      </property>
@@ -625,10 +700,19 @@
       <iconset resource="../resource/webcourse.qrc">
        <normaloff>:/ICO/lgoin.png</normaloff>:/ICO/lgoin.png</iconset>
      </property>
+     <property name="flags">
+      <set>ItemIsSelectable|ItemIsEnabled</set>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>项目注册</string>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="textAlignment">
       <set>AlignCenter</set>
@@ -637,10 +721,19 @@
       <iconset resource="../resource/webcourse.qrc">
        <normaloff>:/ICO/regist.png</normaloff>:/ICO/regist.png</iconset>
      </property>
+     <property name="flags">
+      <set>ItemIsSelectable|ItemIsEnabled</set>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>我的项目</string>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="textAlignment">
       <set>AlignCenter</set>
@@ -649,10 +742,19 @@
       <iconset resource="../resource/webcourse.qrc">
        <normaloff>:/ICO/project.png</normaloff>:/ICO/project.png</iconset>
      </property>
+     <property name="flags">
+      <set>ItemIsSelectable|ItemIsEnabled</set>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>我的课程</string>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="textAlignment">
       <set>AlignCenter</set>
@@ -661,10 +763,19 @@
       <iconset resource="../resource/webcourse.qrc">
        <normaloff>:/ICO/course.png</normaloff>:/ICO/course.png</iconset>
      </property>
+     <property name="flags">
+      <set>ItemIsSelectable|ItemIsEnabled</set>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>实验室</string>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="textAlignment">
       <set>AlignCenter</set>
@@ -673,10 +784,19 @@
       <iconset resource="../resource/webcourse.qrc">
        <normaloff>:/ICO/lab.png</normaloff>:/ICO/lab.png</iconset>
      </property>
+     <property name="flags">
+      <set>ItemIsSelectable|ItemIsEnabled</set>
+     </property>
     </item>
     <item>
      <property name="text">
       <string>关于</string>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="textAlignment">
       <set>AlignCenter</set>
@@ -684,6 +804,9 @@
      <property name="icon">
       <iconset resource="../resource/webcourse.qrc">
        <normaloff>:/ICO/about.png</normaloff>:/ICO/about.png</iconset>
+     </property>
+     <property name="flags">
+      <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
      </property>
     </item>
    </widget>
