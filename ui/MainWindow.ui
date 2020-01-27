@@ -58,7 +58,7 @@
      <enum>QFrame::Plain</enum>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="login_page">
      <widget class="QLabel" name="password_label">
@@ -542,6 +542,9 @@
       <property name="checkable">
        <bool>true</bool>
       </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
       <property name="autoDefault">
        <bool>false</bool>
       </property>
@@ -551,6 +554,9 @@
       <property name="flat">
        <bool>true</bool>
       </property>
+      <property name="name" stdset="0">
+       <string>thumb</string>
+      </property>
      </widget>
      <widget class="QLabel" name="about_label">
       <property name="enabled">
@@ -558,14 +564,14 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>110</x>
+        <x>130</x>
         <y>40</y>
-        <width>431</width>
+        <width>391</width>
         <height>381</height>
        </rect>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color:#ffaa00;&quot;&gt;WebCourse&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-style:italic;&quot;&gt;一款学习辅助软件。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;作者：菜菜子（xeroxYor）&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;项目地址：&lt;/span&gt;&lt;a href=&quot;github.com/MrBeike/webCourse.git&quot;&gt;&lt;span style=&quot; font-size:18pt; text-decoration: underline; color:#0000ff;&quot;&gt;@github.com/MrBeike&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;联系方式：lbbas@126.com&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;本项目仅供python、pyqt学习研究使用，请勿用于其他非法用途。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;本项目开源免费，请勿作任何商业行为。QT @ GPL&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; color:#ffaa00;&quot;&gt;  WebCourse&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-style:italic;&quot;&gt;     一款学习辅助软件。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;作者：菜菜子（xeroxYor）&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;项目地址：&lt;/span&gt;&lt;a href=&quot;github.com/MrBeike/webCourse.git&quot;&gt;&lt;span style=&quot; font-size:18pt; text-decoration: underline; color:#0000ff;&quot;&gt;@github.com/MrBeike&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;联系方式：lbbas@126.com&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;本项目仅供python、pyqt学习研究使用，请勿用于其他非法用途。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;本项目开源免费，请勿作任何商业行为。QT @ GPL&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="textFormat">
        <enum>Qt::RichText</enum>
@@ -596,17 +602,40 @@
      <widget class="QPushButton" name="xeroxyor_button">
       <property name="geometry">
        <rect>
-        <x>270</x>
+        <x>280</x>
         <y>230</y>
-        <width>121</width>
+        <width>101</width>
         <height>31</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <kerning>false</kerning>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>WhatsThisCursor</cursorShape>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="contextMenuPolicy">
+       <enum>Qt::NoContextMenu</enum>
       </property>
       <property name="text">
        <string/>
       </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>false</bool>
+      </property>
       <property name="flat">
        <bool>true</bool>
+      </property>
+      <property name="name" stdset="0">
+       <string>xeroxyor</string>
       </property>
      </widget>
      <zorder>thumb_button</zorder>

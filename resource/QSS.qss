@@ -22,12 +22,24 @@ QListWidget::item:hover {
     border-left: 5px solid red
  }
 
-/* 
-HistoryPanel:hover {
-    background: rgb(52, 52, 52);
-} */
-
 
 QTableView {
     selection-background-color: #44c767;
+}
+
+QPushButton[name = 'thumb']:checked {
+    background-color: transparent;
+}
+
+QPushButton[name = 'thumb']:pressed {
+    background-color: transparent;
+}
+
+
+QPushButton[name = 'xeroxyor']:checked {
+    background-color: transparent;
+}
+
+QPushButton[name = 'xeroxyor']:pressed {
+    background-color: transparent;
 }

@@ -15,12 +15,12 @@ sys.path = [os.path.join(myFolder, 'ui'),
 os.chdir(myFolder)
 
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import pyqtSlot,Qt,QTimer
 from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QDialog,QTableWidgetItem
 
 from Ui_MainWindow import *
 from Ui_DetailWindow import *
+from Ui_XeroxYor import *
 from Login import Login
 from Learn import Learn
 from Regist import Regist
@@ -30,81 +30,36 @@ from result import *
 
 # TODO 实验室增加注册过期课程功能
 # TODO 保存密码用户快捷登陆
-# TODO 用户登陆后界面变化
 # TODO  消息收集器 每个按钮结束响应
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
 
+
         # self.login_status = False
         self.login_status = True
         # 设置donate界面默认不显示
-        self.stackedWidget.setCurrentIndex(0)
         self.donate_label.setVisible(False)
+        # 设置默认目录项为“用户登陆”
+        self.stackedWidget.setCurrentIndex(0)
+        # 加载QSS配置
         with open(r'resource\QSS.qss', 'r') as f:
             self.list_style = f.read()
         self.setStyleSheet(self.list_style)
 
+
         # for test only Delete later {
-        self.project_list_initial()
-        self.course_list_initial()
+        self.project_list_initial(project_result)
+        self.course_list_initial(course_result)
         # for test only Delete later }
 
 
     '''
-    Slots Defination
+    Table Model Defination
     '''
-    # ===MainWindow===
-    # List与StackDock连接
-
-    @pyqtSlot(int)
-    def on_menu_list_currentRowChanged(self, value):
-        if self.login_status or value == 0:
-            self.stackedWidget.setCurrentIndex(value)  
-        else:
-            QMessageBox.about(self, "提示", "请先登陆!")
-    # FIXME 未登录时 默认选中标签1
-
-    # TODO 已经登录后的情况判断
-    # ===login_page===
-    @pyqtSlot()
-    def on_login_button_clicked(self):
-        if not self.login_status:
-            username = self.username_input.currentText().strip()
-            password = self.password_input.text()
-            rememberFlag = self.remember_check.isChecked()
-            if not username:
-                QMessageBox.about(self,'提示','请输入用户名')
-                return False
-            if not password:
-                QMessageBox.about(self,'提示','请输入密码')
-                return False
-            login_status, s, login_message = Login().login(username, password, rememberFlag)
-            self.statusbar.showMessage(login_message)
-            if login_status:
-                self.s = s
-                self.login_status = login_status
-                self.project_list_initial()
-                self.course_list_initial()
-                self.login_button.setText('注  销')
-            else:
-                # TODO 错误提示美化
-                QMessageBox.about(self,'提示',login_message)
-        else:
-            login_status,s,message = Login.logout()
-            # TODO 注销函数未完成
-
-    # ===regist_page===
-    # 搜索按钮响应
-    @pyqtSlot()
-    def on_search_button_clicked(self):
-        # keyword = self.keyword_input.text().strip()
-        # year = self.year_input.text().strip()
-        # s = self.s
-        # self.register = Regist(s,keyword,year)
-        # search_result = self.register.search()
-        # 建立数据模型实例
+     # 建立数据模型实例
+    def regist_list_initial(self,search_result):
         self.regist_list_model = QStandardItemModel()
         # 设置列标题
         header = ['类型', '名称', '注册情况','ID']
@@ -125,35 +80,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.regist_list.setModel(self.regist_list_model)
         
         # 表格栏宽、列宽调整
-        # self.regist_list.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        # self.regist_list.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)        
-        # self.regist_list.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        # self.regist_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
         self.regist_list.setColumnWidth(0,90)
         self.regist_list.setColumnWidth(1,530)
         self.regist_list.setColumnWidth(2,0)
         self.regist_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
-    # FIXME 注册函数有问题？
-    # 注册按钮响应
-    @pyqtSlot()
-    def on_regist_button_clicked(self):
-        row = self.regist_list.currentIndex().row()
-        type = self.regist_list_model.index(row, 0).data()
-        name = self.regist_list_model.index(row, 1).data()
-        id= self.regist_list_model.index(row, 2).data()
-        info = {
-            'type': type,
-            'name': name,
-            'id': id
-        }
-        regist_message = self.register.regist(info)
-        QMessageBox.about(self,'提示',regist_message)
-
-    # ===project_page===
-    def project_list_initial(self):
-        # learn = Learn(self.s)
-        # project_result = learn.projectReader()
+    def project_list_initial(self,project_result):
         # 建立数据模型实例
         self.project_list_model = QStandardItemModel()
         # 设置列标题
@@ -181,9 +113,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.project_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
 
-    def course_list_initial(self):
-        # learn = Learn(self.s)
-        # course_result = learn.courseReader()
+    def course_list_initial(self,course_result):
         # 建立数据模型实例
         self.course_list_model = QStandardItemModel()
         # 设置列标题
@@ -209,26 +139,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.course_list.setColumnWidth(3,0)
         self.course_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
-    # 学习整个项目按钮响应
-    @pyqtSlot()
-    def on_learnProject_button_clicked(self):
-        learn = Learn(self.s)
-        row = self.project_list.currentIndex().row()
-        projectId  = self.project_list_model.index(row, 4).data()
-        courseLists = learn.projectDetailReader(projectId)
-        learn.learn(courseLists)
-        self.project_list_initial()
-
-    # 学习项目子课程按钮响应
-    @pyqtSlot()
-    def on_detail_button_clicked(self):
-        # TODO 窗口初始化 传值  projectName?
-        row = self.project_list.currentIndex().row()
-        projectId = self.project_list_model.index(row, 4).data()
-        # learn = Learn(self.s)
-        # project_detail_result = learn.projectDetailReader(projectId)
-        # 将子窗口添加到主窗口进程中，修复闪退
-        self.detailWindow = DetailWindow()
+    def project_detail_list_initial(self,project_detail_result):
         # 建立数据模型实例
         self.project_detail_list_model = QStandardItemModel()
         # 设置列标题
@@ -247,20 +158,125 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # 添加模型到QTableView实例中
         self.detailWindow.project_detail_list.setModel(self.project_detail_list_model)
     
-        self.detailWindow.project_detail_list.setColumnWidth(0,455)
+        self.detailWindow.project_detail_list.setColumnWidth(0,440)
         self.detailWindow.project_detail_list.setColumnWidth(1,40)
         self.detailWindow.project_detail_list.setColumnWidth(2,70)
         self.detailWindow.project_detail_list.setColumnWidth(3,70)
         self.detailWindow.project_detail_list.setColumnWidth(4,0)
         self.detailWindow.project_detail_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
+
+    '''
+    Slots Defination
+    '''
+    # ===MainWindow===
+    # List与StackDock连接
+
+    @pyqtSlot(int)
+    def on_menu_list_currentRowChanged(self, value):
+        if self.login_status or value == 0:
+            self.stackedWidget.setCurrentIndex(value)  
+        else:
+            QMessageBox.about(self, "提示", "请先登陆!")
+    # FIXME 未登录时 默认选中标签1
+
+    # ===login_page===
+    @pyqtSlot()
+    def on_login_button_clicked(self):
+        if not self.login_status:
+            username = self.username_input.currentText().strip()
+            password = self.password_input.text()
+            rememberFlag = self.remember_check.isChecked()
+            if not username:
+                QMessageBox.about(self,'提示','请输入用户名')
+                return False
+            if not password:
+                QMessageBox.about(self,'提示','请输入密码')
+                return False
+            login_status, s, login_message = Login().login(username, password, rememberFlag)
+            self.statusbar.showMessage(login_message)
+            if login_status:
+                self.s = s
+                self.login_status = login_status
+                learn = Learn(s)
+                project_result = learn.projectReader()
+                course_result = learn.courseReader()
+                self.project_list_initial(project_result)
+                self.course_list_initial(course_result)
+                self.login_button.setText('注  销')
+                self.username_input.setEnabled(False)
+                self.password_input.setEnabled(False)
+                self.remember_check.setEnabled(False)
+            else:
+                # TODO 错误提示美化
+                QMessageBox.about(self,'提示',login_message)
+        else:
+            logout_status,s,message = Login.logout()
+            if logout_status:
+                self.username_input.setEnabled(True)
+                self.password_input.setEnabled(True)
+                self.remember_check.setEnabled(True)
+                self.login_status = False
+            # TODO 注销函数未完成
+
+    # ===regist_page===
+    # 搜索按钮响应
+    @pyqtSlot()
+    def on_search_button_clicked(self):
+        # keyword = self.keyword_input.text().strip()
+        # year = self.year_input.text().strip()
+        # s = self.s
+        # self.register = Regist(s,keyword,year)
+        # search_result = self.register.search()
+        self.regist_list_initial(search_result)
+
+    # FIXME 注册函数有问题？
+    # 注册按钮响应
+    @pyqtSlot()
+    def on_regist_button_clicked(self):
+        row = self.regist_list.currentIndex().row()
+        type = self.regist_list_model.index(row, 0).data()
+        name = self.regist_list_model.index(row, 1).data()
+        id= self.regist_list_model.index(row, 2).data()
+        info = {
+            'type': type,
+            'name': name,
+            'id': id
+        }
+        regist_message = self.register.regist(info)
+        QMessageBox.about(self,'提示',regist_message)
+
+    # ===project_page===
+    # 学习整个项目按钮响应
+    @pyqtSlot()
+    def on_learnProject_button_clicked(self):
+        Learn = Learn(self.s)
+        row = self.project_list.currentIndex().row()
+        projectId  = self.project_list_model.index(row, 4).data()
+        courseLists = Learn.projectDetailReader(projectId)
+        Learn.learn(courseLists)
+        self.project_list_model.clear()
+        project_result = Learn.projectReader()
+        self.project_list_initial(project_result)
+
+    # 学习项目子课程按钮响应
+    @pyqtSlot()
+    def on_detail_button_clicked(self):
+        row = self.project_list.currentIndex().row()
+        projectName = self.project_list_model.index(row,0).data()
+        projectId = self.project_list_model.index(row, 4).data()
+        # Learn = Learn(self.s)
+        # project_detail_result = Learn.projectDetailReader(projectId)
+        # 将子窗口添加到主窗口进程中，修复闪退
+        self.detailWindow = DetailWindow(projectName,projectId)
+        self.project_detail_list_initial(project_detail_result)
         self.detailWindow.show()
+
 
     # ===course_page===
     #学习按钮响应
-    # FIXME 学习后视图更新失败
     @pyqtSlot()
     def on_learnCourse_button_clicked(self):
-        learn = Learn(self.s)
+        Learn = Learn(self.s)
         row = self.course_list.currentIndex().row()
         courseId = self.course_list_model.index(row,3).data()
         courseTime = self.course_list_model.index(row,1).data()
@@ -269,9 +285,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             'id':courseId,
             'time':courseTime
         }]
-        learn.learn(courseLists)
+        Learn.learn(courseLists)
         self.course_list_model.clear()
-        self.course_list_initial()
+        course_result = Learn.courseReader()
+        self.course_list_initial(course_result)
 
 
     # ===lab_page===
@@ -284,10 +301,56 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.about_label.setHidden(value)
         self.donate_label.setVisible(value)
 
+    # 控制隐藏界面显示
+    @pyqtSlot()
+    def on_xeroxyor_button_clicked(self):
+        self.xeroxYor = XeroxYor()
+        self.xeroxYor.show()
+
+# 项目内课程详细信息窗体
 class DetailWindow(QDialog,Ui_DetailWindow):
-    def __init__(self,parent=None):
+    def __init__(self,projectName,projectId,parent=None):
         super(DetailWindow, self).__init__(parent)
         self.setupUi(self)
+        self.project_name_label.setText(str(projectName))
+        self.project_id_label.setText(str(projectId))
+
+    @pyqtSlot()
+    def on_learn_button_clicked(self):
+        row = self.project_detail_list.currentIndex().row()
+        courseId = self.project_detail_list_model.index(row, 4).data()
+        courseTime = self.course_list_model.index(row,1).data()
+        # 为了函数的一致性，此处构建包含一个信息点的list [{,,,}]
+        courseLists = [{
+            'id':courseId,
+            'time':courseTime
+        }]
+        Learn = Learn(self.s)
+        Learn.learn(courseLists)
+        self.project_detail_list_model.clear()
+        
+        project_detail_result = Learn.projectDetailReader(projectId)
+        self.project_detail_list_initial(project_detail_result)
+
+
+# 隐藏页窗体
+class XeroxYor(QDialog,Ui_XeroxYor):
+    def __init__(self,parent=None):
+        super(XeroxYor,self).__init__(parent)
+        self.setupUi(self)
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
+        self.min = self.roll_text.verticalScrollBar().minimum()
+        self.t = QTimer()
+        self.t.timeout.connect(self.changeTxtPosition)
+        self.t.start(100)
+
+    def changeTxtPosition(self):
+        self.roll_text.verticalScrollBar().setValue(self.min)
+        self.min += 1
+        if self.min == self.roll_text.verticalScrollBar().maximum():
+            self.t.stop()
+            self.destroy()
+
 
 
 if __name__ == '__main__':

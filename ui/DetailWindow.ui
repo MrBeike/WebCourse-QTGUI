@@ -7,20 +7,26 @@
     <x>0</x>
     <y>0</y>
     <width>681</width>
-    <height>428</height>
+    <height>494</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>详细信息</string>
   </property>
   <widget class="QPushButton" name="learn_button">
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>380</y>
+     <y>450</y>
      <width>121</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>学  习</string>
@@ -30,9 +36,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>20</y>
+     <y>60</y>
      <width>661</width>
-     <height>351</height>
+     <height>381</height>
     </rect>
    </property>
    <property name="horizontalScrollBarPolicy">
@@ -43,6 +49,59 @@
    </property>
    <property name="textElideMode">
     <enum>Qt::ElideMiddle</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="project_name_label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>661</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <property name="text">
+    <string>示例文字</string>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
+   </property>
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <property name="indent">
+    <number>10</number>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::NoTextInteraction</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="project_id_label">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>20</y>
+     <width>0</width>
+     <height>0</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>
