@@ -3,7 +3,7 @@
 import hashlib
 import requests
 import time
-from dataBase import DataBase
+from DataBase import DataBase
 from bs4 import BeautifulSoup
 from paramDefine import *
 
@@ -21,6 +21,8 @@ class Login:
     '''
     def __init__(self):
         pass
+        # self.db = DataBase.
+        # TODO 数据库初始化
 
     def login(self,username,password,rememberFlag):
 

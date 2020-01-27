@@ -29,8 +29,11 @@ from Download import Download
 from result import *
 
 # TODO 实验室增加注册过期课程功能
-# TODO 保存密码用户快捷登陆
-# TODO  消息收集器 每个按钮结束响应
+# TODO 实验室增加下载课程视频功能
+# TODO 保存密码用户快捷登陆 密码管理（界面？直接删除？带X号）
+# TODO 消息收集器 每个按钮结束响应
+# TODO 数据库保存路径？
+# TODO 打包方式  文件夹释放模式？
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
@@ -177,7 +180,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.stackedWidget.setCurrentIndex(value)  
         else:
             QMessageBox.about(self, "提示", "请先登陆!")
-    # FIXME 未登录时 默认选中标签1
+    # FIXME 未登录时 默认选中标签1 或不允许点击其他选项卡
 
     # ===login_page===
     @pyqtSlot()

@@ -62,6 +62,21 @@ class DataBase:
 
 
 
+user_create = '''
+CREATE TABLE IF NOT EXISTS USER( 
+ACCOUNT  NOT NULL UNIQUE ON CONFLICT REPLACE,
+ PASSWD  NOT NULL,
+ NAME    NOT NULL);
+'''
+user_add_data = '\"REPLACE INTO USER (ACCOUNT,PASSWD,NAME) VALUES (?,?,?)\",(data["loginId"], data["passwd"], data["name"])'
+user_read_data = 'select * from user'
+
+userSQL = {'db_name': 'userinfo.db', 'create_table': user_create, 'add_data': user_add_data,
+           'read_data': user_read_data}
+
+
+
+
 
 #
 # # 判断表存不存在来创建表
