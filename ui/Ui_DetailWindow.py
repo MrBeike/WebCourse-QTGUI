@@ -28,11 +28,17 @@ class Ui_DetailWindow(object):
         self.project_detail_list.setTextElideMode(QtCore.Qt.ElideMiddle)
         self.project_detail_list.setObjectName("project_detail_list")
         self.project_name_label = QtWidgets.QLabel(DetailWindow)
-        self.project_name_label.setGeometry(QtCore.QRect(30, 20, 541, 21))
+        self.project_name_label.setGeometry(QtCore.QRect(10, 20, 661, 31))
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
         font.setPointSize(12)
         self.project_name_label.setFont(font)
+        self.project_name_label.setAutoFillBackground(True)
+        self.project_name_label.setFrameShape(QtWidgets.QFrame.Box)
+        self.project_name_label.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.project_name_label.setScaledContents(False)
+        self.project_name_label.setIndent(10)
+        self.project_name_label.setTextInteractionFlags(QtCore.Qt.NoTextInteraction)
         self.project_name_label.setObjectName("project_name_label")
         self.project_id_label = QtWidgets.QLabel(DetailWindow)
         self.project_id_label.setGeometry(QtCore.QRect(600, 20, 0, 0))
@@ -44,6 +50,6 @@ class Ui_DetailWindow(object):
 
     def retranslateUi(self, DetailWindow):
         _translate = QtCore.QCoreApplication.translate
-        DetailWindow.setWindowTitle(_translate("DetailWindow", "Dialog"))
+        DetailWindow.setWindowTitle(_translate("DetailWindow", "详细信息"))
         self.learn_button.setText(_translate("DetailWindow", "学  习"))
         self.project_name_label.setText(_translate("DetailWindow", "示例文字"))

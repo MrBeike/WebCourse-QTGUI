@@ -191,6 +191,24 @@
        <string>记住密码</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="manager_button">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>330</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>[账户管理]</string>
+      </property>
+     </widget>
      <zorder>password_label</zorder>
      <zorder>logo_label</zorder>
      <zorder>password_input</zorder>
@@ -198,6 +216,7 @@
      <zorder>username_input</zorder>
      <zorder>remember_check</zorder>
      <zorder>username_label</zorder>
+     <zorder>manager_button</zorder>
     </widget>
     <widget class="QWidget" name="regist_page">
      <widget class="QTableView" name="regist_list">
@@ -602,19 +621,16 @@
      <widget class="QPushButton" name="xeroxyor_button">
       <property name="geometry">
        <rect>
-        <x>280</x>
-        <y>230</y>
-        <width>101</width>
-        <height>31</height>
+        <x>361</x>
+        <y>231</y>
+        <width>16</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="font">
        <font>
         <kerning>false</kerning>
        </font>
-      </property>
-      <property name="cursor">
-       <cursorShape>WhatsThisCursor</cursorShape>
       </property>
       <property name="focusPolicy">
        <enum>Qt::NoFocus</enum>

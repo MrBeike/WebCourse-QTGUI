@@ -19,6 +19,8 @@ class DataBase:
         self.sql = sql
         self.conn = sqlite3.connect(self.sql['db_name'])
         self.create_table()
+        blank_data = {'loginId':'','passwd':'','name':'blank'}
+        self.add_data(blank_data)
 
     def create_table(self):
         try:
@@ -34,9 +36,8 @@ class DataBase:
         :return: None
         '''
         data = data
-        sql = self.sql['add_data']
-        sql = eval(sql)
-        self.conn.execute(sql[0],sql[1])
+        data = (data["loginId"], data["passwd"], data["name"])
+        self.conn.execute(self.sql['add_data'],data)
         self.conn.commit()
         return
 
@@ -53,6 +54,16 @@ class DataBase:
         except sqlite3.OperationalError as e:
             print("没有保存的数据",e)
             return False
+    
+    def delete_data(self,index):
+        '''
+        :param index -- index to specify dataEntry(For now is name) 
+        '''
+        cur = self.conn.cursor()
+        cur.execute(sself.sql['delete_data'],index)
+        self.conn.commit()
+        return
+
 
     def close(self):
         try:
@@ -68,76 +79,11 @@ ACCOUNT  NOT NULL UNIQUE ON CONFLICT REPLACE,
  PASSWD  NOT NULL,
  NAME    NOT NULL);
 '''
-user_add_data = '\"REPLACE INTO USER (ACCOUNT,PASSWD,NAME) VALUES (?,?,?)\",(data["loginId"], data["passwd"], data["name"])'
-user_read_data = 'select * from user'
+user_add_data = '''REPLACE INTO USER (ACCOUNT,PASSWD,NAME) VALUES (?,?,?)'''
+user_read_data = '''SELECT * From USER'''
+user_delete_data = '''DELETE FROM USER where NAME="{}"'''
 
-userSQL = {'db_name': 'userinfo.db', 'create_table': user_create, 'add_data': user_add_data,
-           'read_data': user_read_data}
-
-
-
+SQL = {'db_name': 'userinfo.db', 'create_table': user_create, 'add_data': user_add_data,
+           'read_data': user_read_data,'delete_data':user_delete_data}
 
 
-#
-# # 判断表存不存在来创建表
-# def create_table(db_name):
-#     conn = sqlite3.connect(db_name)
-#     try:
-#         create_tb_cmd = '''
-#         CREATE TABLE IF NOT EXISTS USER(
-#         ACCOUNT  NOT NULL UNIQUE ON CONFLICT REPLACE,
-#          PASSWD  NOT NULL,
-#          NAME    CHAR);
-#         '''
-#         # 主要就是上面的语句
-#         conn.execute(create_tb_cmd)
-#     except:
-#         print("Create table failed")
-#         return False
-#
-#
-# def add_data(db_name, data):
-#     conn = sqlite3.connect(db_name)
-#     conn.execute("REPLACE INTO USER (ACCOUNT,PASSWD,NAME) VALUES (?,?,?)",
-#                  (data['loginId'], data['passwd'], data['name']))
-#     conn.commit()
-#     conn.close()
-#     return
-#
-#
-# def read_data(db_name):
-#     try:
-#         conn = sqlite3.connect(db_name)
-#         cur = conn.cursor()
-#         cur.execute("SELECT * FROM USER;")
-#         userlistTable = PrettyTable(['序号', '用户账号', '用户名'])
-#         userlist = cur.fetchall()
-#         userlists = []
-#         for i in range(len(userlist)):
-#             userlists.append(i + 1)
-#             userlists.append(userlist[i][0])
-#             userlists.append(userlist[i][2])
-#             userlistTable.add_row(userlists)
-#             userlists.clear()
-#         print(userlistTable)
-#         conn.commit()
-#         conn.close()
-#         return userlist
-#     except sqlite3.OperationalError:
-#         print("没有保存的用户名和密码，请输入用户名密码")
-#         return False
-#
-#
-# def userchoose(userlist):
-#     while True:
-#         try:
-#             choose = int(input("请输入用户序号： ")) - 1
-#             webAccount = userlist[choose][0]
-#             webPasswd = userlist[choose][1]
-#             # 登陆时需要POST的数据
-#             data = {'loginId': webAccount,
-#                     'passwd': webPasswd,
-#                     }
-#             return data
-#         except (Exception, IndexError):
-#             print("输入错误")

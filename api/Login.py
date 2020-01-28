@@ -3,7 +3,7 @@
 import hashlib
 import requests
 import time
-from DataBase import DataBase
+from DataBase import DataBase,SQL
 from bs4 import BeautifulSoup
 from paramDefine import *
 
@@ -21,8 +21,7 @@ class Login:
     '''
     def __init__(self):
         pass
-        # self.db = DataBase.
-        # TODO 数据库初始化
+
 
     def login(self,username,password,rememberFlag):
 
@@ -54,6 +53,7 @@ class Login:
                     login_message= "您以{}的身份登陆成功".format(userName)
                     if rememberFlag:
                         data['name'] = userName
+                        db = DataBase(SQL)
                         db.add_data(data)
                     login_status = True
                 elif ctext == "用户名密码不匹配，请重新输入。":

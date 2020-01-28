@@ -21,19 +21,23 @@ from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QD
 from Ui_MainWindow import *
 from Ui_DetailWindow import *
 from Ui_XeroxYor import *
+from Ui_DbManager import *
+
 from Login import Login
 from Learn import Learn
 from Regist import Regist
 from Test import Test
 from Download import Download
+from DataBase import DataBase,SQL
+
 from result import *
 
 # TODO 实验室增加注册过期课程功能
 # TODO 实验室增加下载课程视频功能
-# TODO 保存密码用户快捷登陆 密码管理（界面？直接删除？带X号）
 # TODO 消息收集器 每个按钮结束响应
-# TODO 数据库保存路径？
+# TODO 数据库保存路径？加密？
 # TODO 打包方式  文件夹释放模式？
+
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
@@ -50,18 +54,49 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         with open(r'resource\QSS.qss', 'r') as f:
             self.list_style = f.read()
         self.setStyleSheet(self.list_style)
-
+        self.loadRememberedUser()
 
         # for test only Delete later {
         self.project_list_initial(project_result)
         self.course_list_initial(course_result)
         # for test only Delete later }
 
+    def loadRememberedUser(self):
+        db = DataBase(SQL)
+        self.userLists = db.read_data()
+        usernames = [x[0] for x in self.userLists]
+        self.username_input.addItems(usernames)
+
 
     '''
     Table Model Defination
     '''
      # 建立数据模型实例
+    def user_list_initial(self,user_result):
+        self.user_list_model =QStandardItemModel()
+        header =['姓名','账户名']
+        self.user_list_model.setHorizontalHeaderLabels(header)
+        if user_result:
+            row, col = len(user_result), len(user_result[0])
+            for row, datadict in enumerate(user_result):
+                # datadict['loginId'],datadict['passwd'],datadict['name']
+                datalist = [datadict[2],datadict[0],datadict[1]]
+                for col, cell in enumerate(datalist):
+                    value = QStandardItem(str(cell))
+                    value.setTextAlignment(Qt.AlignCenter)
+                    # 设置单元不可编辑
+                    value.setEditable(False)
+                    self.user_list_model.setItem(row, col, value)
+        # 添加模型到QTableView实例中
+        self.dbManager.user_list.setModel(self.user_list_model)
+        
+        # 表格栏宽、列宽调整
+        self.dbManager.user_list.setColumnWidth(0,100)
+        self.dbManager.user_list.setColumnWidth(1,300)
+        self.dbManager.user_list.setColumnWidth(2,0)
+        self.dbManager.user_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
+
+
     def regist_list_initial(self,search_result):
         self.regist_list_model = QStandardItemModel()
         # 设置列标题
@@ -173,7 +208,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     '''
     # ===MainWindow===
     # List与StackDock连接
-
     @pyqtSlot(int)
     def on_menu_list_currentRowChanged(self, value):
         if self.login_status or value == 0:
@@ -220,6 +254,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.remember_check.setEnabled(True)
                 self.login_status = False
             # TODO 注销函数未完成
+
+    # FIXME 数据库增加数据，顺序变动导致输入框第一个不是空白
+    # 已保存用户名和密码同步选中
+    @pyqtSlot(int)
+    def on_username_input_currentIndexChanged(self, value):
+        self.password_input.setText(self.userLists[value][1])
+
+    # 账户管理按钮响应
+    @pyqtSlot()
+    def on_manager_button_clicked(self):
+        self.dbManager = DbManager()
+        db = DataBase(SQL)
+        user_result = db.read_data()
+        self.user_list_initial(user_result)
+        self.dbManager.show()
 
     # ===regist_page===
     # 搜索按钮响应
@@ -335,6 +384,20 @@ class DetailWindow(QDialog,Ui_DetailWindow):
         project_detail_result = Learn.projectDetailReader(projectId)
         self.project_detail_list_initial(project_detail_result)
 
+class DbManager(QDialog,Ui_DbManager):
+    def __init__(self,parent=None):
+        super(DbManager, self).__init__(parent)
+        self.setupUi(self)
+
+    @pyqtSlot()
+    def on_delete_button_clicked(self):
+        row = self.user_list.currentIndex().row()
+        name = self.user_list.index(row,0).data()
+        db = DataBase(SQL)
+        db.delete_data(name)
+        user_result = db.read_data()
+        self.user_list.clear()
+        self.user_list_initial(user_result)
 
 # 隐藏页窗体
 class XeroxYor(QDialog,Ui_XeroxYor):
