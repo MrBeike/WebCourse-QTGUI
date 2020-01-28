@@ -177,31 +177,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.course_list.setColumnWidth(3,0)
         self.course_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
-    def project_detail_list_initial(self,project_detail_result):
-        # 建立数据模型实例
-        self.project_detail_list_model = QStandardItemModel()
-        # 设置列标题
-        header = ['课程名称', '学时','测试得分','是否完成','课程编号']
-        self.project_detail_list_model.setHorizontalHeaderLabels(header)
-        # 向模型添加数据
-        if project_detail_result:
-            row, col = len(project_detail_result), len(project_detail_result[0])
-            for row, datadict in enumerate(project_detail_result):
-                datalist = [datadict['name'],datadict['time'],datadict['score'],datadict['finished'],datadict['id']]
-                for col, cell in enumerate(datalist):
-                    value = QStandardItem(str(cell))
-                    # 设置单元不可编辑
-                    value.setEditable(False)
-                    self.project_detail_list_model.setItem(row, col, value)
-        # 添加模型到QTableView实例中
-        self.detailWindow.project_detail_list.setModel(self.project_detail_list_model)
-    
-        self.detailWindow.project_detail_list.setColumnWidth(0,440)
-        self.detailWindow.project_detail_list.setColumnWidth(1,40)
-        self.detailWindow.project_detail_list.setColumnWidth(2,70)
-        self.detailWindow.project_detail_list.setColumnWidth(3,70)
-        self.detailWindow.project_detail_list.setColumnWidth(4,0)
-        self.detailWindow.project_detail_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
     '''
     Slots Defination
@@ -255,6 +230,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.login_status = False
             # TODO 注销函数未完成
 
+
     # FIXME 数据库增加数据，顺序变动导致输入框第一个不是空白
     # 已保存用户名和密码同步选中
     @pyqtSlot(int)
@@ -266,8 +242,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def on_manager_button_clicked(self):
         self.dbManager = DbManager()
         db = DataBase(SQL)
-        user_result = db.read_data()
-        self.user_list_initial(user_result)
+        user_result = db.read_data_formanager()
+        self.dbManager.user_list_initial(user_result)
         self.dbManager.show()
 
     # ===regist_page===
@@ -367,6 +343,32 @@ class DetailWindow(QDialog,Ui_DetailWindow):
         self.project_name_label.setText(str(projectName))
         self.project_id_label.setText(str(projectId))
 
+    def project_detail_list_initial(self,project_detail_result):
+        # 建立数据模型实例
+        self.project_detail_list_model = QStandardItemModel()
+        # 设置列标题
+        header = ['课程名称', '学时','测试得分','是否完成','课程编号']
+        self.project_detail_list_model.setHorizontalHeaderLabels(header)
+        # 向模型添加数据
+        if project_detail_result:
+            row, col = len(project_detail_result), len(project_detail_result[0])
+            for row, datadict in enumerate(project_detail_result):
+                datalist = [datadict['name'],datadict['time'],datadict['score'],datadict['finished'],datadict['id']]
+                for col, cell in enumerate(datalist):
+                    value = QStandardItem(str(cell))
+                    # 设置单元不可编辑
+                    value.setEditable(False)
+                    self.project_detail_list_model.setItem(row, col, value)
+        # 添加模型到QTableView实例中
+        self.project_detail_list.setModel(self.project_detail_list_model)
+    
+        self.project_detail_list.setColumnWidth(0,440)
+        self.project_detail_list.setColumnWidth(1,40)
+        self.project_detail_list.setColumnWidth(2,70)
+        self.project_detail_list.setColumnWidth(3,70)
+        self.dproject_detail_list.setColumnWidth(4,0)
+        self.project_detail_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
+
     @pyqtSlot()
     def on_learn_button_clicked(self):
         row = self.project_detail_list.currentIndex().row()
@@ -389,14 +391,39 @@ class DbManager(QDialog,Ui_DbManager):
         super(DbManager, self).__init__(parent)
         self.setupUi(self)
 
+    def user_list_initial(self,user_result):
+        self.user_list_model =QStandardItemModel()
+        header =['姓名','账户名']
+        self.user_list_model.setHorizontalHeaderLabels(header)
+        if user_result:
+            row, col = len(user_result), len(user_result[0])
+            for row, datadict in enumerate(user_result):
+                # datadict['loginId'],datadict['passwd'],datadict['name']
+                datalist = [datadict[2],datadict[0],datadict[1]]
+                for col, cell in enumerate(datalist):
+                    value = QStandardItem(str(cell))
+                    value.setTextAlignment(Qt.AlignCenter)
+                    # 设置单元不可编辑
+                    value.setEditable(False)
+                    self.user_list_model.setItem(row, col, value)
+        # 添加模型到QTableView实例中
+        self.user_list.setModel(self.user_list_model)
+        
+        # 表格栏宽、列宽调整
+        self.user_list.setColumnWidth(0,100)
+        self.user_list.setColumnWidth(1,300)
+        self.user_list.setColumnWidth(2,0)
+        self.user_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
+
     @pyqtSlot()
     def on_delete_button_clicked(self):
         row = self.user_list.currentIndex().row()
-        name = self.user_list.index(row,0).data()
+        account = self.user_list_model.index(row,1).data()
+        print(account)
         db = DataBase(SQL)
-        db.delete_data(name)
-        user_result = db.read_data()
-        self.user_list.clear()
+        db.delete_data(account)
+        user_result = db.read_data_formanager()
+        self.user_list_model.clear()
         self.user_list_initial(user_result)
 
 # 隐藏页窗体

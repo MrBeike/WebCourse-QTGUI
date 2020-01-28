@@ -54,13 +54,27 @@ class DataBase:
         except sqlite3.OperationalError as e:
             print("没有保存的数据",e)
             return False
+
+    def read_data_formanager(self):
+        '''
+        :return: data --a table like  structure list
+        '''
+        try:
+            cur = self.conn.cursor()
+            cur.execute(self.sql['read_data_formanager'])
+            data = cur.fetchall()
+            self.conn.commit()
+            return data
+        except sqlite3.OperationalError as e:
+            print("没有保存的数据",e)
+            return False    
     
     def delete_data(self,index):
         '''
-        :param index -- index to specify dataEntry(For now is name) 
+        :param index -- index to specify dataEntry(For now is account) 
         '''
         cur = self.conn.cursor()
-        cur.execute(sself.sql['delete_data'],index)
+        cur.execute(self.sql['delete_data'],(index,))
         self.conn.commit()
         return
 
@@ -80,10 +94,12 @@ ACCOUNT  NOT NULL UNIQUE ON CONFLICT REPLACE,
  NAME    NOT NULL);
 '''
 user_add_data = '''REPLACE INTO USER (ACCOUNT,PASSWD,NAME) VALUES (?,?,?)'''
-user_read_data = '''SELECT * From USER'''
-user_delete_data = '''DELETE FROM USER where NAME="{}"'''
+user_read_data = '''SELECT * From USER ORDER BY ACCOUNT'''
+user_delete_data = '''DELETE FROM USER where ACCOUNT=(?)'''
+# 不显示预设的空白记录（空白记录为combox第一行显示空白所设）
+user_read_data_formanager = '''SELECT * From USER WHERE NAME <>'blank' ORDER BY ACCOUNT'''
 
 SQL = {'db_name': 'userinfo.db', 'create_table': user_create, 'add_data': user_add_data,
-           'read_data': user_read_data,'delete_data':user_delete_data}
+           'read_data': user_read_data,'delete_data':user_delete_data,'read_data_formanager':user_read_data_formanager}
 
 
