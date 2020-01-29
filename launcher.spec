@@ -5,11 +5,12 @@ block_cipher = None
 
 a = Analysis(['launcher.py'],
              pathex=['C:\\Users\\lbbas\\Desktop\\test\\webCourseQT',
+             'C:\\Users\\lbbas\\Desktop\\test\\webCourseQT\\api',
              'C:\\Users\\lbbas\\Desktop\\test\\webCourseQT\\resource',
              'C:\\Users\\lbbas\\Desktop\\test\\webCourseQT\\ui'
              ],
              binaries=[],
-             datas=[],
+             datas=[('resource','resource')],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
