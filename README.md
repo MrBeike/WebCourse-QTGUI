@@ -2,7 +2,7 @@
 
 ## What's This 
 为方便用户操作，同时也是完成自己的一个小心愿。利用QT(PyQt5)为webCourse项目制作了一个简单的界面。
-如果你不知道什么是webCourse的话，点击[这里](https://github.com/MrBeike/webCourse)
+如果你不知道什么是webCourse的话，点击[这里](https://github.com/MrBeike/webCourse)。
 
 ## What's LookLike
 <img src="screenshot.png">
