@@ -35,7 +35,6 @@ from result import *
 # TODO 实验室增加注册过期课程功能
 # TODO 实验室增加下载课程视频功能
 # TODO 消息收集器 每个按钮结束响应
-# TODO 数据库保存路径？加密？
 # TODO 打包方式  文件夹释放模式？
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -62,6 +61,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # for test only Delete later }
 
     def loadRememberedUser(self):
+        self.username_input.clear()
         db = DataBase(SQL)
         self.userLists = db.read_data()
         usernames = [x[0] for x in self.userLists]
@@ -71,32 +71,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     '''
     Table Model Defination
     '''
-     # 建立数据模型实例
-    def user_list_initial(self,user_result):
-        self.user_list_model =QStandardItemModel()
-        header =['姓名','账户名']
-        self.user_list_model.setHorizontalHeaderLabels(header)
-        if user_result:
-            row, col = len(user_result), len(user_result[0])
-            for row, datadict in enumerate(user_result):
-                # datadict['loginId'],datadict['passwd'],datadict['name']
-                datalist = [datadict[2],datadict[0],datadict[1]]
-                for col, cell in enumerate(datalist):
-                    value = QStandardItem(str(cell))
-                    value.setTextAlignment(Qt.AlignCenter)
-                    # 设置单元不可编辑
-                    value.setEditable(False)
-                    self.user_list_model.setItem(row, col, value)
-        # 添加模型到QTableView实例中
-        self.dbManager.user_list.setModel(self.user_list_model)
-        
-        # 表格栏宽、列宽调整
-        self.dbManager.user_list.setColumnWidth(0,100)
-        self.dbManager.user_list.setColumnWidth(1,300)
-        self.dbManager.user_list.setColumnWidth(2,0)
-        self.dbManager.user_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
-
-
     def regist_list_initial(self,search_result):
         self.regist_list_model = QStandardItemModel()
         # 设置列标题
@@ -192,6 +166,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # FIXME 未登录时 默认选中标签1 或不允许点击其他选项卡
 
     # ===login_page===
+    @pyqtSlot(int)
+    def on_username_input_activated(self,value):
+        print(value)
+        self.loadRememberedUser()
+
     @pyqtSlot()
     def on_login_button_clicked(self):
         if not self.login_status:
@@ -230,8 +209,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.login_status = False
             # TODO 注销函数未完成
 
-
-    # FIXME 数据库增加数据，顺序变动导致输入框第一个不是空白
     # 已保存用户名和密码同步选中
     @pyqtSlot(int)
     def on_username_input_currentIndexChanged(self, value):
@@ -296,7 +273,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # project_detail_result = Learn.projectDetailReader(projectId)
         # 将子窗口添加到主窗口进程中，修复闪退
         self.detailWindow = DetailWindow(projectName,projectId)
-        self.project_detail_list_initial(project_detail_result)
+        self.detailWindow.project_detail_list_initial(project_detail_result)
         self.detailWindow.show()
 
 
@@ -366,7 +343,7 @@ class DetailWindow(QDialog,Ui_DetailWindow):
         self.project_detail_list.setColumnWidth(1,40)
         self.project_detail_list.setColumnWidth(2,70)
         self.project_detail_list.setColumnWidth(3,70)
-        self.dproject_detail_list.setColumnWidth(4,0)
+        self.project_detail_list.setColumnWidth(4,0)
         self.project_detail_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
     @pyqtSlot()
@@ -435,7 +412,7 @@ class XeroxYor(QDialog,Ui_XeroxYor):
         self.min = self.roll_text.verticalScrollBar().minimum()
         self.t = QTimer()
         self.t.timeout.connect(self.changeTxtPosition)
-        self.t.start(100)
+        self.t.start(200)
 
     def changeTxtPosition(self):
         self.roll_text.verticalScrollBar().setValue(self.min)
