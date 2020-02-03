@@ -88,14 +88,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     # 设置单元不可编辑
                     value.setEditable(False)
                     self.regist_list_model.setItem(row, col, value)
-        # 添加模型到QTableView实例中
-        self.regist_list.setModel(self.regist_list_model)
-        
-        # 表格栏宽、列宽调整
-        self.regist_list.setColumnWidth(0,90)
-        self.regist_list.setColumnWidth(1,530)
-        self.regist_list.setColumnWidth(2,0)
-        self.regist_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
+            # 添加模型到QTableView实例中
+            self.regist_list.setModel(self.regist_list_model)
+            
+            # 表格栏宽、列宽调整
+            self.regist_list.setColumnWidth(0,90)
+            self.regist_list.setColumnWidth(1,530)
+            self.regist_list.setColumnWidth(2,0)
+            self.regist_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
     def project_list_initial(self,project_result):
         # 建立数据模型实例
@@ -114,15 +114,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     # 设置单元不可编辑
                     value.setEditable(False)
                     self.project_list_model.setItem(row, col, value)
-        # 添加模型到QTableView实例中
-        self.project_list.setModel(self.project_list_model)
-        
-        self.project_list.setColumnWidth(0,370)
-        self.project_list.setColumnWidth(1,150)
-        self.project_list.setColumnWidth(2,40)
-        self.project_list.setColumnWidth(3,60)
-        self.project_list.setColumnWidth(4,0)
-        self.project_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
+            # 添加模型到QTableView实例中
+            self.project_list.setModel(self.project_list_model)
+            
+            self.project_list.setColumnWidth(0,370)
+            self.project_list.setColumnWidth(1,150)
+            self.project_list.setColumnWidth(2,40)
+            self.project_list.setColumnWidth(3,60)
+            self.project_list.setColumnWidth(4,0)
+            self.project_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
 
     def course_list_initial(self,course_result):
@@ -143,13 +143,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     value.setEditable(False)
                     self.course_list_model.setItem(row, col, value)
         # 添加模型到QTableView实例中
-        self.course_list.setModel(self.course_list_model)
-        
-        self.course_list.setColumnWidth(0,500)
-        self.course_list.setColumnWidth(1,40)
-        self.course_list.setColumnWidth(2,80)
-        self.course_list.setColumnWidth(3,0)
-        self.course_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
+            self.course_list.setModel(self.course_list_model)
+            
+            self.course_list.setColumnWidth(0,500)
+            self.course_list.setColumnWidth(1,40)
+            self.course_list.setColumnWidth(2,80)
+            self.course_list.setColumnWidth(3,0)
+            self.course_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
 
     '''
@@ -168,7 +168,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # ===login_page===
     @pyqtSlot(int)
     def on_username_input_activated(self,value):
-        print(value)
         self.loadRememberedUser()
 
     @pyqtSlot()
@@ -336,15 +335,15 @@ class DetailWindow(QDialog,Ui_DetailWindow):
                     # 设置单元不可编辑
                     value.setEditable(False)
                     self.project_detail_list_model.setItem(row, col, value)
-        # 添加模型到QTableView实例中
-        self.project_detail_list.setModel(self.project_detail_list_model)
-    
-        self.project_detail_list.setColumnWidth(0,440)
-        self.project_detail_list.setColumnWidth(1,40)
-        self.project_detail_list.setColumnWidth(2,70)
-        self.project_detail_list.setColumnWidth(3,70)
-        self.project_detail_list.setColumnWidth(4,0)
-        self.project_detail_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
+            # 添加模型到QTableView实例中
+            self.project_detail_list.setModel(self.project_detail_list_model)
+        
+            self.project_detail_list.setColumnWidth(0,440)
+            self.project_detail_list.setColumnWidth(1,40)
+            self.project_detail_list.setColumnWidth(2,70)
+            self.project_detail_list.setColumnWidth(3,70)
+            self.project_detail_list.setColumnWidth(4,0)
+            self.project_detail_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
     @pyqtSlot()
     def on_learn_button_clicked(self):
@@ -383,20 +382,19 @@ class DbManager(QDialog,Ui_DbManager):
                     # 设置单元不可编辑
                     value.setEditable(False)
                     self.user_list_model.setItem(row, col, value)
-        # 添加模型到QTableView实例中
-        self.user_list.setModel(self.user_list_model)
-        
-        # 表格栏宽、列宽调整
-        self.user_list.setColumnWidth(0,100)
-        self.user_list.setColumnWidth(1,300)
-        self.user_list.setColumnWidth(2,0)
-        self.user_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
+            # 添加模型到QTableView实例中
+            self.user_list.setModel(self.user_list_model)
+            
+            # 表格栏宽、列宽调整
+            self.user_list.setColumnWidth(0,100)
+            self.user_list.setColumnWidth(1,300)
+            self.user_list.setColumnWidth(2,0)
+            self.user_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
     @pyqtSlot()
     def on_delete_button_clicked(self):
         row = self.user_list.currentIndex().row()
         account = self.user_list_model.index(row,1).data()
-        print(account)
         db = DataBase(SQL)
         db.delete_data(account)
         user_result = db.read_data_formanager()
@@ -412,7 +410,7 @@ class XeroxYor(QDialog,Ui_XeroxYor):
         self.min = self.roll_text.verticalScrollBar().minimum()
         self.t = QTimer()
         self.t.timeout.connect(self.changeTxtPosition)
-        self.t.start(200)
+        self.t.start(150)
 
     def changeTxtPosition(self):
         self.roll_text.verticalScrollBar().setValue(self.min)
@@ -421,6 +419,8 @@ class XeroxYor(QDialog,Ui_XeroxYor):
             self.t.stop()
             self.destroy()
 
+    def mousePressEvent(self, event):
+        self.destroy()
 
 
 if __name__ == '__main__':

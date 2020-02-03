@@ -52,6 +52,15 @@
      <height>601</height>
     </rect>
    </property>
+   <property name="mouseTracking">
+    <bool>false</bool>
+   </property>
+   <property name="toolTip">
+    <string>按ESC键退出当前窗口</string>
+   </property>
+   <property name="whatsThis">
+    <string/>
+   </property>
    <property name="styleSheet">
     <string notr="true">image: url(:/IMG/xeroxYor.jpg);</string>
    </property>
@@ -63,6 +72,9 @@
    </property>
    <property name="text">
     <string/>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::NoTextInteraction</set>
    </property>
   </widget>
   <widget class="QTextEdit" name="roll_text">

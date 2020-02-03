@@ -27,10 +27,13 @@ class Ui_XeroxYor(object):
         XeroxYor.setProperty("windowsFlags", "")
         self.img = QtWidgets.QLabel(XeroxYor)
         self.img.setGeometry(QtCore.QRect(-20, -50, 671, 601))
+        self.img.setMouseTracking(False)
+        self.img.setWhatsThis("")
         self.img.setStyleSheet("image: url(:/IMG/xeroxYor.jpg);")
         self.img.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.img.setLineWidth(0)
         self.img.setText("")
+        self.img.setTextInteractionFlags(QtCore.Qt.NoTextInteraction)
         self.img.setObjectName("img")
         self.roll_text = QtWidgets.QTextEdit(XeroxYor)
         self.roll_text.setGeometry(QtCore.QRect(0, 560, 631, 31))
@@ -51,6 +54,7 @@ class Ui_XeroxYor(object):
     def retranslateUi(self, XeroxYor):
         _translate = QtCore.QCoreApplication.translate
         XeroxYor.setWindowTitle(_translate("XeroxYor", "xeroxYor"))
+        self.img.setToolTip(_translate("XeroxYor", "按ESC键退出当前窗口"))
         self.roll_text.setHtml(_translate("XeroxYor", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
