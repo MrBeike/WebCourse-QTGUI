@@ -14,8 +14,12 @@ class Ui_DbManager(object):
     def setupUi(self, DbManager):
         DbManager.setObjectName("DbManager")
         DbManager.resize(432, 344)
+        DbManager.setMinimumSize(QtCore.QSize(432, 344))
+        DbManager.setMaximumSize(QtCore.QSize(432, 344))
         self.user_list = QtWidgets.QTableView(DbManager)
         self.user_list.setGeometry(QtCore.QRect(10, 50, 411, 241))
+        self.user_list.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.user_list.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.user_list.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.user_list.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.user_list.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
