@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>563</width>
-    <height>383</height>
+    <width>620</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>消息提示</string>
   </property>
-  <widget class="QTableView" name="tableView">
+  <widget class="QTableView" name="notify_table">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>561</width>
-     <height>351</height>
+     <width>620</width>
+     <height>400</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -27,6 +27,18 @@
    </property>
    <property name="frameShape">
     <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::NoEditTriggers</set>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::SingleSelection</enum>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <property name="showGrid">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>
