@@ -18,6 +18,9 @@ class DbManager(QDialog,Ui_DbManager):
         self.qss = qss_content.readAll()
         self.setStyleSheet(self.qss)
 
+    '''
+    Table Model Defination
+    '''
     def user_list_initial(self,user_result):
         self.user_list_model =QStandardItemModel()
         header =['姓名','账户名']
@@ -42,6 +45,9 @@ class DbManager(QDialog,Ui_DbManager):
             self.user_list.setColumnWidth(2,0)
             self.user_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
+    '''
+    Slot Defination
+    '''
     @pyqtSlot()
     def on_delete_button_clicked(self):
         row = self.user_list.currentIndex().row()

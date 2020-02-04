@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Notify</class>
- <widget class="QWidget" name="Notify">
+ <class>NotifyWindow</class>
+ <widget class="QWidget" name="NotifyWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>消息提示</string>
   </property>
-  <widget class="QTableView" name="notify_table">
+  <widget class="QTableView" name="notify_list">
    <property name="geometry">
     <rect>
      <x>0</x>

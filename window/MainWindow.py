@@ -19,7 +19,7 @@ from DetailWindow import DetailWindow
 from DbManager import DbManager
 from XeroxYor import XeroxYor
 
-
+# Temp import delete later
 from result import *
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -142,7 +142,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 
     '''
-    Slots Defination
+    Slot Defination
     '''
     # ===MainWindow===
     # List与StackDock连接

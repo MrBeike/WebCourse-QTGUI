@@ -21,6 +21,9 @@ class DetailWindow(QDialog,Ui_DetailWindow):
         self.qss = qss_content.readAll()
         self.setStyleSheet(self.qss)
 
+    '''
+    Table Model Defination
+    '''
     def project_detail_list_initial(self,project_detail_result):
         # 建立数据模型实例
         self.project_detail_list_model = QStandardItemModel()
@@ -47,6 +50,9 @@ class DetailWindow(QDialog,Ui_DetailWindow):
             self.project_detail_list.setColumnWidth(4,0)
             self.project_detail_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
+    '''
+    Slot Defination
+    '''
     @pyqtSlot()
     def on_learn_button_clicked(self):
         row = self.project_detail_list.currentIndex().row()
