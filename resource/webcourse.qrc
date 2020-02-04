@@ -1,6 +1,6 @@
 <RCC>
   <qresource prefix="QSS">
-    <file>QSS.qss</file>
+    <file>style.qss</file>
   </qresource>
   <qresource prefix="ICO">
     <file>list.ico</file>

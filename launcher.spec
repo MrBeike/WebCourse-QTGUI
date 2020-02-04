@@ -10,7 +10,7 @@ a = Analysis(['launcher.py'],
              'C:\\Users\\lbbas\\Desktop\\test\\webCourseQT\\ui'
              ],
              binaries=[],
-             datas=[('resource','resource')],
+             datas=[],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],

@@ -14,9 +14,9 @@ sys.path = [os.path.join(myFolder, 'ui'),
 
 os.chdir(myFolder)
 
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtCore import pyqtSlot,Qt,QTimer
-from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QDialog,QTableWidgetItem
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon,QPixmap
+from PyQt5.QtCore import pyqtSlot,Qt,QTimer,QFile,QTextStream
+from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QDialog,QTableWidgetItem, QSystemTrayIcon
 
 from Ui_MainWindow import *
 from Ui_DetailWindow import *
@@ -52,9 +52,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # 设置默认目录项为“用户登陆”
         self.stackedWidget.setCurrentIndex(0)
         # 加载QSS配置
-        with open(r'resource\QSS.qss', 'r') as f:
-            self.list_style = f.read()
-        self.setStyleSheet(self.list_style)
+        qss_file = QFile(":/QSS/style.qss")
+        qss_file.open(QFile.ReadOnly)
+        qss_content= QTextStream(qss_file)
+        self.qss = qss_content.readAll()
+        self.setStyleSheet(self.qss)
         self.loadRememberedUser()
 
         # for test only Delete later {
