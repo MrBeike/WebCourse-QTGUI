@@ -22,6 +22,9 @@ QListWidget::item:hover {
     border-left: 5px solid red
  }
 
+ HistoryPanel::item:hover {
+    background: rgb(52, 52, 52);
+}
 
 QTableView {
     selection-background-color: #44c767;

@@ -318,6 +318,9 @@ class DetailWindow(QDialog,Ui_DetailWindow):
         self.setupUi(self)
         self.project_name_label.setText(str(projectName))
         self.project_id_label.setText(str(projectId))
+        with open(r'resource\QSS.qss', 'r') as f:
+            self.list_style = f.read()
+        self.setStyleSheet(self.list_style)
 
     def project_detail_list_initial(self,project_detail_result):
         # 建立数据模型实例
@@ -366,6 +369,9 @@ class DbManager(QDialog,Ui_DbManager):
     def __init__(self,parent=None):
         super(DbManager, self).__init__(parent)
         self.setupUi(self)
+        with open(r'resource\QSS.qss', 'r') as f:
+            self.list_style = f.read()
+        self.setStyleSheet(self.list_style)
 
     def user_list_initial(self,user_result):
         self.user_list_model =QStandardItemModel()
