@@ -22,6 +22,12 @@ class Notify:
         }
         self.message_collect.append(message_dict)
     
+    def extend(self,list):
+        '''
+        :param list Notify实例 list
+        '''
+        self.message_collect.extend(list)
+    
     def show(self):
         message = self.message_collect.copy()
         # 清空消息队列

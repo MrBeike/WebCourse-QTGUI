@@ -4,7 +4,7 @@
 from bs4 import BeautifulSoup
 from paramDefine import *
 
-
+from Notify import Notify
 
 class Test:
     '''
@@ -15,10 +15,10 @@ class Test:
     '''
     def __init__(self,s,testIds):
         self.s = s
+        self.notify = Notify()
         self.testIds = testIds
-        self.autoTest()
 
-    def autoTest(self):
+    def test(self):
         testIds = self.testIds
         for testId in testIds:
             try:
@@ -31,7 +31,7 @@ class Test:
                 self.resultPage()
             except AttributeError:
                 continue
-        return
+        return self.notify
 
 
     # 通过itemId获取一份试卷，并读取试卷三参数（testId,itemId,historyId）
@@ -70,7 +70,6 @@ class Test:
                         }
         s.post(answerPage_url, data={"itemId": itemId})  # 为了解决测试页面空白导致做题程序无法正常运行做的修补，执行顺序？ 2018年8月22日10:29:39
         s.post(testRedo_url, data=pagefixPackge)
-        return
 
 
     # 通过itemId获取最近一次的答案
@@ -99,7 +98,7 @@ class Test:
         submitPageContent = submitPageResponse.content.decode('utf-8')
         # print("服务器返回信息:", submitPageContent)
         # TODO 测试-提交试卷-消息提示？
-        return
+
 
     #测试结果页面，反馈成绩
     def resultPage(self):
@@ -112,5 +111,6 @@ class Test:
         thisRecord = resultSoup.find("span", class_="record_num_this").get_text()
         topRecord = resultSoup.find("span", class_="record_num_top").get_text()
         # print("本次成绩：", thisRecord, "最高成绩：", topRecord)
-        # TODO 测试-测试结果-消息提示
-        return
+        test_message = f"本次测试成绩：{thisRecord}"
+        self.notify.add('测试成绩',test_message)
+

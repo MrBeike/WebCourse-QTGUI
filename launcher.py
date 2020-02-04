@@ -15,14 +15,13 @@ sys.path = [os.path.join(myFolder, 'ui'),
 
 os.chdir(myFolder)
 
-
 from PyQt5.QtWidgets import QApplication
 
 from MainWindow import MainWindow
 
+
 # TODO 实验室增加注册过期课程功能
 # TODO 实验室增加下载课程视频功能
-# TODO 消息收集器 每个按钮结束响应
 # TODO 打包方式  文件夹释放模式？
 
 

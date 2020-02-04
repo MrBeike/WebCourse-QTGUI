@@ -103,7 +103,6 @@ class Download:
                 f.write(log.encode())
             saveToPage_message = "已经生成含有视频地址和名称的文件：videolist.html"
             # TODO 下载-下载信息-消息提示
-        return
 
     # TODO 下载-下载文件-界面 文件浏览器 另存为
     def videoDownload(self,downloadLists):

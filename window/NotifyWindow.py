@@ -1,4 +1,16 @@
 # -*- coding: utf-8 -*-
+import os
+import sys
+import os.path
+
+myFolder = os.path.split(os.path.realpath(__file__))[0]
+sys.path = [os.path.join(myFolder, 'ui'),
+            os.path.join(myFolder, 'resource'),
+            os.path.join(myFolder, 'api'),
+            os.path.join(myFolder, 'window')
+            ] + sys.path
+
+os.chdir(myFolder)
 
 from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon,QPixmap
 from PyQt5.QtCore import pyqtSlot,Qt,QTimer,QFile,QTextStream
@@ -10,6 +22,11 @@ class NotifyWindow(QDialog,Ui_NotifyWindow):
     def __init__(self,parent=None):
         super(NotifyWindow, self).__init__(parent)
         self.setupUi(self)
+        qss_file = QFile(":/QSS/style.qss")
+        qss_file.open(QFile.ReadOnly)
+        qss_content= QTextStream(qss_file)
+        self.qss = qss_content.readAll()
+        self.setStyleSheet(self.qss)
 
     '''
     Table Model Defination

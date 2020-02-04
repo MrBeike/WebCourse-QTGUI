@@ -15,16 +15,21 @@ class Login:
     @param：username: 账户 str
     @param：password: 密码 str
     @param：rememberFlag: 是否记住密码 bool
-    @return: login_status: 登陆成功标志 bool
-    @return：s: 成功登陆的session   requests.session()
-    @return: login_message: 登陆反馈信息  str
     '''
-    def __init__(self):
-        pass
+    def __init__(self,username,password,rememberFlag):
+        self.username = username
+        self.password = password
+        self.rememberFlag = rememberFlag
 
-
-    def login(self,username,password,rememberFlag):
-
+    def login(self):
+        '''
+        @return: login_status: 登陆成功标志 bool
+        @return：s: 成功登陆的session   requests.session()
+        @return: login_message: 登陆反馈信息  str
+        '''
+        username = self.username
+        password = self.password
+        rememberFlag = self.rememberFlag
         # 设置请求头
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 5.1; rv:39.0) Gecko/20100101 Firefox/39.0',
                 'HOST': '11.129.195.195',
@@ -71,3 +76,7 @@ class Login:
                 login_message = '接收数据失败 -- 请等待1秒'
                 time.sleep(1)
         return (login_status,s,login_message)
+
+    # TODO 注销函数未完成
+    def logout(self):
+        pass

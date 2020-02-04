@@ -1,8 +1,21 @@
 # -*- coding: utf-8 -*-
 
+import os
+import sys
+import os.path
+
+myFolder = os.path.split(os.path.realpath(__file__))[0]
+sys.path = [os.path.join(myFolder, 'ui'),
+            os.path.join(myFolder, 'resource'),
+            os.path.join(myFolder, 'api'),
+            os.path.join(myFolder, 'window')
+            ] + sys.path
+
+os.chdir(myFolder)
+
 # PyQt import
 from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon,QPixmap
-from PyQt5.QtCore import pyqtSlot,Qt,QTimer,QFile,QTextStream
+from PyQt5.QtCore import pyqtSlot,Qt,QTimer,QFile,QTextStream,QModelIndex
 from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QDialog,QTableWidgetItem, QSystemTrayIcon
 
 # UI Defination import
@@ -18,6 +31,7 @@ from DataBase import DataBase,SQL
 from DetailWindow import DetailWindow
 from DbManager import DbManager
 from XeroxYor import XeroxYor
+from NotifyWindow import NotifyWindow
 
 # Temp import delete later
 from result import *
@@ -27,8 +41,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
 
-        # self.login_status = False
-        self.login_status = True
+        self.login_status = False
+        # self.login_status = True
         # 设置donate界面默认不显示
         self.donate_label.setVisible(False)
         # 设置关于界面的超链接
@@ -148,11 +162,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # List与StackDock连接
     @pyqtSlot(int)
     def on_menu_list_currentRowChanged(self, value):
-        if self.login_status or value == 0:
+        if self.login_status or value in(0,5):
             self.stackedWidget.setCurrentIndex(value)  
         else:
             QMessageBox.about(self, "提示", "请先登陆!")
-    # FIXME 未登录时 默认选中标签1 或不允许点击其他选项卡
+            # FIXME 未登录时 默认选中标签1 或不允许点击其他选项卡
 
     # ===login_page===
     @pyqtSlot()
@@ -167,7 +181,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if not password:
                 QMessageBox.about(self,'提示','请输入密码')
                 return False
-            login_status, s, login_message = Login().login(username, password, rememberFlag)
+            login = Login(username, password, rememberFla)
+            login_status, s, login_message = login.login()
             self.statusbar.showMessage(login_message)
             if login_status:
                 self.s = s
@@ -182,16 +197,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.password_input.setEnabled(False)
                 self.remember_check.setEnabled(False)
             else:
-                # TODO 错误提示美化
                 QMessageBox.about(self,'提示',login_message)
         else:
-            logout_status,s,message = Login.logout()
+            logout_status,s,message = login.logout()
             if logout_status:
                 self.username_input.setEnabled(True)
                 self.password_input.setEnabled(True)
                 self.remember_check.setEnabled(True)
                 self.login_status = False
-            # TODO 注销函数未完成
 
     # 已保存用户名和密码同步选中
     @pyqtSlot(int)
@@ -237,13 +250,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # 学习整个项目按钮响应
     @pyqtSlot()
     def on_learnProject_button_clicked(self):
-        Learn = Learn(self.s)
+        learn = Learn(self.s)
         row = self.project_list.currentIndex().row()
         projectId  = self.project_list_model.index(row, 4).data()
-        courseLists = Learn.projectDetailReader(projectId)
-        Learn.learn(courseLists)
+        courseLists = learn.projectDetailReader(projectId)
+        notify = learn.learn(courseLists)
+        notify_result = notify.show()
+        self.notifywindow = NotifyWindow()
+        self.notifywindow.notify_list_initial(notify_result)
+        self.notifywindow.show()
         self.project_list_model.clear()
-        project_result = Learn.projectReader()
+        project_result = learn.projectReader()
         self.project_list_initial(project_result)
 
     # 学习项目子课程按钮响应
@@ -252,8 +269,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         row = self.project_list.currentIndex().row()
         projectName = self.project_list_model.index(row,0).data()
         projectId = self.project_list_model.index(row, 4).data()
-        # Learn = Learn(self.s)
-        # project_detail_result = Learn.projectDetailReader(projectId)
+        # learn = Learn(self.s)
+        # project_detail_result = learn.projectDetailReader(projectId)
         # 将子窗口添加到主窗口进程中，修复闪退
         self.detailWindow = DetailWindow(projectName,projectId)
         self.detailWindow.project_detail_list_initial(project_detail_result)
@@ -264,7 +281,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     #学习按钮响应
     @pyqtSlot()
     def on_learnCourse_button_clicked(self):
-        Learn = Learn(self.s)
+        learn = Learn(self.s)
         row = self.course_list.currentIndex().row()
         courseId = self.course_list_model.index(row,3).data()
         courseTime = self.course_list_model.index(row,1).data()
@@ -273,9 +290,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             'id':courseId,
             'time':courseTime
         }]
-        Learn.learn(courseLists)
+        notify = learn.learn(courseLists)
+        notify_result = notify.show()
+        self.notifywindow = NotifyWindow()
+        self.notifywindow.notify_list_initial(notify_result)
+        self.notifywindow.show()
         self.course_list_model.clear()
-        course_result = Learn.courseReader()
+        course_result = learn.courseReader()
         self.course_list_initial(course_result)
 
 

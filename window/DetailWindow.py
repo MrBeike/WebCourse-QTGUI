@@ -1,4 +1,16 @@
 # -*- coding: utf-8 -*-
+import os
+import sys
+import os.path
+
+myFolder = os.path.split(os.path.realpath(__file__))[0]
+sys.path = [os.path.join(myFolder, 'ui'),
+            os.path.join(myFolder, 'resource'),
+            os.path.join(myFolder, 'api'),
+            os.path.join(myFolder, 'window')
+            ] + sys.path
+
+os.chdir(myFolder)
 
 from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon,QPixmap
 from PyQt5.QtCore import pyqtSlot,Qt,QTimer,QFile,QTextStream
@@ -63,9 +75,12 @@ class DetailWindow(QDialog,Ui_DetailWindow):
             'id':courseId,
             'time':courseTime
         }]
-        Learn = Learn(self.s)
-        Learn.learn(courseLists)
+        learn = Learn(self.s)
+        notify = learn.learn(courseLists)
+        notify_result = notify.show()
+        self.notifywindow = NotifyWindow()
+        self.notifywindow.notify_list_initial(notify_result)
+        self.notifywindow.show()
         self.project_detail_list_model.clear()
-        
         project_detail_result = Learn.projectDetailReader(projectId)
         self.project_detail_list_initial(project_detail_result)

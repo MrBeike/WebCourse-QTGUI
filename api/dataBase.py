@@ -39,7 +39,6 @@ class DataBase:
         data = (data["loginId"], data["passwd"], data["name"])
         self.conn.execute(self.sql['add_data'],data)
         self.conn.commit()
-        return
 
     def read_data(self):
         '''
@@ -76,7 +75,6 @@ class DataBase:
         cur = self.conn.cursor()
         cur.execute(self.sql['delete_data'],(index,))
         self.conn.commit()
-        return
 
 
     def close(self):

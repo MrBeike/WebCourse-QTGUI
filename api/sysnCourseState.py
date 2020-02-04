@@ -21,7 +21,6 @@ def planb(s):
         # 2.根据用户选择的ID读取对应项目课程,读取课程ID，提交同步
         projectpickId = projectread(project)
         sysnCourse(projectpickId, s)
-        return
     else:
         return
 
@@ -40,4 +39,3 @@ def sysnCourse(id, s):
     response = s.post(sysn_url, data=data)
     res = response.json()
     print(res)
-    return

@@ -4,10 +4,11 @@ import random
 import re
 
 from bs4 import BeautifulSoup
-from Test import Test
 from paramDefine import *
 from math import ceil
 
+from Test import Test
+from Notify import Notify
 
 class Learn:
     '''
@@ -17,6 +18,7 @@ class Learn:
     '''
     def __init__(self,s):
         self.s = s
+        self.Notify = Notify()
 
     def projectReader(self):
         '''
@@ -135,12 +137,13 @@ class Learn:
                     "studyTime": courseTime}
             response = s.post(timeSave_url, data=data)
             learn_message = response.content.decode("utf-8")
-        # TODO 学习-消息提示
+            self.notify.add('学习时间',learn_message)
         self.points = self.pointDetect(courseLists)
         # 课程轨迹实现部分
         self.learnRecord()
         # 自动测试实现部分
         self.testDetect()
+        return self.notify
 
     def pointDetect(self,courseLists):
         '''
@@ -215,7 +218,7 @@ class Learn:
                             "videoStudyRecord.studyTimeLong": totalLearnTimeNum}
                 save = s.post(saveRecord_url, data=savedata)
                 learnRecord_message = save.content.decode("utf-8")
-                # TODO 学习轨迹-消息显示
+                self.notify.add('视频轨迹',learnRecord_message)
 
     def testDetect(self):
         '''
@@ -228,8 +231,9 @@ class Learn:
             if pointType == "test":
                 testIds.append(point['pointId'])
         if testIds:
-            Test(self.s,testIds)
-
+            test = Test(self.s,testIds)
+            test_notify = test.test()
+        self.notify.extend(test_notify)
     
     def getCourseStatue(self,courseId):
         '''
@@ -248,4 +252,3 @@ class Learn:
             return courseInfo
         else:
             print('返回数据出错')
-            return
