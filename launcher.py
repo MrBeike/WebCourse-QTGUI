@@ -47,6 +47,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.login_status = True
         # 设置donate界面默认不显示
         self.donate_label.setVisible(False)
+        # 设置关于界面的超链接
+        self.about_label.setOpenExternalLinks(True)
         # 设置默认目录项为“用户登陆”
         self.stackedWidget.setCurrentIndex(0)
         # 加载QSS配置
@@ -93,8 +95,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             
             # 表格栏宽、列宽调整
             self.regist_list.setColumnWidth(0,90)
-            self.regist_list.setColumnWidth(1,530)
-            self.regist_list.setColumnWidth(2,0)
+            self.regist_list.setColumnWidth(1,450)
+            self.regist_list.setColumnWidth(2,80)
+            self.regist_list.setColumnWidth(3,0)
             self.regist_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
     def project_list_initial(self,project_result):
@@ -166,10 +169,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # FIXME 未登录时 默认选中标签1 或不允许点击其他选项卡
 
     # ===login_page===
-    @pyqtSlot(int)
-    def on_username_input_activated(self,value):
-        self.loadRememberedUser()
-
     @pyqtSlot()
     def on_login_button_clicked(self):
         if not self.login_status:
@@ -233,14 +232,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # search_result = self.register.search()
         self.regist_list_initial(search_result)
 
-    # FIXME 注册函数有问题？
     # 注册按钮响应
     @pyqtSlot()
     def on_regist_button_clicked(self):
         row = self.regist_list.currentIndex().row()
         type = self.regist_list_model.index(row, 0).data()
         name = self.regist_list_model.index(row, 1).data()
-        id= self.regist_list_model.index(row, 2).data()
+        id= self.regist_list_model.index(row, 3).data()
         info = {
             'type': type,
             'name': name,
