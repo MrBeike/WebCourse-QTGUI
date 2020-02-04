@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\lbbas\Desktop\test\webCourseQT\ui\MainWindow.ui'
+# Form implementation generated from reading ui file 'c:\Users\xeroxYor\Desktop\WebCourse-QTGUI\ui\MainWindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.0
+# Created by: PyQt5 UI code generator 5.14.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -347,7 +347,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(5)
         self.menu_list.setCurrentRow(-1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.username_input, self.password_input)
@@ -387,7 +387,7 @@ class Ui_MainWindow(object):
         self.descriptio_label.setText(_translate("MainWindow", "陆续开发相关扩展功能，勾选以打开该功能"))
         self.search_checkBox.setText(_translate("MainWindow", "搜索课程（不限地区、时间）"))
         self.thumb_button.setProperty("name", _translate("MainWindow", "thumb"))
-        self.about_label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:36pt; font-weight:600; color:#ffaa00;\">  WebCourse</span></p><p><span style=\" font-size:18pt; font-style:italic;\">     一款学习辅助软件。</span></p><p><br/></p><p><span style=\" font-size:18pt;\">作者：菜菜子（xeroxYor）</span></p><p><span style=\" font-size:18pt;\">项目地址：</span><a href=\"github.com/MrBeike/webCourse.git\"><span style=\" font-size:18pt; text-decoration: underline; color:#0000ff;\">@github.com/MrBeike</span></a></p><p><span style=\" font-size:18pt;\">联系方式：lbbas@126.com</span></p><p><span style=\" font-size:10pt;\">本项目仅供python、pyqt学习研究使用，请勿用于其他非法用途。</span></p><p><span style=\" font-size:10pt;\">本项目开源免费，请勿作任何商业行为。QT @ GPL</span></p></body></html>"))
+        self.about_label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:36pt; font-weight:600; color:#ffaa00;\">WebCourse</span></p><p><span style=\" font-size:18pt; font-style:italic;\">一款学习辅助软件。</span></p><p><br/></p><p><span style=\" font-size:18pt;\">作者：菜菜子（xeroxYor）</span></p><p><span style=\" font-size:18pt;\">项目地址：</span><a href=\"https://github.com/MrBeike/WebCourse-QTGUI\"><span style=\" font-size:18pt; text-decoration: underline; color:#0000ff;\">@github.com/MrBeike</span></a></p><p><span style=\" font-size:18pt;\">联系方式：lbbas@126.com</span></p><p><span style=\" font-size:10pt;\">本项目仅供python、pyqt学习研究使用，请勿用于其他非法用途。</span></p><p><span style=\" font-size:10pt;\">本项目开源免费，请勿作任何商业行为。QT @ GPL</span></p></body></html>"))
         self.xeroxyor_button.setProperty("name", _translate("MainWindow", "xeroxyor"))
         self.menu_list.setSortingEnabled(False)
         __sortingEnabled = self.menu_list.isSortingEnabled()
