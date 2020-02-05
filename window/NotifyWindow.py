@@ -1,23 +1,4 @@
 # -*- coding: utf-8 -*-
-import os
-import sys
-import os.path
-
-myFolder = os.path.split(os.path.realpath(__file__))[0]
-sys.path = [os.path.join(myFolder, 'ui'),
-            os.path.join(myFolder, 'resource'),
-            os.path.join(myFolder, 'api'),
-            os.path.join(myFolder, 'window')
-            ] + sys.path
-
-os.chdir(myFolder)
-
-from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon,QPixmap
-from PyQt5.QtCore import pyqtSlot,Qt,QTimer,QFile,QTextStream
-from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QDialog,QTableWidgetItem, QSystemTrayIcon
-
-from Ui_NotifyWindow import *
-
 class NotifyWindow(QDialog,Ui_NotifyWindow):
     def __init__(self,parent=None):
         super(NotifyWindow, self).__init__(parent)

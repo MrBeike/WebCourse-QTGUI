@@ -61,7 +61,7 @@
      <enum>QFrame::Plain</enum>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="login_page">
      <widget class="QLabel" name="password_label">
@@ -481,6 +481,9 @@
     </widget>
     <widget class="QWidget" name="lab_page">
      <widget class="QCheckBox" name="download_checkBox">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>70</x>
@@ -512,6 +515,9 @@
       </property>
      </widget>
      <widget class="QCheckBox" name="search_checkBox">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>70</x>

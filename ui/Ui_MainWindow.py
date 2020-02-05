@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\lbbas\Desktop\test\webCourseQT\ui\MainWindow.ui'
+# Form implementation generated from reading ui file 'c:\Users\xeroxYor\Desktop\WebCourse-QTGUI\ui\MainWindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.0
+# Created by: PyQt5 UI code generator 5.14.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -25,6 +25,7 @@ class Ui_MainWindow(object):
         icon.addPixmap(QtGui.QPixmap(":/ICO/list.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setIconSize(QtCore.QSize(64, 64))
+        MainWindow.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.stackedWidget = QtWidgets.QStackedWidget(self.centralwidget)
@@ -192,6 +193,7 @@ class Ui_MainWindow(object):
         self.lab_page = QtWidgets.QWidget()
         self.lab_page.setObjectName("lab_page")
         self.download_checkBox = QtWidgets.QCheckBox(self.lab_page)
+        self.download_checkBox.setEnabled(False)
         self.download_checkBox.setGeometry(QtCore.QRect(70, 110, 91, 51))
         self.download_checkBox.setObjectName("download_checkBox")
         self.descriptio_label = QtWidgets.QLabel(self.lab_page)
@@ -201,6 +203,7 @@ class Ui_MainWindow(object):
         self.descriptio_label.setFont(font)
         self.descriptio_label.setObjectName("descriptio_label")
         self.search_checkBox = QtWidgets.QCheckBox(self.lab_page)
+        self.search_checkBox.setEnabled(False)
         self.search_checkBox.setGeometry(QtCore.QRect(70, 160, 221, 41))
         self.search_checkBox.setObjectName("search_checkBox")
         self.line = QtWidgets.QFrame(self.lab_page)
@@ -347,7 +350,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(5)
+        self.stackedWidget.setCurrentIndex(4)
         self.menu_list.setCurrentRow(-1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.username_input, self.password_input)
