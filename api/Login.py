@@ -61,6 +61,7 @@ class Login:
                         db = DataBase(SQL)
                         db.add_data(data)
                     login_status = True
+                    self.s = s
                 elif ctext == "用户名密码不匹配，请重新输入。":
                     login_message= "用户名密码不匹配，请重试。"
                     login_status =False
@@ -79,4 +80,8 @@ class Login:
 
     # TODO 注销函数未完成
     def logout(self):
-        pass
+        self.s.close()
+        s = requests.session()
+        self.s = s
+        print(s.cookies.items())
+        return True

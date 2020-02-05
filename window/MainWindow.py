@@ -44,10 +44,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setStyleSheet(self.qss)
         self.loadRememberedUser()
 
-        # for test only Delete later {
-        self.project_list_initial(project_result)
-        self.course_list_initial(course_result)
-        # for test only Delete later }
+        # # for test only Delete later {
+        # self.project_list_initial(project_result)
+        # self.course_list_initial(course_result)
+        # # for test only Delete later }
 
     def loadRememberedUser(self):
         self.username_input.clear()
@@ -168,8 +168,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if not password:
                 QMessageBox.about(self,'提示','请输入密码')
                 return False
-            login = Login(username, password, rememberFla)
-            login_status, s, login_message = login.login()
+            self.login = Login(username, password, rememberFlag)
+            login_status, s, login_message = self.login.login()
             self.statusbar.showMessage(login_message)
             if login_status:
                 self.s = s
@@ -186,8 +186,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             else:
                 QMessageBox.about(self,'提示',login_message)
         else:
-            logout_status,s,message = login.logout()
+            logout_status = self.login.logout()
             if logout_status:
+                self.login_button.setText('登  陆')
                 self.username_input.setEnabled(True)
                 self.password_input.setEnabled(True)
                 self.remember_check.setEnabled(True)
@@ -211,11 +212,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # 搜索按钮响应
     @pyqtSlot()
     def on_search_button_clicked(self):
-        # keyword = self.keyword_input.text().strip()
-        # year = self.year_input.text().strip()
-        # s = self.s
-        # self.register = Regist(s,keyword,year)
-        # search_result = self.register.search()
+        keyword = self.keyword_input.text().strip()
+        year = self.year_input.text().strip()
+        s = self.s
+        self.register = Regist(s,keyword,year)
+        search_result = self.register.search()
         self.regist_list_initial(search_result)
 
     # 注册按钮响应
@@ -232,6 +233,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         }
         regist_message = self.register.regist(info)
         QMessageBox.about(self,'提示',regist_message)
+        self.regist_list_model.clear()
+        search_result = self.register.search()
+        self.regist_list_initial(search_result)
+        project_result = self.learn.projectReader()
+        course_result = self.learn.courseReader()
+        self.project_list_initial(project_result)
+        self.course_list_initial(course_result)
 
     # ===project_page===
     # 学习整个项目按钮响应
@@ -255,7 +263,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         row = self.project_list.currentIndex().row()
         projectName = self.project_list_model.index(row,0).data()
         projectId = self.project_list_model.index(row, 4).data()
-        # project_detail_result = self.learn.projectDetailReader(projectId)
+        project_detail_result = self.learn.projectDetailReader(projectId)
         # 将子窗口添加到主窗口进程中，修复闪退
         self.detailWindow = DetailWindow(self.s,projectName,projectId)
         self.detailWindow.project_detail_list_initial(project_detail_result)

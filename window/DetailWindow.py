@@ -1,10 +1,17 @@
 # -*- coding: utf-8 -*-
+
+# PyQt import
 from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon,QPixmap
 from PyQt5.QtCore import pyqtSlot,Qt,QTimer,QFile,QTextStream
 from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QDialog,QTableWidgetItem, QSystemTrayIcon
 
+# UI Defination import
 from Ui_DetailWindow import *
 
+# Window Defination import
+from NotifyWindow import NotifyWindow
+
+# Api import
 from Learn import Learn
 
 # 项目内课程详细信息窗体

@@ -18,7 +18,7 @@ class Learn:
     '''
     def __init__(self,s):
         self.s = s
-        self.Notify = Notify()
+        self.notify = Notify()
 
     def projectReader(self):
         '''
@@ -233,7 +233,7 @@ class Learn:
         if testIds:
             test = Test(self.s,testIds)
             test_notify = test.test()
-        self.notify.extend(test_notify)
+            self.notify.extend(test_notify)
     
     def getCourseStatue(self,courseId):
         '''
@@ -245,6 +245,7 @@ class Learn:
         json = response.json()
         if json['success'] == 'true':
             data = json['data']
+            print(data)
             for key in data:
                 courseId = key
                 courseInfo = data[key]

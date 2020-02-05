@@ -22,11 +22,12 @@ class Notify:
         }
         self.message_collect.append(message_dict)
     
-    def extend(self,list):
+    def extend(self,notifyObject):
         '''
-        :param list Notify实例 list
+        :param notifyObject Notify实例 object
         '''
-        self.message_collect.extend(list)
+        extend_list = notifyObject.message_collect
+        self.message_collect.extend(extend_list)
     
     def show(self):
         message = self.message_collect.copy()
