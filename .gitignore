@@ -10,3 +10,4 @@ build
 testFile.py
 xeroxYor.jpg
 upx*
+*.log
