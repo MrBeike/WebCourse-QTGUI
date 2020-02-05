@@ -56,3 +56,14 @@ class DbManager(QDialog,Ui_DbManager):
         user_result = db.read_data_formanager()
         self.user_list_model.clear()
         self.user_list_initial(user_result)
+
+
+    # 自定义Signal 用于主窗口密码输入框可选项与数据库同步
+    dbmanager_Signal = QtCore.pyqtSignal(str)
+
+    def sendSignal(self):
+        content = 'closed'
+        self.dbmanager_Signal.emit(content)
+
+    def closeEvent(self, event):
+        self.sendSignal()

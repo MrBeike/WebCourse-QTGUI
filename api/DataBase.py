@@ -99,5 +99,3 @@ user_read_data_formanager = '''SELECT * From USER WHERE NAME <>'blank' ORDER BY 
 
 SQL = {'db_name': 'user.db', 'create_table': user_create, 'add_data': user_add_data,
            'read_data': user_read_data,'delete_data':user_delete_data,'read_data_formanager':user_read_data_formanager}
-
-
