@@ -90,7 +90,7 @@ class Test:
 
 
     # 提交获取的试卷答案
-    def submitPage(answers, submitPackge):
+    def submitPage(self,answers, submitPackge):
         s = self.s
         submitPackge["myAnswers"] = answers
         submitPageData = submitPackge

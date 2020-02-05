@@ -9,11 +9,12 @@ from Learn import Learn
 
 # 项目内课程详细信息窗体
 class DetailWindow(QDialog,Ui_DetailWindow):
-    def __init__(self,projectName,projectId,parent=None):
+    def __init__(self,s,projectName,projectId,parent=None):
         super(DetailWindow, self).__init__(parent)
         self.setupUi(self)
         self.project_name_label.setText(str(projectName))
         self.project_id_label.setText(str(projectId))
+        self.learn = Learn(s)
         qss_file = QFile(":/QSS/style.qss")
         qss_file.open(QFile.ReadOnly)
         qss_content= QTextStream(qss_file)
@@ -38,6 +39,7 @@ class DetailWindow(QDialog,Ui_DetailWindow):
                     value = QStandardItem(str(cell))
                     # 设置单元不可编辑
                     value.setEditable(False)
+                    value.setTextAlignment(Qt.AlignCenter)
                     self.project_detail_list_model.setItem(row, col, value)
             # 添加模型到QTableView实例中
             self.project_detail_list.setModel(self.project_detail_list_model)
@@ -52,22 +54,23 @@ class DetailWindow(QDialog,Ui_DetailWindow):
     '''
     Slot Defination
     '''
+    # 详细课程界面学习按钮响应
     @pyqtSlot()
     def on_learn_button_clicked(self):
         row = self.project_detail_list.currentIndex().row()
         courseId = self.project_detail_list_model.index(row, 4).data()
-        courseTime = self.course_list_model.index(row,1).data()
+        courseTime = self.project_detail_list_model.index(row,1).data()
         # 为了函数的一致性，此处构建包含一个信息点的list [{,,,}]
         courseLists = [{
             'id':courseId,
             'time':courseTime
         }]
-        learn = Learn(self.s)
-        notify = learn.learn(courseLists)
+        notify = self.learn.learn(courseLists)
         notify_result = notify.show()
         self.notifywindow = NotifyWindow()
         self.notifywindow.notify_list_initial(notify_result)
         self.notifywindow.show()
         self.project_detail_list_model.clear()
-        project_detail_result = Learn.projectDetailReader(projectId)
+        projectId = self.project_id_label.text()
+        project_detail_result = self.learn.projectDetailReader(projectId)
         self.project_detail_list_initial(project_detail_result)

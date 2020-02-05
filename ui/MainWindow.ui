@@ -61,7 +61,7 @@
      <enum>QFrame::Plain</enum>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="login_page">
      <widget class="QLabel" name="password_label">
@@ -615,9 +615,9 @@
       <property name="geometry">
        <rect>
         <x>110</x>
-        <y>20</y>
+        <y>0</y>
         <width>431</width>
-        <height>401</height>
+        <height>421</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -663,10 +663,41 @@
        <string>xeroxyor</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>542</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>赞赏作者</string>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="textInteractionFlags">
+       <set>Qt::NoTextInteraction</set>
+      </property>
+      <property name="buddy">
+       <cstring>thumb_button</cstring>
+      </property>
+     </widget>
      <zorder>thumb_button</zorder>
      <zorder>donate_label</zorder>
      <zorder>about_label</zorder>
      <zorder>xeroxyor_button</zorder>
+     <zorder>label</zorder>
     </widget>
    </widget>
    <widget class="QListWidget" name="menu_list">

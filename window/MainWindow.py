@@ -174,9 +174,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if login_status:
                 self.s = s
                 self.login_status = login_status
-                learn = Learn(s)
-                project_result = learn.projectReader()
-                course_result = learn.courseReader()
+                self.learn = Learn(s)
+                project_result = self.learn.projectReader()
+                course_result = self.learn.courseReader()
                 self.project_list_initial(project_result)
                 self.course_list_initial(course_result)
                 self.login_button.setText('注  销')
@@ -237,17 +237,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # 学习整个项目按钮响应
     @pyqtSlot()
     def on_learnProject_button_clicked(self):
-        learn = Learn(self.s)
         row = self.project_list.currentIndex().row()
         projectId  = self.project_list_model.index(row, 4).data()
-        courseLists = learn.projectDetailReader(projectId)
-        notify = learn.learn(courseLists)
+        courseLists = self.learn.projectDetailReader(projectId)
+        notify = self.learn.learn(courseLists)
         notify_result = notify.show()
         self.notifywindow = NotifyWindow()
         self.notifywindow.notify_list_initial(notify_result)
         self.notifywindow.show()
         self.project_list_model.clear()
-        project_result = learn.projectReader()
+        project_result = self.learn.projectReader()
         self.project_list_initial(project_result)
 
     # 学习项目子课程按钮响应
@@ -256,10 +255,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         row = self.project_list.currentIndex().row()
         projectName = self.project_list_model.index(row,0).data()
         projectId = self.project_list_model.index(row, 4).data()
-        # learn = Learn(self.s)
-        # project_detail_result = learn.projectDetailReader(projectId)
+        # project_detail_result = self.learn.projectDetailReader(projectId)
         # 将子窗口添加到主窗口进程中，修复闪退
-        self.detailWindow = DetailWindow(projectName,projectId)
+        self.detailWindow = DetailWindow(self.s,projectName,projectId)
         self.detailWindow.project_detail_list_initial(project_detail_result)
         self.detailWindow.show()
 
@@ -268,7 +266,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     #学习按钮响应
     @pyqtSlot()
     def on_learnCourse_button_clicked(self):
-        learn = Learn(self.s)
         row = self.course_list.currentIndex().row()
         courseId = self.course_list_model.index(row,3).data()
         courseTime = self.course_list_model.index(row,1).data()
@@ -277,13 +274,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             'id':courseId,
             'time':courseTime
         }]
-        notify = learn.learn(courseLists)
+        notify = self.learn.learn(courseLists)
         notify_result = notify.show()
         self.notifywindow = NotifyWindow()
         self.notifywindow.notify_list_initial(notify_result)
         self.notifywindow.show()
         self.course_list_model.clear()
-        course_result = learn.courseReader()
+        course_result = self.learn.courseReader()
         self.course_list_initial(course_result)
 
 
