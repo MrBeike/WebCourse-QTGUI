@@ -7,7 +7,8 @@ a = Analysis(['launcher.py'],
              pathex=['C:\\Users\\lbbas\\Desktop\\test\\webCourseQT',
              'C:\\Users\\lbbas\\Desktop\\test\\webCourseQT\\api',
              'C:\\Users\\lbbas\\Desktop\\test\\webCourseQT\\resource',
-             'C:\\Users\\lbbas\\Desktop\\test\\webCourseQT\\ui'
+             'C:\\Users\\lbbas\\Desktop\\test\\webCourseQT\\ui',
+             'C:\\Users\\lbbas\\Desktop\\test\\webCourseQT\\window'
              ],
              binaries=[],
              datas=[],
@@ -30,11 +31,12 @@ exe = EXE(pyz,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=True )
+          console=False)
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
                a.datas,
                strip=False,
                upx=True,
+               icon='C:\\Users\\lbbas\\Desktop\\test\\webCourseQT\\resource\\list.ico',
                name='launcher')
