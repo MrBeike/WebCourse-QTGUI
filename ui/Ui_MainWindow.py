@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\xeroxYor\Desktop\WebCourse-QTGUI\ui\MainWindow.ui'
+# Form implementation generated from reading ui file 'c:\Users\xeroxYor\Desktop\WebCourse-QTGUI - 副本\ui\MainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.14.1
 #
@@ -235,7 +235,7 @@ class Ui_MainWindow(object):
         self.about_label.setObjectName("about_label")
         self.donate_label = QtWidgets.QLabel(self.about_page)
         self.donate_label.setEnabled(True)
-        self.donate_label.setGeometry(QtCore.QRect(110, 0, 431, 421))
+        self.donate_label.setGeometry(QtCore.QRect(110, 0, 431, 441))
         self.donate_label.setStyleSheet("border-image: url(:/IMG/donate.png);")
         self.donate_label.setText("")
         self.donate_label.setObjectName("donate_label")
