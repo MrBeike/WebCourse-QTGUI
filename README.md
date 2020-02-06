@@ -13,9 +13,9 @@
 - 其他还没想到。
   
 ## How to use it
-! 暂时未发布EXE,等待测试通过后发布
+  WebCourse GUI 1.0发布啦，撒花✿✿ヽ(°▽°)ノ✿  --2020年2月5日21:06:36
 - 在[Release](https://github.com/MrBeike/WebCourse-QTGUI/releases)页面下载。
-- 在[百度网盘]下载。`分享码`
+- 在[百度网盘](https://pan.baidu.com/s/1mBzYuhjLF5DRChnxUdEw2g)下载。`分享码:8hrw`
 
 ## How to build it
 + 克隆项目到本地    `git clone https://github.com/MrBeike/WebCourse-QTGUI.git`

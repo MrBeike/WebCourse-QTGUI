@@ -33,14 +33,15 @@ class NotifyWindow(QDialog,Ui_NotifyWindow):
                 datalist = [datadict['type'],datadict['message']]
                 for col, cell in enumerate(datalist):
                     value = QStandardItem(str(cell))
+                    value.setTextAlignment(Qt.AlignCenter)
                     # 设置单元不可编辑
                     value.setEditable(False)
                     self.notify_list_model.setItem(row, col, value)
             # 添加模型到QTableView实例中
             self.notify_list.setModel(self.notify_list_model)
         
-            self.notify_list.setColumnWidth(0,40)
-            self.notify_list.setColumnWidth(1,580)
+            self.notify_list.setColumnWidth(0,100)
+            self.notify_list.setColumnWidth(1,610)
             self.notify_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
     '''

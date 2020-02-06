@@ -206,6 +206,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         db = DataBase(SQL)
         user_result = db.read_data_formanager()
         self.dbManager.user_list_initial(user_result)
+        # 自定义Signal连接
+        self.dbManager.dbmanager_Signal.connect(self.loadRememberedUser)
         self.dbManager.show()
 
     # ===regist_page===

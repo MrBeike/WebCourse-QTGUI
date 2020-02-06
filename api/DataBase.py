@@ -97,7 +97,5 @@ user_delete_data = '''DELETE FROM USER where ACCOUNT=(?)'''
 # 不显示预设的空白记录（空白记录为combox第一行显示空白所设）
 user_read_data_formanager = '''SELECT * From USER WHERE NAME <>'blank' ORDER BY ACCOUNT'''
 
-SQL = {'db_name': 'userinfo.db', 'create_table': user_create, 'add_data': user_add_data,
+SQL = {'db_name': 'user.db', 'create_table': user_create, 'add_data': user_add_data,
            'read_data': user_read_data,'delete_data':user_delete_data,'read_data_formanager':user_read_data_formanager}
-
-

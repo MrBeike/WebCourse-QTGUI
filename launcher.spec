@@ -1,4 +1,4 @@
-# -*- mode: python -*-
+# -*- mode: python ; coding: utf-8 -*-
 
 block_cipher = None
 
@@ -7,8 +7,8 @@ a = Analysis(['launcher.py'],
              pathex=['C:\\Users\\lbbas\\Desktop\\test\\webCourseQT',
              'C:\\Users\\lbbas\\Desktop\\test\\webCourseQT\\api',
              'C:\\Users\\lbbas\\Desktop\\test\\webCourseQT\\resource',
-             'C:\\Users\\lbbas\\Desktop\\test\\webCourseQT\\ui'
-             ],
+             'C:\\Users\\lbbas\\Desktop\\test\\webCourseQT\\ui',
+             'C:\\Users\\lbbas\\Desktop\\test\\webCourseQT\\window'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -25,16 +25,17 @@ exe = EXE(pyz,
           a.scripts,
           [],
           exclude_binaries=True,
-          name='launcher',
+          name='WebCourse',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=True )
+          console=False, icon='resource\\list.ico')
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
                a.datas,
                strip=False,
                upx=True,
-               name='launcher')
+               upx_exclude=[],
+               name='WebCourse')

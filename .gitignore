@@ -5,6 +5,15 @@ venv
 wheelhouse
 *.db
 *.pyc
+<<<<<<< HEAD
 test.py
 .dist
 gpl-3.0.rtf
+=======
+dist
+build
+testFile.py
+xeroxYor.jpg
+upx*
+*.log
+>>>>>>> 6b50c16d5f1da62a6cc860f45eb45e75899ab8e4
