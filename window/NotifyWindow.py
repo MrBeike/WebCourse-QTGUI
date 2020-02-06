@@ -41,7 +41,7 @@ class NotifyWindow(QDialog,Ui_NotifyWindow):
             self.notify_list.setModel(self.notify_list_model)
         
             self.notify_list.setColumnWidth(0,100)
-            self.notify_list.setColumnWidth(1,610)
+            self.notify_list.setColumnWidth(1,510)
             self.notify_list.verticalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
     '''
