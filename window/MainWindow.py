@@ -20,8 +20,6 @@ from DbManager import DbManager
 from XeroxYor import XeroxYor
 from NotifyWindow import NotifyWindow
 
-# Temp import delete later
-from result import *
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
