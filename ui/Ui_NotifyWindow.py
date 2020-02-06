@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\lbbas\Desktop\test\webCourseQT\ui\NotifyWindow.ui'
+# Form implementation generated from reading ui file 'e:\webCourseQT\ui\NotifyWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.0
 #
@@ -18,6 +18,7 @@ class Ui_NotifyWindow(object):
         self.notify_list.setGeometry(QtCore.QRect(0, 0, 620, 400))
         self.notify_list.setStyleSheet("")
         self.notify_list.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.notify_list.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         self.notify_list.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.notify_list.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.notify_list.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
