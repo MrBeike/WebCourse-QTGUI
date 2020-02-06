@@ -6,3 +6,5 @@ wheelhouse
 *.db
 *.pyc
 test.py
+.dist
+gpl-3.0.rtf
