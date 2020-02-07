@@ -28,6 +28,9 @@
 + PyQt 5.13 文件夹模式打包后，会提示 `unable to find Qt5Core.dll on PATH` 
   - 解决方案：将提示的dll文件复制到dist下 `PyQt5\Qt\bin`中，或使用5.12.2版本PyQt。
   - 参考链接：https://github.com/pyinstaller/pyinstaller/issues/4293
-+ 部分杀毒软件报告病毒，
++ 部分杀毒软件报告病毒
+  - 初步认定是pyinstaller打包造成部分杀软报毒。程序本身并无恶意代码。正在尝试通过`rebuild pyinstaller bootloader`解决问题。
+  - 附上之前发布的webcourse.exe在线杀毒结果 by [virustotal](https://www.virustotal.com/).com.
+  - <img src="VirusTotal.png">
 ## Contact Me
 - Mail: lbbas@126.com
