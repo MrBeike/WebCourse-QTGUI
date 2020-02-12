@@ -6,13 +6,13 @@ from PyQt5.QtCore import pyqtSlot,Qt,QTimer,QFile,QTextStream
 from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QDialog,QTableWidgetItem, QSystemTrayIcon
 
 # UI Defination import
-from Ui_DetailWindow import *
+from ui.Ui_DetailWindow import *
 
 # Window Defination import
-from NotifyWindow import NotifyWindow
+from window.NotifyWindow import NotifyWindow
 
 # Api import
-from Learn import Learn
+from api.Learn import Learn
 
 # 项目内课程详细信息窗体
 class DetailWindow(QDialog,Ui_DetailWindow):

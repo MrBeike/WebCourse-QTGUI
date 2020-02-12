@@ -5,7 +5,6 @@
 !define PRODUCT_VERSION "GUI 1.0"
 !define PRODUCT_PUBLISHER "xeroxYor(菜菜子)"
 !define PRODUCT_WEB_SITE "https://mrbeike.github.io/WebCourse-QTGUI/"
-!define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\WebCourse.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 
@@ -16,36 +15,45 @@
 !define MUI_ABORTWARNING
 !define MUI_ICON "resource\list.ico"
 !define MUI_UNICON "resource\uninstaller.ico"
+<<<<<<< HEAD
 
 ; Language Selection Dialog Settings
 !define MUI_LANGDLL_REGISTRY_ROOT "${PRODUCT_UNINST_ROOT_KEY}"
 !define MUI_LANGDLL_REGISTRY_KEY "${PRODUCT_UNINST_KEY}"
 !define MUI_LANGDLL_REGISTRY_VALUENAME "NSIS:Language"
+=======
+>>>>>>> 4681d04a26ea89604aba5ed538c766a6eb86e4d9
 
 ; Welcome page
 !insertmacro MUI_PAGE_WELCOME
 ; License page
 !define MUI_LICENSEPAGE_CHECKBOX
+<<<<<<< HEAD
 !insertmacro MUI_PAGE_LICENSE "resource\gpl-3.0.rtf"
+=======
+!insertmacro MUI_PAGE_LICENSE "gpl-3.0.rtf"
+>>>>>>> 4681d04a26ea89604aba5ed538c766a6eb86e4d9
 ; Directory page
 !insertmacro MUI_PAGE_DIRECTORY
 ; Instfiles page
 !insertmacro MUI_PAGE_INSTFILES
 ; Finish page
+<<<<<<< HEAD
 !define MUI_FINISHPAGE_RUN "$INSTDIR\${PRODUCT_NAME}"
+=======
+>>>>>>> 4681d04a26ea89604aba5ed538c766a6eb86e4d9
 !insertmacro MUI_PAGE_FINISH
 
 ; Uninstaller pages
 !insertmacro MUI_UNPAGE_INSTFILES
 
 ; Language files
-!insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_LANGUAGE "SimpChinese"
-!insertmacro MUI_LANGUAGE "TradChinese"
 
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
+<<<<<<< HEAD
 OutFile "WebCourseInstaller.exe"
 InstallDir "$PROGRAMFILES\${PRODUCT_NAME}"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
@@ -60,20 +68,43 @@ Section "WebCourse" SEC01
   CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}.lnk" "$INSTDIR\${PRODUCT_NAME}.exe"
   CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\${PRODUCT_NAME}.exe"
+=======
+OutFile "Setup.exe"
+InstallDir "$PROGRAMFILES\WebCourse"
+ShowInstDetails show
+ShowUnInstDetails show
+
+Section "WebCourse" SEC01
+  SetOutPath "$INSTDIR"
+  SetOverwrite on
+  File "dist\WebCourse\*.*"
+  File "dist\WebCourse\user.db"
+>>>>>>> 4681d04a26ea89604aba5ed538c766a6eb86e4d9
 SectionEnd
 
 Section -AdditionalIcons
   WriteIniStr "$INSTDIR\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
+<<<<<<< HEAD
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Website.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\uninst.exe"
+=======
+  CreateDirectory "$SMPROGRAMS\WebCourse"
+  CreateShortCut "$SMPROGRAMS\WebCourse\Website.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
+  CreateShortCut "$SMPROGRAMS\WebCourse\Uninstall.lnk" "$INSTDIR\uninst.exe"
+>>>>>>> 4681d04a26ea89604aba5ed538c766a6eb86e4d9
 SectionEnd
 
 Section -Post
   WriteUninstaller "$INSTDIR\uninst.exe"
+<<<<<<< HEAD
   WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\${PRODUCT_NAME}.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninst.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\${PRODUCT_NAME}.exe"
+=======
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninst.exe"
+>>>>>>> 4681d04a26ea89604aba5ed538c766a6eb86e4d9
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
@@ -107,7 +138,10 @@ Function un.onUninstSuccess
 FunctionEnd
 
 Function un.onInit
+<<<<<<< HEAD
 !insertmacro MUI_UNGETLANGUAGE
+=======
+>>>>>>> 4681d04a26ea89604aba5ed538c766a6eb86e4d9
   MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "你确实要完全移除 $(^Name) ，其及所有的组件？" IDYES +2
   Abort
   ;检测程序是否运行
@@ -122,6 +156,7 @@ FunctionEnd
 Section Uninstall
   Delete "$INSTDIR\${PRODUCT_NAME}.url"
   Delete "$INSTDIR\uninst.exe"
+<<<<<<< HEAD
   Delete "$INSTDIR\${PRODUCT_NAME}.exe"
 
   Delete "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk"
@@ -131,11 +166,21 @@ Section Uninstall
 
   RMDir "$SMPROGRAMS\${PRODUCT_NAME}"
   RMDir /r "$INSTDIR" ;删除所有
+=======
+  Delete "$INSTDIR\user.db"
+  Delete "$INSTDIR\*.*"
+
+  Delete "$SMPROGRAMS\WebCourse\Uninstall.lnk"
+  Delete "$SMPROGRAMS\WebCourse\Website.lnk"
+
+  RMDir "$SMPROGRAMS\WebCourse"
+  RMDir "$INSTDIR"
+>>>>>>> 4681d04a26ea89604aba5ed538c766a6eb86e4d9
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
-  DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
   SetAutoClose true
 SectionEnd
+<<<<<<< HEAD
 
 
 
@@ -175,3 +220,5 @@ function .onInit
 ;      MessageBox MB_ICONSTOP "Not found"
     ${EndIf}
 functionEnd  
+=======
+>>>>>>> 4681d04a26ea89604aba5ed538c766a6eb86e4d9

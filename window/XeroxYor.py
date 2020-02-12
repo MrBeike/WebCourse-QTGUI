@@ -3,7 +3,8 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon,QPixmap
 from PyQt5.QtCore import pyqtSlot,Qt,QTimer,QFile,QTextStream
 from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QDialog,QTableWidgetItem, QSystemTrayIcon
 
-from Ui_XeroxYor import *
+# UI Defination import
+from ui.Ui_XeroxYor import *
 
 # 隐藏页窗体
 class XeroxYor(QDialog,Ui_XeroxYor):

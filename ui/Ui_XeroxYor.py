@@ -67,4 +67,3 @@ class Ui_XeroxYor(object):
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Consolas,Courier New,monospace\'; font-size:14pt; color:#000000;\">索性起来做点事，来度过这无奈的夜晚。</span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Consolas,Courier New,monospace\'; font-size:14pt; color:#000000;\">然后便有了这个小项目。</span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Consolas,Courier New,monospace\'; font-size:14pt; color:#000000;\">我很想你，心瑜小可爱。---菜菜子 </span></p></body></html>"))
-import webcourse_rc

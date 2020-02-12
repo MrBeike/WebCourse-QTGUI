@@ -5,7 +5,7 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon,QPixmap
 from PyQt5.QtCore import pyqtSlot,Qt,QTimer,QFile,QTextStream,QModelIndex
 from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QDialog,QTableWidgetItem, QSystemTrayIcon
 
-from Ui_NotifyWindow import *
+from ui.Ui_NotifyWindow import *
 
 class NotifyWindow(QDialog,Ui_NotifyWindow):
     def __init__(self,parent=None):

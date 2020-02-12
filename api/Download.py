@@ -5,9 +5,9 @@ import time
 
 from bs4 import BeautifulSoup
 
-from Wget import Wget
-from Learn import Learn
-from paramDefine import *
+from api.Wget import Wget
+from api.Learn import Learn
+from api.paramDefine import *
 
 
 

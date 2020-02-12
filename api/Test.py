@@ -2,9 +2,9 @@
 # -*-coding:utf-8-*-
 
 from bs4 import BeautifulSoup
-from paramDefine import *
+from api.paramDefine import *
 
-from Notify import Notify
+from api.Notify import Notify
 
 class Test:
     '''

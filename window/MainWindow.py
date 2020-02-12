@@ -6,19 +6,19 @@ from PyQt5.QtCore import pyqtSlot,Qt,QTimer,QFile,QTextStream,QModelIndex
 from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QDialog,QTableWidgetItem, QSystemTrayIcon
 
 # UI Defination import
-from Ui_MainWindow import *
+from ui.Ui_MainWindow import *
 
 # Api import
-from Login import Login
-from Learn import Learn
-from Regist import Regist
-from DataBase import DataBase,SQL
+from api.Login import Login
+from api.Learn import Learn
+from api.Regist import Regist
+from api.DataBase import DataBase,SQL
 
 # Window Defination import
-from DetailWindow import DetailWindow
-from DbManager import DbManager
-from XeroxYor import XeroxYor
-from NotifyWindow import NotifyWindow
+from window.DetailWindow import DetailWindow
+from window.DbManager import DbManager
+from window.XeroxYor import XeroxYor
+from window.NotifyWindow import NotifyWindow
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -35,17 +35,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # 设置默认目录项为“用户登陆”
         self.stackedWidget.setCurrentIndex(0)
         # 加载QSS配置
+        # 建立QFile对象并打开
         qss_file = QFile(":/QSS/style.qss")
         qss_file.open(QFile.ReadOnly)
+        # 读取QFile内容
         qss_content= QTextStream(qss_file)
         self.qss = qss_content.readAll()
         self.setStyleSheet(self.qss)
         self.loadRememberedUser()
 
-        # # for test only Delete later {
-        # self.project_list_initial(project_result)
-        # self.course_list_initial(course_result)
-        # # for test only Delete later }
 
     def loadRememberedUser(self):
         self.username_input.clear()
@@ -185,6 +183,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 QMessageBox.about(self,'提示',login_message)
         else:
             logout_status = self.login.logout()
+            self.statusbar.showMessage("用户登录已注销")
             if logout_status:
                 self.login_button.setText('登  陆')
                 self.username_input.setEnabled(True)
@@ -293,7 +292,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 
     # ===lab_page===
-    # TODO 存在的必要？
+        # TODO 存在的必要？
+        # TODO 实验室增加注册过期课程功能
+        # TODO 实验室增加下载课程视频功能
 
     # ===about_page===
     # 控制捐赠界面的开关

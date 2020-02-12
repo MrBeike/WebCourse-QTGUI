@@ -3,9 +3,11 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon,QPixmap
 from PyQt5.QtCore import pyqtSlot,Qt,QTimer,QFile,QTextStream
 from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QDialog,QTableWidgetItem, QSystemTrayIcon
 
-from Ui_DbManager import *
+# UI Defination import
+from ui.Ui_DbManager import *
 
-from DataBase import DataBase,SQL
+# Api import
+from api.DataBase import DataBase,SQL
 
 class DbManager(QDialog,Ui_DbManager):
     def __init__(self,parent=None):
