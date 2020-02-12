@@ -6,19 +6,19 @@ from PyQt5.QtCore import pyqtSlot,Qt,QTimer,QFile,QTextStream,QModelIndex
 from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QDialog,QTableWidgetItem, QSystemTrayIcon
 
 # UI Defination import
-from Ui_MainWindow import *
+from ui.Ui_MainWindow import *
 
 # Api import
-from Login import Login
-from Learn import Learn
-from Regist import Regist
-from DataBase import DataBase,SQL
+from api.Login import Login
+from api.Learn import Learn
+from api.Regist import Regist
+from api.DataBase import DataBase,SQL
 
 # Window Defination import
-from DetailWindow import DetailWindow
-from DbManager import DbManager
-from XeroxYor import XeroxYor
-from NotifyWindow import NotifyWindow
+from window.DetailWindow import DetailWindow
+from window.DbManager import DbManager
+from window.XeroxYor import XeroxYor
+from window.NotifyWindow import NotifyWindow
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):

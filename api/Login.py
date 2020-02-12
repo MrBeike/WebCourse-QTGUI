@@ -3,9 +3,9 @@
 import hashlib
 import requests
 import time
-from DataBase import DataBase,SQL
+from api.DataBase import DataBase,SQL
 from bs4 import BeautifulSoup
-from paramDefine import *
+from api.paramDefine import *
 
 
 class Login:

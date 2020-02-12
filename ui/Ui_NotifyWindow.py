@@ -31,4 +31,3 @@ class Ui_NotifyWindow(object):
     def retranslateUi(self, NotifyWindow):
         _translate = QtCore.QCoreApplication.translate
         NotifyWindow.setWindowTitle(_translate("NotifyWindow", "消息提示"))
-import webcourse_rc

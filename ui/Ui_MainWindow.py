@@ -420,4 +420,3 @@ class Ui_MainWindow(object):
         item = self.menu_list.item(5)
         item.setText(_translate("MainWindow", "关于"))
         self.menu_list.setSortingEnabled(__sortingEnabled)
-import webcourse_rc

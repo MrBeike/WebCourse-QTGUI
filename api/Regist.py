@@ -4,7 +4,7 @@
 import re
 
 from bs4 import BeautifulSoup
-from paramDefine import *
+from api.paramDefine import *
 
 
 class Regist:

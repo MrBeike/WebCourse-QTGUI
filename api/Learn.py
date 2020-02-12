@@ -4,11 +4,11 @@ import random
 import re
 
 from bs4 import BeautifulSoup
-from paramDefine import *
+from api.paramDefine import *
 from math import ceil
 
-from Test import Test
-from Notify import Notify
+from api.Test import Test
+from api.Notify import Notify
 
 class Learn:
     '''
