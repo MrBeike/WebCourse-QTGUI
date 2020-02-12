@@ -183,6 +183,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 QMessageBox.about(self,'提示',login_message)
         else:
             logout_status = self.login.logout()
+            self.statusbar.showMessage("用户登录已注销")
             if logout_status:
                 self.login_button.setText('登  陆')
                 self.username_input.setEnabled(True)
