@@ -35,17 +35,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # 设置默认目录项为“用户登陆”
         self.stackedWidget.setCurrentIndex(0)
         # 加载QSS配置
+        # 建立QFile对象并打开
         qss_file = QFile(":/QSS/style.qss")
         qss_file.open(QFile.ReadOnly)
+        # 读取QFile内容
         qss_content= QTextStream(qss_file)
         self.qss = qss_content.readAll()
         self.setStyleSheet(self.qss)
         self.loadRememberedUser()
 
-        # # for test only Delete later {
-        # self.project_list_initial(project_result)
-        # self.course_list_initial(course_result)
-        # # for test only Delete later }
 
     def loadRememberedUser(self):
         self.username_input.clear()
@@ -293,7 +291,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 
     # ===lab_page===
-    # TODO 存在的必要？
+        # TODO 存在的必要？
+        # TODO 实验室增加注册过期课程功能
+        # TODO 实验室增加下载课程视频功能
 
     # ===about_page===
     # 控制捐赠界面的开关

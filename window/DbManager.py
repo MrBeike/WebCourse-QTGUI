@@ -3,8 +3,10 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon,QPixmap
 from PyQt5.QtCore import pyqtSlot,Qt,QTimer,QFile,QTextStream
 from PyQt5.QtWidgets import QApplication, QMainWindow,QHeaderView,QMessageBox,QDialog,QTableWidgetItem, QSystemTrayIcon
 
+# UI Defination import
 from ui.Ui_DbManager import *
 
+# Api import
 from api.DataBase import DataBase,SQL
 
 class DbManager(QDialog,Ui_DbManager):
