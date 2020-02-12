@@ -10,7 +10,8 @@
 ## What's TODO
 - “实验室”选项卡内功能还未完成。
 - 消息提示功能还不够完善。
-- 其他还没想到。
+- 课程理论学习时间提示未完成。
+- 学习计划任务功能（探索中）
   
 ## How to use it
   WebCourse GUI 1.0发布啦，撒花✿✿ヽ(°▽°)ノ✿  --2020年2月5日21:06:36
@@ -31,6 +32,6 @@
 + 部分杀毒软件报告病毒
   - 初步认定是pyinstaller打包造成部分杀软报毒。程序本身并无恶意代码。正在尝试通过`rebuild pyinstaller bootloader`解决问题。
   - 附上之前发布的webcourse.exe在线杀毒结果 by [virustotal](https://www.virustotal.com/).com.
-  - <img src="VirusTotal.png">
+  <img src="VirusTotal.png">
 ## Contact Me
 - Mail: lbbas@126.com

@@ -14,8 +14,8 @@
 
 ; MUI Settings
 !define MUI_ABORTWARNING
-!define MUI_ICON "C:\Users\lbbas\Desktop\test\webCourseQT\resource\list.ico"
-!define MUI_UNICON "C:\Users\lbbas\Desktop\test\webCourseQT\resource\uninstaller.ico"
+!define MUI_ICON "resource\list.ico"
+!define MUI_UNICON "resource\uninstaller.ico"
 
 ; Language Selection Dialog Settings
 !define MUI_LANGDLL_REGISTRY_ROOT "${PRODUCT_UNINST_ROOT_KEY}"
@@ -26,13 +26,13 @@
 !insertmacro MUI_PAGE_WELCOME
 ; License page
 !define MUI_LICENSEPAGE_CHECKBOX
-!insertmacro MUI_PAGE_LICENSE "C:\Users\lbbas\Desktop\test\webCourseQT\gpl-3.0.rtf"
+!insertmacro MUI_PAGE_LICENSE "resource\gpl-3.0.rtf"
 ; Directory page
 !insertmacro MUI_PAGE_DIRECTORY
 ; Instfiles page
 !insertmacro MUI_PAGE_INSTFILES
 ; Finish page
-!define MUI_FINISHPAGE_RUN "$INSTDIR\WebCourse.exe"
+!define MUI_FINISHPAGE_RUN "$INSTDIR\${PRODUCT_NAME}"
 !insertmacro MUI_PAGE_FINISH
 
 ; Uninstaller pages
@@ -47,162 +47,58 @@
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 OutFile "WebCourseInstaller.exe"
-InstallDir "$PROGRAMFILES\WebCourse"
+InstallDir "$PROGRAMFILES\${PRODUCT_NAME}"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show
 ShowUnInstDetails show
 
-Function .onInit
-  !insertmacro MUI_LANGDLL_DISPLAY
-FunctionEnd
 
 Section "WebCourse" SEC01
   SetOutPath "$INSTDIR"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-console-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-datetime-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-debug-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-errorhandling-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-file-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-file-l1-2-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-file-l2-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-handle-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-heap-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-interlocked-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-libraryloader-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-localization-l1-2-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-memory-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-namedpipe-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-processenvironment-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-processthreads-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-processthreads-l1-1-1.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-profile-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-rtlsupport-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-string-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-synch-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-synch-l1-2-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-sysinfo-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-timezone-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-core-util-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-crt-conio-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-crt-convert-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-crt-environment-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-crt-filesystem-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-crt-heap-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-crt-locale-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-crt-math-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-crt-multibyte-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-crt-process-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-crt-runtime-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-crt-stdio-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-crt-string-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-crt-time-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\api-ms-win-crt-utility-l1-1-0.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\base_library.zip"
-  SetOutPath "$INSTDIR\certifi"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\certifi\cacert.pem"
-  SetOutPath "$INSTDIR"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\d3dcompiler_47.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\libEGL.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\libGLESv2.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\MSVCP140.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\opengl32sw.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\pyexpat.pyd"
-  SetOutPath "$INSTDIR\PyQt5\Qt\plugins\iconengines"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\plugins\iconengines\qsvgicon.dll"
-  SetOutPath "$INSTDIR\PyQt5\Qt\plugins\imageformats"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\plugins\imageformats\qgif.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\plugins\imageformats\qicns.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\plugins\imageformats\qico.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\plugins\imageformats\qjpeg.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\plugins\imageformats\qsvg.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\plugins\imageformats\qtga.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\plugins\imageformats\qtiff.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\plugins\imageformats\qwbmp.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\plugins\imageformats\qwebp.dll"
-  SetOutPath "$INSTDIR\PyQt5\Qt\plugins\platforms"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\plugins\platforms\qminimal.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\plugins\platforms\qoffscreen.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\plugins\platforms\qwebgl.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\plugins\platforms\qwindows.dll"
-  SetOutPath "$INSTDIR\PyQt5\Qt\plugins\platformthemes"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\plugins\platformthemes\qxdgdesktopportal.dll"
-  SetOutPath "$INSTDIR\PyQt5\Qt\plugins\styles"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\plugins\styles\qwindowsvistastyle.dll"
-  SetOutPath "$INSTDIR\PyQt5\Qt\translations"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_ar.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_bg.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_ca.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_cs.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_da.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_de.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_en.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_es.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_fi.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_fr.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_gd.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_he.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_hu.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_it.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_ja.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_ko.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_lv.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_pl.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_ru.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_sk.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_uk.qm"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\Qt\translations\qtbase_zh_TW.qm"
-  SetOutPath "$INSTDIR\PyQt5"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\QtCore.pyd"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\QtGui.pyd"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\QtWidgets.pyd"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\PyQt5\sip.cp36-win32.pyd"
-  SetOutPath "$INSTDIR"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\python3.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\python36.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\Qt5Core.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\Qt5DBus.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\Qt5Gui.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\Qt5Network.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\Qt5Qml.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\Qt5Quick.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\Qt5Svg.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\Qt5WebSockets.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\Qt5Widgets.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\select.pyd"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\sqlite3.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\ucrtbase.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\unicodedata.pyd"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\user.db"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\VCRUNTIME140.dll"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\WebCourse.exe"
-  CreateDirectory "$SMPROGRAMS\WebCourse"
-  CreateShortCut "$SMPROGRAMS\WebCourse\WebCourse.lnk" "$INSTDIR\WebCourse.exe"
-  CreateShortCut "$DESKTOP\WebCourse.lnk" "$INSTDIR\WebCourse.exe"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\WebCourse.exe.manifest"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\_bz2.pyd"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\_hashlib.pyd"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\_lzma.pyd"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\_socket.pyd"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\_sqlite3.pyd"
-  File "C:\Users\lbbas\Desktop\test\webCourseQT\dist\WebCourse\_ssl.pyd"
+  SetOverwrite on
+  File /r "dist\WebCourse"
+  CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}.lnk" "$INSTDIR\${PRODUCT_NAME}.exe"
+  CreateShortCut "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\${PRODUCT_NAME}.exe"
 SectionEnd
 
 Section -AdditionalIcons
   WriteIniStr "$INSTDIR\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
-  CreateShortCut "$SMPROGRAMS\WebCourse\Website.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
-  CreateShortCut "$SMPROGRAMS\WebCourse\Uninstall.lnk" "$INSTDIR\uninst.exe"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Website.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
+  CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\uninst.exe"
 SectionEnd
 
 Section -Post
   WriteUninstaller "$INSTDIR\uninst.exe"
-  WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\WebCourse.exe"
+  WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\${PRODUCT_NAME}.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninst.exe"
-  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\WebCourse.exe"
+  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\${PRODUCT_NAME}.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayVersion" "${PRODUCT_VERSION}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "Publisher" "${PRODUCT_PUBLISHER}"
 SectionEnd
+
+;onInit该回调将会在当安装程序接近完成初始化时调用，若函数调用了 Abort，则安装程序立即退出。检查程序是否正在运行
+Function .onInit
+  !insertmacro MUI_LANGDLL_DISPLAY
+  ;关闭进程
+  Push $R0
+  CheckProc:
+    Push "${PRODUCT_NAME}.exe"
+    ProcessWork::existsprocess
+    Pop $R0
+    IntCmp $R0 0 Done
+    MessageBox MB_OKCANCEL|MB_ICONSTOP "安装程序检测到 ${PRODUCT_NAME} 正在运行。$\r$\n$\r$\n点击 “确定” 强制关闭${PRODUCT_NAME}，继续安装。$\r$\n点击 “取消” 退出安装程序。" IDCANCEL Exit
+    Push "${PRODUCT_NAME}.exe"
+    Processwork::KillProcess
+    Sleep 1000
+    Goto CheckProc
+    Exit:
+    Abort
+    Done:
+    Pop $R0
+FunctionEnd
 
 
 Function un.onUninstSuccess
@@ -212,145 +108,70 @@ FunctionEnd
 
 Function un.onInit
 !insertmacro MUI_UNGETLANGUAGE
-  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "你确实要完全移除 $(^Name) ？" IDYES +2
+  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "你确实要完全移除 $(^Name) ，其及所有的组件？" IDYES +2
   Abort
+  ;检测程序是否运行
+  FindProcDLL::FindProc "${PRODUCT_NAME}.exe"
+  Pop $R0
+  IntCmp $R0 1 0 no_run
+  MessageBox MB_ICONSTOP "卸载程序检测到 ${PRODUCT_NAME} 正在运行，请关闭之后再卸载！"
+  Quit
+  no_run:
 FunctionEnd
 
 Section Uninstall
   Delete "$INSTDIR\${PRODUCT_NAME}.url"
   Delete "$INSTDIR\uninst.exe"
-  Delete "$INSTDIR\_ssl.pyd"
-  Delete "$INSTDIR\_sqlite3.pyd"
-  Delete "$INSTDIR\_socket.pyd"
-  Delete "$INSTDIR\_lzma.pyd"
-  Delete "$INSTDIR\_hashlib.pyd"
-  Delete "$INSTDIR\_bz2.pyd"
-  Delete "$INSTDIR\WebCourse.exe.manifest"
-  Delete "$INSTDIR\WebCourse.exe"
-  Delete "$INSTDIR\VCRUNTIME140.dll"
-  Delete "$INSTDIR\user.db"
-  Delete "$INSTDIR\unicodedata.pyd"
-  Delete "$INSTDIR\ucrtbase.dll"
-  Delete "$INSTDIR\sqlite3.dll"
-  Delete "$INSTDIR\select.pyd"
-  Delete "$INSTDIR\Qt5Widgets.dll"
-  Delete "$INSTDIR\Qt5WebSockets.dll"
-  Delete "$INSTDIR\Qt5Svg.dll"
-  Delete "$INSTDIR\Qt5Quick.dll"
-  Delete "$INSTDIR\Qt5Qml.dll"
-  Delete "$INSTDIR\Qt5Network.dll"
-  Delete "$INSTDIR\Qt5Gui.dll"
-  Delete "$INSTDIR\Qt5DBus.dll"
-  Delete "$INSTDIR\Qt5Core.dll"
-  Delete "$INSTDIR\python36.dll"
-  Delete "$INSTDIR\python3.dll"
-  Delete "$INSTDIR\PyQt5\sip.cp36-win32.pyd"
-  Delete "$INSTDIR\PyQt5\QtWidgets.pyd"
-  Delete "$INSTDIR\PyQt5\QtGui.pyd"
-  Delete "$INSTDIR\PyQt5\QtCore.pyd"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_zh_TW.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_uk.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_sk.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_ru.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_pl.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_lv.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_ko.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_ja.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_it.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_hu.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_he.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_gd.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_fr.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_fi.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_es.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_en.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_de.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_da.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_cs.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_ca.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_bg.qm"
-  Delete "$INSTDIR\PyQt5\Qt\translations\qtbase_ar.qm"
-  Delete "$INSTDIR\PyQt5\Qt\plugins\styles\qwindowsvistastyle.dll"
-  Delete "$INSTDIR\PyQt5\Qt\plugins\platformthemes\qxdgdesktopportal.dll"
-  Delete "$INSTDIR\PyQt5\Qt\plugins\platforms\qwindows.dll"
-  Delete "$INSTDIR\PyQt5\Qt\plugins\platforms\qwebgl.dll"
-  Delete "$INSTDIR\PyQt5\Qt\plugins\platforms\qoffscreen.dll"
-  Delete "$INSTDIR\PyQt5\Qt\plugins\platforms\qminimal.dll"
-  Delete "$INSTDIR\PyQt5\Qt\plugins\imageformats\qwebp.dll"
-  Delete "$INSTDIR\PyQt5\Qt\plugins\imageformats\qwbmp.dll"
-  Delete "$INSTDIR\PyQt5\Qt\plugins\imageformats\qtiff.dll"
-  Delete "$INSTDIR\PyQt5\Qt\plugins\imageformats\qtga.dll"
-  Delete "$INSTDIR\PyQt5\Qt\plugins\imageformats\qsvg.dll"
-  Delete "$INSTDIR\PyQt5\Qt\plugins\imageformats\qjpeg.dll"
-  Delete "$INSTDIR\PyQt5\Qt\plugins\imageformats\qico.dll"
-  Delete "$INSTDIR\PyQt5\Qt\plugins\imageformats\qicns.dll"
-  Delete "$INSTDIR\PyQt5\Qt\plugins\imageformats\qgif.dll"
-  Delete "$INSTDIR\PyQt5\Qt\plugins\iconengines\qsvgicon.dll"
-  Delete "$INSTDIR\pyexpat.pyd"
-  Delete "$INSTDIR\opengl32sw.dll"
-  Delete "$INSTDIR\MSVCP140.dll"
-  Delete "$INSTDIR\libGLESv2.dll"
-  Delete "$INSTDIR\libEGL.dll"
-  Delete "$INSTDIR\d3dcompiler_47.dll"
-  Delete "$INSTDIR\certifi\cacert.pem"
-  Delete "$INSTDIR\base_library.zip"
-  Delete "$INSTDIR\api-ms-win-crt-utility-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-crt-time-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-crt-string-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-crt-stdio-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-crt-runtime-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-crt-process-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-crt-multibyte-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-crt-math-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-crt-locale-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-crt-heap-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-crt-filesystem-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-crt-environment-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-crt-convert-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-crt-conio-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-util-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-timezone-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-sysinfo-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-synch-l1-2-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-synch-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-string-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-rtlsupport-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-profile-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-processthreads-l1-1-1.dll"
-  Delete "$INSTDIR\api-ms-win-core-processthreads-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-processenvironment-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-namedpipe-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-memory-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-localization-l1-2-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-libraryloader-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-interlocked-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-heap-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-handle-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-file-l2-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-file-l1-2-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-file-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-errorhandling-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-debug-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-datetime-l1-1-0.dll"
-  Delete "$INSTDIR\api-ms-win-core-console-l1-1-0.dll"
+  Delete "$INSTDIR\${PRODUCT_NAME}.exe"
 
-  Delete "$SMPROGRAMS\WebCourse\Uninstall.lnk"
-  Delete "$SMPROGRAMS\WebCourse\Website.lnk"
-  Delete "$DESKTOP\WebCourse.lnk"
-  Delete "$SMPROGRAMS\WebCourse\WebCourse.lnk"
+  Delete "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk"
+  Delete "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk"
+  Delete "$DESKTOP\${PRODUCT_NAME}.lnk"
+  Delete "$SMPROGRAMS\${PRODUCT_NAME}\$$PRODUCT_NAME.lnk"
 
-  RMDir "$SMPROGRAMS\WebCourse"
-  RMDir "$INSTDIR\PyQt5\Qt\translations"
-  RMDir "$INSTDIR\PyQt5\Qt\plugins\styles"
-  RMDir "$INSTDIR\PyQt5\Qt\plugins\platformthemes"
-  RMDir "$INSTDIR\PyQt5\Qt\plugins\platforms"
-  RMDir "$INSTDIR\PyQt5\Qt\plugins\imageformats"
-  RMDir "$INSTDIR\PyQt5\Qt\plugins\iconengines"
-  RMDir "$INSTDIR\PyQt5"
-  RMDir "$INSTDIR\certifi"
-  RMDir "$INSTDIR"
+  RMDir "$SMPROGRAMS\${PRODUCT_NAME}"
+  RMDir /r "$INSTDIR" ;删除所有
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
   DeleteRegKey HKLM "${PRODUCT_DIR_REGKEY}"
   SetAutoClose true
 SectionEnd
+
+
+
+
+function .onInit
+    setShellVarContext all
+    !insertmacro VerifyUserIsAdmin  
+ 
+    #check program running.
+    ${nsProcess::FindProcess} ${APPEXENAME} $R0
+    ${If} $R0 == "
+        # it's running
+        MessageBox MB_OK "软件正在运行，按确定退出!"
+        Quit
+    ${EndIf}  
+ 
+;    MessageBox MB_OK "当前软件的版本为：${VERSIONLONG}"
+    #check version from custom install place
+    ReadRegStr $ HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} ${APPNAME}" "MainProgramLocation"
+    ${If} $ != ""
+;      MessageBox MB_OK "文件位置：$0"
+      ${If} ${FileExists} $
+;        #if installed version is greater, return 2
+;        #else if equality, return 0.
+;        #else if less, return 1 and resume install process.
+;        #MessageBox MB_OK "Version=$R0"
+;       MessageBox MB_OK "before push the parameter for VerCheck function.$0"
+       push $
+       Call VerCheck
+       ${VersionCompare} $VersionNumber ${VERSIONLONG} $R0
+       ${"
+           MessageBox MB_OK "你已经安装同版本或较新版本${APPNAME}软件，按确定退出安装！"
+           Quit
+        ${Endif}
+      ${EndIf}
+;    ${Else}
+;      MessageBox MB_ICONSTOP "Not found"
+    ${EndIf}
+functionEnd  
