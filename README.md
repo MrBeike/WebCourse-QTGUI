@@ -33,9 +33,6 @@
   - 正在尝试通过`rebuild pyinstaller bootloader`解决问题。(360依旧报毒,据说是专有的误杀。所以，请自行判断使用。)
   - 附上之前发布的webcourse.exe在线杀毒结果 by [virustotal](https://www.virustotal.com/).com.
   <img src="VirusTotal.png">
-<<<<<<< HEAD
-=======
-
->>>>>>> 4681d04a26ea89604aba5ed538c766a6eb86e4d9
+  
 ## Contact Me
 - Mail: lbbas@126.com
