@@ -48,6 +48,7 @@ class Regist:
     # 项目注册
     def projectRegister(self, pid):
         # code含义未知，参考网页注册按钮java函数而确定为-1,等待进一步研究
+        # code变动为0 原因未知 2020年3月27日
         code = 0
         data = {'loginId': self.loginId,
                 'projectId': pid,
