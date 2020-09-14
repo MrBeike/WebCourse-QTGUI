@@ -19,7 +19,12 @@ class Learn:
     def __init__(self,s):
         self.s = s
         self.notify = Notify()
+        self.studentCenter()
 
+    # 访问项目和课程前需先访问学员中心，否则无法获取用户头像等参数导致freemaker模板出错（2020年9月14日 HZJ反馈）
+    def studentCenter(self):
+        studentCenter_page = self.s.get(studentCenter_url).content.decode('utf-8')
+            
     def projectReader(self):
         '''
         获取登陆后“我的项目”网页信息，并筛选出项目信息。

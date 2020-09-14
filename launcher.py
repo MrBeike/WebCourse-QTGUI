@@ -2,6 +2,7 @@
 
 __author__ = 'xeroxYor'
 import sys
+import logging
 
 from PyQt5.QtWidgets import QApplication
 
@@ -10,8 +11,8 @@ import resource.webcourse_rc
 # Window Defination import
 from window.MainWindow import MainWindow
 
-
 if __name__ == '__main__':
+    logging.basicConfig(filename='DeBugInfo', level=logging.DEBUG)
     app = QApplication(sys.argv)
     mainWinow = MainWindow()
     mainWinow.show()

@@ -14,9 +14,11 @@ mycourse_url = "http://11.129.195.195/learning/entity/student/student_getMyProje
 login_url = "http://11.129.195.195/center/center/login_login.action"
 # 注销登陆地址
 logout_url = "http://11.129.195.195/center/center/login_quitPbc.action"
+# 学员中心地址
+studentCenter_url = 'http://11.129.195.195/learning/entity/student/student_index.action'
 # 我的项目地址
 project_url = "http://11.129.195.195/learning/entity/student/student_sear" \
-              "chProject.action?page.pageSize=80&page.orderBy=createDate"
+              "chProject.action?loginId=605200&page.pageSize=80&page.orderBy=createDate"
 # 项目课件地址
 course_url = "http://11.129.195.195/learning/entity/student/student_getMy" \
              "ProjectCourses.action"

@@ -10,5 +10,7 @@ upx*
 NsProcess.zip
 *.db
 *.pyc
+*.html
 test.py
 gpl-3.0.rtf
+DeBugInfo
